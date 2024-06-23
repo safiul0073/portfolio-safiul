@@ -15,19 +15,25 @@
     "@stripe/react-stripe-js": "^2.6.2",
     "@stripe/stripe-js": "^3.1.0",
     "@tailwindcss/forms": "^0.5.7",
+    "bcryptjs": "^2.4.3",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
     "framer-motion": "^11.2.6",
+    "jodit-react": "^4.1.2",
+    "jsonwebtoken": "^9.0.2",
     "lucide-react": "^0.366.0",
     "next": "14.1.4",
     "next-themes": "^0.3.0",
     "react": "^18.3.1",
     "react-dom": "^18",
+    "react-hot-toast": "^2.4.1",
     "tailwind-merge": "^2.2.2",
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.13",
+    "@types/bcryptjs": "^2",
+    "@types/jsonwebtoken": "^9",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
@@ -37,5 +43,6 @@
     "postcss": "^8",
     "tailwindcss": "^3.3.0",
     "typescript": "^5"
-  }
+  },
+  "packageManager": "yarn@4.3.1"
 }

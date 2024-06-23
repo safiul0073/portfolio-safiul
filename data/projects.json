@@ -1,0 +1,31 @@
+[
+  {
+    "id": 1,
+    "name": "Courier Service",
+    "stacks": "Next.js, Laravel, Docker, AWS, PostgreSQL",
+    "description": "<p><br></p>",
+    "website": "",
+    "repository": "",
+    "short_list": [
+      "Developed APIs for both web and mobile applications, ensuring seamless integration and functionality.",
+      "Implemented a complex role-based system (Hub, Central Hub, Agent, Merchant) with nested sub-roles to manage various user permissions.",
+      "Implemented performance optimization strategies, resulting in a 30% improvement in application response times.",
+      "Utilized modern development tools and practices such as Git, and CI/CD pipelines to streamline development workﬂows."
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Multilevel Marketing(MLM)",
+    "stacks": "Laravel, Node.js, React.js, Tailwindcss, Mysql",
+    "description": "<p>this is description</p>",
+    "website": "https://binary.sinvestingsolutions.com/",
+    "repository": "https://github.com/safiul0073/multilevel-marketing-application",
+    "short_list": [
+      "Developed a comprehensive MLM system, streamlining the management of network marketing structures and sales tracking.",
+      "Implemented core functionalities using Laravel and Node.js for the back-end, ensuring robust and scalable server-side operations.",
+      "Built dynamic and interactive user interfaces with React.js, enhancing user experience and engagement.",
+      "Designed and managed MySQL databases, optimizing data storage and retrieval for large-scale network marketing data.",
+      "Utilized Tailwind CSS to create a modern and responsive design, providing a consistent look and feel across all devices."
+    ]
+  }
+]
