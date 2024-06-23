@@ -8,7 +8,6 @@ import ShortList from "./ShortList";
 import { formTypes } from "@/app/api/projects/route";
 
 export default function Page() {
-  // const router = useRouter();
   const [form, setForm] = useState<formTypes>({
     id: 0,
     name: "",
