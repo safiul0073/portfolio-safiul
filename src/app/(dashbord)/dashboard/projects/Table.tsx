@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const Table = () => {
@@ -43,12 +44,12 @@ const Table = () => {
                 <td className="text-center">{project.stacks}</td>
                 <td className="text-center">{project.description}</td>
                 <td className="text-center">
-                  <a
-                    href={`/dashboard/projects/edit/${project.id}`}
+                  <Link
+                    href={`/dashboard/projects/${project.id}/edit`}
                     className="text-blue-500 hover:text-blue-700 mr-2"
                   >
                     Edit
-                  </a>
+                  </Link>
                   <button
                     onClick={() => deleteProject(project.id)}
                     className="text-red-500 hover:text-red-700"

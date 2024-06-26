@@ -2,13 +2,23 @@
 import { PageHeader } from "@/components/dashboard/PageHeader";
 import PrimaryButton from "@/components/dashboard/PrimaryButton";
 import InputGroup from "@/components/dashboard/ui/InputGroup";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TextAreaGroup from "@/components/dashboard/ui/TextAreaGroup";
-
 import { formTypes } from "@/app/api/projects/route";
-import ShortList from "../ShortList";
+import ShortList from "../../ShortList";
 
-export default function Page() {
+export default function Page({ params }: { params: { id: string } }) {
+
+  useEffect( () => {
+    const getProject = async () => {
+      const res = await fetch("/api/projects/" + params.id);
+      const data = await res.json();
+      setForm(data);
+    }
+
+    getProject();
+  }, [params]);
+
   const [form, setForm] = useState<formTypes>({
     id: 0,
     name: "",
