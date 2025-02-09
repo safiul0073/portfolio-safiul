@@ -27,5 +27,16 @@
       "Designed and managed MySQL databases, optimizing data storage and retrieval for large-scale network marketing data.",
       "Utilized Tailwind CSS to create a modern and responsive design, providing a consistent look and feel across all devices."
     ]
+  },
+  {
+    "id": 3,
+    "name": "Md Safiullah",
+    "stacks": "Next.js, Prisma, Postgresql, React Query",
+    "description": "<p>fsdfsdfds</p>",
+    "website": "#",
+    "repository": "#",
+    "short_list": [
+      "Architected and implemented a real-time lead management system to enhance sales and customer relationship management."
+    ]
   }
 ]

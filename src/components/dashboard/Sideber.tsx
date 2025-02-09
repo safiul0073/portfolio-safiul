@@ -7,6 +7,7 @@ const Sidebar = () => {
           <h2 className="text-xl font-bold mb-4">Dashboard</h2>
           <ul className="space-y-4">
             <li><Link href={"/dashboard"} className="block hover:bg-gray-700 py-2 px-4 rounded">Dashboard</Link></li>
+            <li><Link href={"/dashboard/experience"} className="block hover:bg-gray-700 py-2 px-4 rounded">Experiences</Link></li>
             <li><Link href={"/dashboard/projects"} className="block hover:bg-gray-700 py-2 px-4 rounded">Projects</Link></li>
             <li><Link href={"/"} className="block hover:bg-gray-700 py-2 px-4 rounded">Portfolio</Link></li>
           </ul>

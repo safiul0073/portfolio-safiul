@@ -18,7 +18,7 @@ const options: any = {
 };
 
 const Checkout = (props: Props) => {
-    const stripePromise = loadStripe("pk_test_51IRwUGHKaTVbKGO9fAFid4N6ey3DeYBh69KTOKLuOqNbry9Z9EuIrj6jHXex88hPMcwpIb54oNNRCH9dbOYASjiU00zTy2Iu9Y");
+    const stripePromise = loadStripe("pk_test_51FM0vGHXKb7imKJKSb8X5re6yscrifj5sy3l6AImhZMoU5ODgbCvxcJSbSUIPXr3zNZHuDpa5oNvLInZDKOy8z5A00RQJx5m4m");
     return (
         <div className="flex container mt-8">
             <Elements stripe={stripePromise} options={options}>

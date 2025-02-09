@@ -66,6 +66,7 @@ export const CheckoutForm = () => {
             // methods like iDEAL, your customer will be redirected to an intermediate
             // site first to authorize the payment, then redirected to the `return_url`.
             alert("Success");
+            setErrorMessage("Success")
         }
     };
 
@@ -77,7 +78,7 @@ export const CheckoutForm = () => {
             </div>
             <PaymentElement />
 
-            <button type="submit" disabled={!stripe || !elements}>
+            <button type="submit" className="rounded-md mt-2 bg-sky-600 text-white font-normal px-3 py-2 hover:bg-sky-500" disabled={!stripe || !elements}>
                 Pay
             </button>
             {/* Show error message to your customers */}

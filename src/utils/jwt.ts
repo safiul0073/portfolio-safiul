@@ -8,10 +8,11 @@ export function generateToken(user: any) {
   });
 }
 
-export function verifyToken(token: any) {
+export function verifyToken(token: string) {
   try {
     return jwt.verify(token, secret);
   } catch (e) {
+    console.log(e)
     return null;
   }
 }

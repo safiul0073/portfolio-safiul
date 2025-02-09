@@ -21,6 +21,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/stripe/Payment.tsx", "src/components/dashboard/ui/TextAreaGroup.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/stripe/Payment.tsx", "src/components/dashboard/ui/TextAreaGroup.tsx"],
   "exclude": ["node_modules"]
 }
