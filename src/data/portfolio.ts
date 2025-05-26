@@ -1,6 +1,9 @@
 /** @format */
 
 import { Project, Experience, Skill, Education, SocialLink } from "../types";
+import ighotokImage from "../../public/ighotok.png";
+import lottery from "../../public/lottery.png";
+import itsholyday from "../../public/itsholyday.png";
 
 export const personalInfo = {
     name: "Md Safiullah",
@@ -28,7 +31,7 @@ export const projects: Project[] = [
         title: "Yacht Management System",
         description: "A comprehensive solution for managing yacht rentals and bookings also for selling",
         longDescription:
-            "Developed a yacht management system that allows users to browse available yachts, make bookings, and manage their rentals. The system includes features like user authentication, payment processing, and an admin dashboard for managing listings and bookings.",
+            "Developed a yacht management system that allows users to browse available yachts, make bookings, and manage their rentals. The system includes features like user authentication, payment processing, and an admin dashboard for managing listings and bookings. This application develop for codecanyon.",
         image: "https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         technologies: ["Laravel", "MySQL", "Blade", "Tailwind CSS"],
         github: "#",
@@ -41,7 +44,7 @@ export const projects: Project[] = [
         description: "A travel booking application with flight, hotel booking and itinerary management",
         longDescription:
             "Developed a travel booking application that allows users to search for flights, book hotels, and manage their itineraries. The application integrates with third-party APIs for flight and hotel data, providing users with real-time availability and pricing.",
-        image: "https://images.pexels.com/photos/210606/pexels-photo-210606.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        image: itsholyday.src,
         technologies: ["Laravel", "Next.js", "MySQL", "Tailwind CSS"],
         github: "#",
         live: "https://www.itsholidaysltd.com/",
@@ -74,10 +77,32 @@ export const projects: Project[] = [
         description: "A system for managing multi-label marketing campaigns that have Binary and Unilevel system",
         longDescription:
             "Developed a multi-label marketing system that allows users to manage their marketing campaigns. The system includes features like user registration, commission tracking, and reporting dashboards to help businesses optimize their marketing strategies.",
-        image: "https://images.pexels.com/photos/3184295/pexels-photo-3184295.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-        technologies: ["Laravel", "Next.js", "Postgresql", "Docker", "Tailwind CSS"],
+        image: "https://images.pexels.com/photos/210606/pexels-photo-210606.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        technologies: ["Laravel", "Blade", "MySQL", "Tailwind CSS"],
         github: "https://github.com/safiul0073/multilevel-marketing-application",
         live: "#",
+    },
+    {
+        id: 7,
+        title: "Matrimony Application",
+        description: "A matrimony application for connecting individuals for marriage",
+        longDescription:
+            "Developed a matrimony application that allows users to create profiles, search for potential matches, and communicate with each other. The application includes features like user authentication, profile management, and messaging functionality.",
+        image: ighotokImage.src,
+        technologies: ["Laravel", "Next.js", "Firebase", "Mysql", "Tailwind CSS"],
+        github: "#",
+        live: "https://www.ighotok.com",
+    },
+    {
+        id: 8,
+        title: "Online Lottery System",
+        description: "An online lottery system for managing lottery tickets and draws",
+        longDescription:
+            "Developed an online lottery system that allows users to create lottery tickets and participate in draws. The system includes features like user authentication, ticket management, and draw management.",
+        image: lottery.src,
+        technologies: ["Laravel", "Next.js", "Firebase", "Mysql", "Tailwind CSS"],
+        github: "#",
+        live: "https://rifa-frontend-six.vercel.app/",
     },
 ];
 
@@ -106,7 +131,7 @@ export const experiences: Experience[] = [
             "Guided junior developers in best practices and code optimization",
             "Collaborated with cross-functional teams to gather requirements and deliver solutions",
         ],
-        technologies: ["Vue.js", "Laravel", "MySQL","Tailwind CSS"],
+        technologies: ["Vue.js", "Laravel", "MySQL", "Tailwind CSS"],
     },
     {
         id: 3,
