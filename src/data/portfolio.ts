@@ -29,7 +29,7 @@ export const projects: Project[] = [
     {
         id: 2,
         title: "Yacht Management System",
-        description: "A comprehensive solution for managing yacht rentals and bookings also for selling",
+        description: "A comprehensive solution for managing yacht bookings and selling",
         longDescription:
             "Developed a yacht management system that allows users to browse available yachts, make bookings, and manage their rentals. The system includes features like user authentication, payment processing, and an admin dashboard for managing listings and bookings. This application develop for codecanyon.",
         image: "https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",

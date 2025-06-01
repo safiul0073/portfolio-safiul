@@ -72,7 +72,7 @@ const Navbar: React.FC = () => {
             whileTap={{ scale: 0.95 }}
           >
             <span className="text-primary-600 mr-1">&lt;</span>
-            MsMfsdfdsfdsf
+            MS
             <span className="text-primary-600 ml-1">/&gt;</span>
           </motion.a>
           
