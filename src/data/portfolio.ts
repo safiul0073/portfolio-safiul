@@ -10,7 +10,7 @@ export const personalInfo = {
     title: "Full Stack Developer",
     email: "mdsafiul0073@gmail.com",
     location: "Uttara, Dhaka, Bangladesh",
-    bio: "Full stack developer with 3.5+ years of experience building web applications using Laravel, Next.js, React, Vue, and Docker. Passionate about creating clean, efficient, and user-friendly solutions.",
+    bio: "Full stack developer with 4 years of experience building web applications using Laravel, Next.js, React, Vue, and Docker. Passionate about creating clean, efficient, and user-friendly solutions.",
 };
 
 export const projects: Project[] = [
@@ -43,7 +43,7 @@ export const projects: Project[] = [
         title: "Travel & Flight Booking System",
         description: "A travel booking application with flight, hotel booking and itinerary management",
         longDescription:
-            "Developed a travel booking application that allows users to search for flights, book hotels, and manage their itineraries. The application integrates with third-party APIs for flight and hotel data, providing users with real-time availability and pricing.",
+            "Developed a travel booking application that allows users to search for flights, book hotels, and manage their itineraries. The application integrates with third-party APIs for flight and hotel data, providing users with real-time availability and pricing. This is one of my cadecanyone project. https://codecanyon.net/item/boativus-multivendor-boatyacht-booking-platform/58224658",
         image: itsholyday.src,
         technologies: ["Laravel", "Next.js", "MySQL", "Tailwind CSS"],
         github: "#",
@@ -125,13 +125,13 @@ export const experiences: Experience[] = [
         id: 2,
         company: "Arrowhead It Solution",
         position: "Full Stack Developer(Part-Time)",
-        duration: "Sep 2023 - Present",
+        duration: "Sep 2023 - Apr 2025",
         description: [
             "Developed and maintained ERP system using Laravel and Vue.js ",
             "Guided junior developers in best practices and code optimization",
             "Collaborated with cross-functional teams to gather requirements and deliver solutions",
         ],
-        technologies: ["Vue.js", "Laravel", "MySQL", "Tailwind CSS"],
+        technologies: ["Vue.js", "Laravel", "Next.js", "MySQL", "Tailwind CSS"],
     },
     {
         id: 3,
@@ -197,7 +197,7 @@ export const socialLinks: SocialLink[] = [
     },
     {
         name: "LinkedIn",
-        url: "https://linkedin.com/in/safiullah0073",
+        url: "https://linkedin.com/in/safiul0073",
         icon: "linkedin",
     },
     {
