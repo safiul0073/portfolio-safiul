@@ -19,7 +19,7 @@ export const projects: Project[] = [
         title: "E-commerce Platform (Regal Furniture)",
         description: "A full-featured e-commerce platform with product management, cart, and checkout functionality",
         longDescription:
-            "Built a comprehensive e-commerce solution from scratch using Laravel for the backend API and Vue.js for the frontend. Implemented features like user authentication, product catalog, shopping cart, payment processing via Stripe, and order management.",
+            "Built a comprehensive e-commerce solution from scratch using Laravel for the backend API and Vue.js for the frontend. Implemented features like user authentication, product catalog, shopping cart, sslecommerce checkout and order management.",
         image: "https://images.pexels.com/photos/230544/pexels-photo-230544.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         technologies: ["Laravel", "Nuxt.js", "MySQL"],
         github: "#",
