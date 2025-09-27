@@ -1,9 +1,9 @@
 /** @format */
 
-import { Project, Experience, Skill, Education, SocialLink } from "../types";
 import ighotokImage from "../../public/ighotok.png";
-import lottery from "../../public/lottery.png";
 import itsholyday from "../../public/itsholyday.png";
+import lottery from "../../public/lottery.png";
+import { Education, Experience, Project, Skill, SocialLink } from "../types";
 
 export const personalInfo = {
     name: "Md Safiullah",
@@ -27,7 +27,19 @@ export const projects: Project[] = [
         featured: true,
     },
     {
-        id: 2,
+        id: 3,
+        title: "Quiz Platform",
+        description: "A quiz platform for creating and taking quizzes with real-time scoring",
+        longDescription:
+            "Developed a quiz platform that allows users to create custom quizzes and take them in real-time. The platform includes features like timed quizzes, instant feedback, and a leaderboard to encourage competition among users.",
+        image: "https://images.pexels.com/photos/323782/pexels-photo-323782.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        technologies: ["Laravel", "Next.js", "MySQL", "Blade", "Tailwind CSS"],
+        github: "#",
+        live: "https://quiz.softivus.com/",
+        featured: true,
+    },
+    {
+        id: 3,
         title: "Yacht Management System",
         description: "A comprehensive solution for managing yacht bookings and selling",
         longDescription:
@@ -39,7 +51,7 @@ export const projects: Project[] = [
         featured: true,
     },
     {
-        id: 3,
+        id: 4,
         title: "Travel & Flight Booking System",
         description: "A travel booking application with flight, hotel booking and itinerary management",
         longDescription:
@@ -50,7 +62,7 @@ export const projects: Project[] = [
         live: "https://www.itsholidaysltd.com/",
     },
     {
-        id: 4,
+        id: 5,
         title: "Lead Management System",
         description: "A system for managing leads and customer interactions",
         longDescription:
@@ -61,7 +73,7 @@ export const projects: Project[] = [
         live: "#",
     },
     {
-        id: 5,
+        id: 6,
         title: "Courier Management System",
         description: "A system for managing courier services and deliveries",
         longDescription:
@@ -72,7 +84,7 @@ export const projects: Project[] = [
         live: "#",
     },
     {
-        id: 6,
+        id: 7,
         title: "Multi-Label Marketing System",
         description: "A system for managing multi-label marketing campaigns that have Binary and Unilevel system",
         longDescription:
@@ -83,7 +95,7 @@ export const projects: Project[] = [
         live: "#",
     },
     {
-        id: 7,
+        id: 8,
         title: "Matrimony Application",
         description: "A matrimony application for connecting individuals for marriage",
         longDescription:
@@ -94,7 +106,7 @@ export const projects: Project[] = [
         live: "https://www.ighotok.com",
     },
     {
-        id: 8,
+        id: 9,
         title: "Online Lottery System",
         description: "An online lottery system for managing lottery tickets and draws",
         longDescription:
