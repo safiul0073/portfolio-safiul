@@ -3,6 +3,7 @@
 import ighotokImage from "../../public/ighotok.png";
 import itsholyday from "../../public/itsholyday.png";
 import lottery from "../../public/lottery.png";
+import quiz from "../../public/quiz.png";
 import { Education, Experience, Project, Skill, SocialLink } from "../types";
 
 export const personalInfo = {
@@ -32,7 +33,7 @@ export const projects: Project[] = [
         description: "A quiz platform for creating and taking quizzes with real-time scoring",
         longDescription:
             "Developed a quiz platform that allows users to create custom quizzes and take them in real-time. The platform includes features like timed quizzes, instant feedback, and a leaderboard to encourage competition among users.",
-        image: "https://images.pexels.com/photos/323782/pexels-photo-323782.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        image: quiz.src,
         technologies: ["Laravel", "Next.js", "MySQL", "Blade", "Tailwind CSS"],
         github: "#",
         live: "https://quiz.softivus.com/",
