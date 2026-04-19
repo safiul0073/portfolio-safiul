@@ -1,22 +1,48 @@
 /** @format */
 
+import comvest from "../../public/comvest.png";
 import ighotokImage from "../../public/ighotok.png";
 import itsholyday from "../../public/itsholyday.png";
 import lottery from "../../public/lottery.png";
 import quiz from "../../public/quiz.png";
+import investra from "../../public/investra.png";
+import sagorstore from "../../public/sagorstore.png";
 import { Education, Experience, Project, Skill, SocialLink } from "../types";
 
 export const personalInfo = {
     name: "Md Safiullah",
-    title: "Full Stack Developer",
+    title: "Full Stack Developer (Backend Specialized)",
     email: "mdsafiul0073@gmail.com",
     location: "Uttara, Dhaka, Bangladesh",
-    bio: "Full stack developer with 4 years of experience building web applications using Laravel, Next.js, React, Vue, and Docker. Passionate about creating clean, efficient, and user-friendly solutions.",
+    bio: "Full stack developer (Laravel Expert and Next.js Expert) with 4 years of experience building web applications using Laravel, Next.js, React, React Native, Vue, and Docker. Passionate about creating clean, efficient, and user-friendly solutions.",
 };
 
 export const projects: Project[] = [
     {
         id: 1,
+        title: "Property Management System",
+        description: "A comprehensive solution for managing property listings and bookings",
+        longDescription:
+            "Developed a property management system that allows users to browse available properties for Selling, Ranting, Invest and Auction. The system includes features like user authentication, payment processing, and an admin dashboard for managing listings. Also has a furniture selling marketplace and handyman provider. This application has 5 different roles: Property Owner, Agent, Customer, Provider and Admin. I lead the development of this project and I am proud of what we have accomplished.",
+        image: comvest.src,
+        technologies: ["Laravel", "Next.js", "MySQL", "Tailwind CSS", "DocuSign"],
+        github: "#",
+        live: "https://comvest.vercel.app",
+        featured: true,
+    },
+    {
+        id: 2,
+        title: "Micro Investment Platform for Property",
+        description: "Property Investment Platform where people can invest in property with small amount of money.",
+        longDescription: "This is a platform where people can invest in property (invest types - Fixed, Renewable, Infinite) with small amount of money. This application has 2 different roles: Investor and Admin. I also developed a mobile application for this platform.",
+        image: investra.src,
+        technologies: ["Laravel", "Next.js", "MySQL", "Tailwind CSS", "React Native"],
+        github: "#",
+        live: "https://investra.softivus.com",
+        featured: true,
+    },
+    {
+        id: 3,
         title: "E-commerce Platform (Regal Furniture)",
         description: "A full-featured e-commerce platform with product management, cart, and checkout functionality",
         longDescription:
@@ -28,7 +54,7 @@ export const projects: Project[] = [
         featured: true,
     },
     {
-        id: 3,
+        id: 4,
         title: "Quiz Platform",
         description: "A quiz platform for creating and taking quizzes with real-time scoring",
         longDescription:
@@ -40,7 +66,7 @@ export const projects: Project[] = [
         featured: true,
     },
     {
-        id: 3,
+        id: 5,
         title: "Yacht Management System",
         description: "A comprehensive solution for managing yacht bookings and selling",
         longDescription:
@@ -52,7 +78,18 @@ export const projects: Project[] = [
         featured: true,
     },
     {
-        id: 4,
+        id: 6,
+        title: "ERP System",
+        description: "A comprehensive solution for managing business operations",
+        longDescription: "This project is huge but I'm not build this application, But I just do Laravel blade to convert Laravel API and Vue.js frontend. The api is usage monolithic architecture. But for frontend use micro-frontend architecture where A primary dashboard which use for inly login and user role management then showing different type application link such as Inventory, Sales, Purchase, Account, CRM. I did it within 4 months as a part time developer on ArrowheadIt.",
+        image: "https://t3.ftcdn.net/jpg/04/57/96/56/240_F_457965647_3j4wXKgbQbRADc15roCsxUQG6ikA5FZ3.jpg",
+        technologies: ["Laravel", "Vue.js", "MySQL", "Bootstrap", "Vuex"],
+        github: "#",
+        live: "#",
+        featured: true,
+    },
+    {
+        id: 7,
         title: "Travel & Flight Booking System",
         description: "A travel booking application with flight, hotel booking and itinerary management",
         longDescription:
@@ -63,7 +100,7 @@ export const projects: Project[] = [
         live: "https://www.itsholidaysltd.com/",
     },
     {
-        id: 5,
+        id: 8,
         title: "Lead Management System",
         description: "A system for managing leads and customer interactions",
         longDescription:
@@ -74,7 +111,7 @@ export const projects: Project[] = [
         live: "#",
     },
     {
-        id: 6,
+        id: 9,
         title: "Courier Management System",
         description: "A system for managing courier services and deliveries",
         longDescription:
@@ -85,7 +122,7 @@ export const projects: Project[] = [
         live: "#",
     },
     {
-        id: 7,
+        id: 10,
         title: "Multi-Label Marketing System",
         description: "A system for managing multi-label marketing campaigns that have Binary and Unilevel system",
         longDescription:
@@ -96,7 +133,7 @@ export const projects: Project[] = [
         live: "#",
     },
     {
-        id: 8,
+        id: 11,
         title: "Matrimony Application",
         description: "A matrimony application for connecting individuals for marriage",
         longDescription:
@@ -107,7 +144,7 @@ export const projects: Project[] = [
         live: "https://www.ighotok.com",
     },
     {
-        id: 9,
+        id: 12,
         title: "Online Lottery System",
         description: "An online lottery system for managing lottery tickets and draws",
         longDescription:
@@ -117,6 +154,17 @@ export const projects: Project[] = [
         github: "#",
         live: "https://rifa-frontend-six.vercel.app/",
     },
+    {
+        id: 13,
+        title: "Dealer Management System",
+        description: "A system for managing dealer business. (Client is live in khulna)",
+        longDescription:
+            "Developed a dealer management system that allows dealer owner to manage their dealer and customer interactions also his worker and manager. The system includes features like user worker registration, salary and duty management, product management, sales management, profit and loss calculation, every day transaction statement etc to help businesses optimize their sales processes. This application is my first production application which build myself also I commitment that I can give my client free service for lifetime and I'm doing. But not needed at all. Because the platform running very well and my client do went any changes and he satisfied. I develop it in 2021. Now it's 2026 and it's running very well.",
+        image: sagorstore.src,
+        technologies: ["Laravel", "JQuery", "Tailwind CSS"],
+        github: "#",
+        live: "https://sagorstore.com",
+    }
 ];
 
 export const experiences: Experience[] = [
