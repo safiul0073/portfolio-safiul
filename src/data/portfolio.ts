@@ -27,7 +27,7 @@ export const projects: Project[] = [
         image: comvest.src,
         technologies: ["Laravel", "Next.js", "MySQL", "Tailwind CSS", "DocuSign"],
         github: "#",
-        live: "https://comvest.vercel.app",
+        live: "https://comvst.com",
         featured: true,
     },
     {
