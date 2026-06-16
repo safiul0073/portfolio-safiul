@@ -14,7 +14,7 @@ export const personalInfo = {
     title: "Full Stack Developer (Backend Specialized)",
     email: "mdsafiul0073@gmail.com",
     location: "Uttara, Dhaka, Bangladesh",
-    bio: "Full stack developer (Laravel Expert and Next.js Expert) with 4 years of experience building web applications using Laravel, Next.js, React, React Native, Vue, and Docker. Passionate about creating clean, efficient, and user-friendly solutions.",
+    bio: "Full stack developer (Laravel and Next.js Expert) with 4 years of experience building web applications using Laravel, Next.js, React, React Native, Vue, and Docker. Passionate about creating clean, efficient, and user-friendly solutions.",
 };
 
 export const projects: Project[] = [
