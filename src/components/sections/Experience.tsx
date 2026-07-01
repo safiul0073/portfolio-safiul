@@ -37,7 +37,9 @@ const Experience: React.FC = () => {
                 >
                     <h2 className="text-3xl font-bold text-dark-900 dark:text-white mb-2">Experience & Education</h2>
                     <div className="w-20 h-1 bg-primary-600 mx-auto mb-6"></div>
-                    <p className="text-dark-600 dark:text-dark-300 max-w-3xl mx-auto">My professional journey and educational background.</p>
+                    <p className="text-dark-600 dark:text-dark-300 max-w-3xl mx-auto">
+                        Roles, responsibilities, and education that shaped my backend-focused full stack work.
+                    </p>
                 </motion.div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
@@ -58,7 +60,7 @@ const Experience: React.FC = () => {
                             {experiences.map((exp) => (
                                 <motion.div key={exp.id} variants={itemVariants} className="relative">
                                     <div className="absolute w-4 h-4 bg-primary-500 rounded-full -left-[1.15rem] top-1.5 ring-4 ring-primary-100 dark:ring-primary-900/30"></div>
-                                    <div className="bg-dark-50 dark:bg-dark-800 p-6 rounded-lg shadow-md">
+                                    <div className="rounded-lg border border-dark-200 bg-dark-50 p-6 shadow-sm dark:border-dark-700 dark:bg-dark-800">
                                         <h4 className="text-xl font-semibold text-dark-900 dark:text-white mb-1">{exp.position}</h4>
                                         <p className="text-primary-600 dark:text-primary-400 font-medium mb-2">{exp.company}</p>
                                         <p className="text-dark-500 dark:text-dark-400 text-sm mb-4">{exp.duration}</p>
@@ -67,14 +69,14 @@ const Experience: React.FC = () => {
                                             {exp.description.map((desc: string, index: number) => (
                                                 <li key={index} className="text-dark-600 dark:text-dark-300 flex items-start">
                                                     <span className="text-primary-600 mr-2">•</span>
-                                                    <span>{desc}</span>
+                                                    <span className="leading-7">{desc}</span>
                                                 </li>
                                             ))}
                                         </ul>
 
                                         <div className="flex flex-wrap gap-2">
                                             {exp.technologies.map((tech: string, index: number) => (
-                                                <span key={index} className="text-xs px-2 py-1 bg-dark-200 dark:bg-dark-700 text-dark-700 dark:text-dark-300 rounded-full">
+                                                <span key={index} className="rounded-md bg-dark-200 px-2 py-1 text-xs text-dark-700 dark:bg-dark-700 dark:text-dark-300">
                                                     {tech}
                                                 </span>
                                             ))}
@@ -102,7 +104,7 @@ const Experience: React.FC = () => {
                             {education.map((edu) => (
                                 <motion.div key={edu.id} variants={itemVariants} className="relative">
                                     <div className="absolute w-4 h-4 bg-primary-500 rounded-full -left-[1.15rem] top-1.5 ring-4 ring-primary-100 dark:ring-primary-900/30"></div>
-                                    <div className="bg-dark-50 dark:bg-dark-800 p-6 rounded-lg shadow-md">
+                                    <div className="rounded-lg border border-dark-200 bg-dark-50 p-6 shadow-sm dark:border-dark-700 dark:bg-dark-800">
                                         <h4 className="text-xl font-semibold text-dark-900 dark:text-white mb-1">{edu.degree}</h4>
                                         <p className="text-primary-600 dark:text-primary-400 font-medium mb-2">{edu.institution}</p>
                                         <p className="text-dark-500 dark:text-dark-400 text-sm mb-4">{edu.duration}</p>
@@ -119,21 +121,22 @@ const Experience: React.FC = () => {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: "-100px" }}
                             transition={{ duration: 0.5, delay: 0.2 }}
-                            className="mt-12 bg-gradient-to-br from-primary-500 to-secondary-500 p-[1px] rounded-lg"
+                            className="mt-12 rounded-lg bg-gradient-to-br from-primary-500 to-secondary-500 p-[1px]"
                         >
                             <div className="bg-white dark:bg-dark-800 p-6 rounded-lg">
                                 <h4 className="text-xl font-semibold text-dark-900 dark:text-white mb-4">Additional Skills</h4>
 
                                 <div className="space-y-2">
                                     <p className="text-dark-600 dark:text-dark-300">
-                                        <span className="font-medium text-primary-600">Problem Solving:</span> Strong analytical thinking and creative approach to technical
-                                        challenges.
+                                        <span className="font-medium text-primary-600">Problem Solving:</span> Strong analytical thinking for debugging, architecture decisions,
+                                        and complex business workflows.
                                     </p>
                                     <p className="text-dark-600 dark:text-dark-300">
-                                        <span className="font-medium text-primary-600">Collaboration:</span> Excellent team player with experience in agile environments.
+                                        <span className="font-medium text-primary-600">Collaboration:</span> Comfortable working with designers, developers, managers, and clients.
                                     </p>
                                     <p className="text-dark-600 dark:text-dark-300">
-                                        <span className="font-medium text-primary-600">Project Management:</span> Experienced in leading projects from conception to delivery.
+                                        <span className="font-medium text-primary-600">Project Leadership:</span> Experienced in leading small teams, reviewing code, and shipping
+                                        client-facing applications.
                                     </p>
                                     <p className="text-dark-600 dark:text-dark-300">
                                         <span className="font-medium text-primary-600">Communication:</span> Clear and effective communication with team members and clients.

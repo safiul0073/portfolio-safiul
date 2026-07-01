@@ -4,7 +4,7 @@ import {
   Code, Database, Server, 
   Layers, Search, RefreshCw, 
   Cpu, Monitor, GitBranch, 
-  Settings, Layout
+  Settings, Layout, Boxes
 } from 'lucide-react';
 import { skills } from '@/data/portfolio';
 
@@ -17,7 +17,7 @@ const Skills: React.FC = () => {
     { id: 'backend', label: 'Backend', icon: <Server size={16} /> },
     { id: 'database', label: 'Database', icon: <Database size={16} /> },
     { id: 'devops', label: 'DevOps', icon: <RefreshCw size={16} /> },
-    { id: 'other', label: 'Other', icon: <Settings size={16} /> },
+    { id: 'other', label: 'Architecture', icon: <Settings size={16} /> },
   ];
 
   const filteredSkills = activeTab === 'all' 
@@ -34,6 +34,7 @@ const Skills: React.FC = () => {
       case 'laravel': return <Code className="text-[#FF2D20]" />;
       case 'nodejs': return <Server className="text-[#339933]" />;
       case 'express': return <Server className="text-gray-600 dark:text-gray-400" />;
+      case 'nestjs': return <Boxes className="text-[#E0234E]" />;
       case 'php': return <Code className="text-[#777BB4]" />;
       case 'mysql': return <Database className="text-[#4479A1]" />;
       case 'postgresql': return <Database className="text-[#336791]" />;
@@ -58,8 +59,8 @@ const Skills: React.FC = () => {
       transition: { duration: 0.4 }
     },
     hover: { 
-      y: -5,
-      boxShadow: "0 10px 20px rgba(0,0,0,0.1)",
+      y: -4,
+      boxShadow: "0 14px 30px rgba(15, 23, 42, 0.12)",
       transition: { duration: 0.2 }
     }
   };
@@ -77,18 +78,18 @@ const Skills: React.FC = () => {
           <h2 className="text-3xl font-bold text-dark-900 dark:text-white mb-2">Skills & Technologies</h2>
           <div className="w-20 h-1 bg-primary-600 mx-auto mb-6"></div>
           <p className="text-dark-600 dark:text-dark-300 max-w-3xl mx-auto">
-            The technologies and tools I work with on a regular basis.
+            The tools and engineering areas I use to build maintainable full stack applications.
           </p>
         </motion.div>
 
         {/* Filter Tabs */}
         <div className="flex justify-center mb-10 overflow-x-auto pb-2">
-          <div className="inline-flex bg-white dark:bg-dark-900 p-1 rounded-lg shadow-sm">
+          <div className="inline-flex rounded-lg border border-dark-200 bg-white p-1 shadow-sm dark:border-dark-700 dark:bg-dark-900">
             {filterCategories.map((category) => (
               <button
                 key={category.id}
                 onClick={() => setActiveTab(category.id)}
-                className={`px-4 py-2 rounded-md flex items-center text-sm transition-colors duration-200 whitespace-nowrap ${
+                className={`flex items-center whitespace-nowrap rounded-md px-4 py-2 text-sm font-medium transition-colors duration-200 ${
                   activeTab === category.id
                     ? 'bg-primary-600 text-white'
                     : 'text-dark-600 dark:text-dark-300 hover:bg-dark-100 dark:hover:bg-dark-700'
@@ -102,7 +103,7 @@ const Skills: React.FC = () => {
         </div>
 
         {/* Skills Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {filteredSkills.map((skill, index) => (
             <motion.div
               key={skill.name}
@@ -112,13 +113,13 @@ const Skills: React.FC = () => {
               whileHover="hover"
               viewport={{ once: true, margin: "-100px" }}
               transition={{ delay: index * 0.05 }}
-              className="bg-white dark:bg-dark-900 rounded-xl p-6 shadow-md flex flex-col items-center"
+              className="flex flex-col rounded-lg border border-dark-200 bg-white p-5 shadow-sm dark:border-dark-700 dark:bg-dark-900"
             >
-              <div className="w-12 h-12 mb-4 flex items-center justify-center">
+              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-dark-50 dark:bg-dark-800">
                 {getSkillIcon(skill.icon)}
               </div>
               
-              <h3 className="text-lg font-semibold text-dark-900 dark:text-white mb-2">{skill.name}</h3>
+              <h3 className="mb-4 min-h-[3rem] text-lg font-semibold leading-6 text-dark-900 dark:text-white">{skill.name}</h3>
               
               <div className="w-full bg-dark-200 dark:bg-dark-700 h-2 rounded-full overflow-hidden">
                 <motion.div 
@@ -130,7 +131,7 @@ const Skills: React.FC = () => {
                 ></motion.div>
               </div>
               
-              <p className="mt-2 text-sm text-primary-600 font-medium">
+              <p className="mt-3 text-sm font-medium text-primary-600">
                 {skill.proficiency}%
               </p>
             </motion.div>

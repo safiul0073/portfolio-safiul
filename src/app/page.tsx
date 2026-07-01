@@ -9,6 +9,7 @@ import Hero from "@/components/sections/Hero";
 import About from "@/components/sections/About";
 import Projects from "@/components/sections/Projects";
 import Contact from "@/components/sections/Contact";
+import { personalInfo } from "@/data/portfolio";
 export default function Home() {
   return (
     <ThemeProvider>
@@ -24,7 +25,7 @@ export default function Home() {
         </main>
         <footer className="py-6 bg-dark-100 dark:bg-dark-900 text-center text-dark-600 dark:text-dark-400 text-sm">
           <div className="container mx-auto px-4">
-            <p>© {new Date().getFullYear()} Md Safiullah. All rights reserved.</p>
+            <p>© {new Date().getFullYear()} {personalInfo.name}. Built with Next.js and Tailwind CSS.</p>
           </div>
         </footer>
       </div>

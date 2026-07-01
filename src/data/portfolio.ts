@@ -11,19 +11,19 @@ import { Education, Experience, Project, Skill, SocialLink } from "../types";
 
 export const personalInfo = {
     name: "Md Safiullah",
-    title: "Full Stack Developer (Backend Specialized)",
+    title: "Senior Full Stack Developer",
     email: "mdsafiul0073@gmail.com",
     location: "Uttara, Dhaka, Bangladesh",
-    bio: "Full stack developer (Laravel and Next.js Expert) with 4 years of experience building web applications using Laravel, Next.js, React, React Native, Vue, and Docker. Passionate about creating clean, efficient, and user-friendly solutions.",
+    bio: "Full stack developer with 4+ years of experience building reliable web applications with Laravel, Next.js, React, Vue, MySQL, and Docker. I focus on backend architecture, clean user experiences, and production-ready systems that are easy to maintain and scale.",
 };
 
 export const projects: Project[] = [
     {
         id: 1,
         title: "Property Management System",
-        description: "A comprehensive solution for managing property listings and bookings",
+        description: "A multi-role property platform for listings, rentals, investments, auctions, furniture sales, and service providers.",
         longDescription:
-            "Developed a property management system that allows users to browse available properties for Selling, Ranting, Invest and Auction. The system includes features like user authentication, payment processing, and an admin dashboard for managing listings. Also has a furniture selling marketplace and handyman provider. This application has 5 different roles: Property Owner, Agent, Customer, Provider and Admin. I lead the development of this project and I am proud of what we have accomplished.",
+            "Led development of a property management platform that supports property sales, rentals, investments, auctions, furniture marketplace features, and handyman service providers. The system includes authentication, payment processing, role-based dashboards, listing management, and workflows for Property Owners, Agents, Customers, Providers, and Admins.",
         image: comvest.src,
         technologies: ["Laravel", "Next.js", "MySQL", "Tailwind CSS", "DocuSign"],
         github: "#",
@@ -33,8 +33,9 @@ export const projects: Project[] = [
     {
         id: 2,
         title: "Micro Investment Platform for Property",
-        description: "Property Investment Platform where people can invest in property with small amount of money.",
-        longDescription: "This is a platform where people can invest in property (invest types - Fixed, Renewable, Infinite) with small amount of money. This application has 2 different roles: Investor and Admin. I also developed a mobile application for this platform.",
+        description: "A property investment platform that lets users invest smaller amounts through multiple investment models.",
+        longDescription:
+            "Built a property investment platform where users can invest in real estate through fixed, renewable, and infinite investment models. The application includes Investor and Admin roles, portfolio workflows, and a companion mobile application built for the same product ecosystem.",
         image: investra.src,
         technologies: ["Laravel", "Next.js", "MySQL", "Tailwind CSS", "React Native"],
         github: "#",
@@ -44,9 +45,9 @@ export const projects: Project[] = [
     {
         id: 3,
         title: "E-commerce Platform (Regal Furniture)",
-        description: "A full-featured e-commerce platform with product management, cart, and checkout functionality",
+        description: "A furniture e-commerce platform with catalog management, cart, checkout, and order workflows.",
         longDescription:
-            "Built a comprehensive e-commerce solution from scratch using Laravel for the backend API and Vue.js for the frontend. Implemented features like user authentication, product catalog, shopping cart, sslecommerce checkout and order management.",
+            "Built a full e-commerce solution using Laravel for the backend API and Vue.js/Nuxt.js for the frontend. Implemented authentication, product catalog management, shopping cart, SSLCommerz checkout, and order management workflows.",
         image: "https://images.pexels.com/photos/230544/pexels-photo-230544.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         technologies: ["Laravel", "Nuxt.js", "MySQL"],
         github: "#",
@@ -56,9 +57,9 @@ export const projects: Project[] = [
     {
         id: 4,
         title: "Quiz Platform",
-        description: "A quiz platform for creating and taking quizzes with real-time scoring",
+        description: "A quiz and learning platform with custom quizzes, timed sessions, scoring, and leaderboard features.",
         longDescription:
-            "Developed a quiz platform that allows users to create custom quizzes and take them in real-time. The platform includes features like timed quizzes, instant feedback, and a leaderboard to encourage competition among users.",
+            "Developed a quiz platform that lets users create and take custom quizzes with timed sessions, instant feedback, real-time scoring, and leaderboard features that support competitive learning experiences.",
         image: quiz.src,
         technologies: ["Laravel", "Next.js", "MySQL", "Blade", "Tailwind CSS"],
         github: "#",
@@ -68,9 +69,9 @@ export const projects: Project[] = [
     {
         id: 5,
         title: "Yacht Management System",
-        description: "A comprehensive solution for managing yacht bookings and selling",
+        description: "A yacht booking and sales platform with listing management, booking flows, and admin controls.",
         longDescription:
-            "Developed a yacht management system that allows users to browse available yachts, make bookings, and manage their rentals. The system includes features like user authentication, payment processing, and an admin dashboard for managing listings and bookings. This application develop for codecanyon.",
+            "Developed a yacht management system for browsing available yachts, booking rentals, and managing yacht sales. The platform includes authentication, payment workflows, listing management, and an admin dashboard, built as a commercial CodeCanyon product.",
         image: "https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         technologies: ["Laravel", "MySQL", "Blade", "Tailwind CSS"],
         github: "#",
@@ -80,8 +81,9 @@ export const projects: Project[] = [
     {
         id: 6,
         title: "ERP System",
-        description: "A comprehensive solution for managing business operations",
-        longDescription: "This project is huge but I'm not build this application, But I just do Laravel blade to convert Laravel API and Vue.js frontend. The api is usage monolithic architecture. But for frontend use micro-frontend architecture where A primary dashboard which use for inly login and user role management then showing different type application link such as Inventory, Sales, Purchase, Account, CRM. I did it within 4 months as a part time developer on ArrowheadIt.",
+        description: "An ERP frontend modernization project covering inventory, sales, purchase, accounts, CRM, and role management.",
+        longDescription:
+            "Contributed to a large ERP system by converting Laravel Blade screens into a Laravel API and Vue.js frontend experience. The backend used a monolithic architecture, while the frontend followed a micro-frontend approach with a primary dashboard for login, user role management, and access to modules such as Inventory, Sales, Purchase, Accounts, and CRM. Delivered the work within 4 months as a part-time developer at Arrowhead IT Solution.",
         image: "https://t3.ftcdn.net/jpg/04/57/96/56/240_F_457965647_3j4wXKgbQbRADc15roCsxUQG6ikA5FZ3.jpg",
         technologies: ["Laravel", "Vue.js", "MySQL", "Bootstrap", "Vuex"],
         github: "#",
@@ -91,9 +93,9 @@ export const projects: Project[] = [
     {
         id: 7,
         title: "Travel & Flight Booking System",
-        description: "A travel booking application with flight, hotel booking and itinerary management",
+        description: "A travel booking application with flight search, hotel booking, itinerary management, and API integrations.",
         longDescription:
-            "Developed a travel booking application that allows users to search for flights, book hotels, and manage their itineraries. The application integrates with third-party APIs for flight and hotel data, providing users with real-time availability and pricing. This is one of my cadecanyone project. https://codecanyon.net/item/boativus-multivendor-boatyacht-booking-platform/58224658",
+            "Developed a travel booking application that allows users to search flights, book hotels, and manage itineraries. The application integrates third-party APIs for flight and hotel data, giving users real-time availability and pricing. This work is part of my commercial marketplace product experience.",
         image: itsholyday.src,
         technologies: ["Laravel", "Next.js", "MySQL", "Tailwind CSS"],
         github: "#",
@@ -102,9 +104,9 @@ export const projects: Project[] = [
     {
         id: 8,
         title: "Lead Management System",
-        description: "A system for managing leads and customer interactions",
+        description: "A lead tracking platform for capturing inquiries, managing follow-ups, and reviewing sales activity.",
         longDescription:
-            "Developed a lead management system that allows businesses to track and manage customer interactions. The system includes features like lead capture forms, email notifications, and reporting dashboards to help businesses optimize their sales processes.",
+            "Developed a lead management system that helps businesses capture, track, and manage customer interactions. The system includes lead capture forms, email notifications, follow-up workflows, and reporting dashboards for improving sales operations.",
         image: "https://images.pexels.com/photos/3184295/pexels-photo-3184295.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         technologies: ["Next.js", "Node.js", "Tailwind CSS", "Prisma"],
         github: "#",
@@ -113,9 +115,9 @@ export const projects: Project[] = [
     {
         id: 9,
         title: "Courier Management System",
-        description: "A system for managing courier services and deliveries",
+        description: "A courier operations platform for shipment scheduling, delivery tracking, and multi-role management.",
         longDescription:
-            "Developed a courier management system that allows users to schedule and track deliveries. The system includes features like real-time tracking, delivery notifications, and an admin dashboard for managing orders and drivers. This application have Four different roles: Agent, Shops, Merchant and Admin.",
+            "Developed a courier management system that allows users to schedule and track deliveries. The platform includes delivery notifications, operational dashboards, order management, and role-based workflows for Agents, Shops, Merchants, and Admins.",
         image: "https://images.pexels.com/photos/3184295/pexels-photo-3184295.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         technologies: ["Laravel", "Next.js", "Postgresql", "Docker", "Tailwind CSS"],
         github: "#",
@@ -123,10 +125,10 @@ export const projects: Project[] = [
     },
     {
         id: 10,
-        title: "Multi-Label Marketing System",
-        description: "A system for managing multi-label marketing campaigns that have Binary and Unilevel system",
+        title: "Multi-Level Marketing System",
+        description: "A marketing management platform with binary and unilevel structures, commissions, and reporting.",
         longDescription:
-            "Developed a multi-label marketing system that allows users to manage their marketing campaigns. The system includes features like user registration, commission tracking, and reporting dashboards to help businesses optimize their marketing strategies.",
+            "Developed a multi-level marketing system with binary and unilevel structures. The platform includes user registration, commission tracking, member management, and reporting dashboards for monitoring business performance.",
         image: "https://images.pexels.com/photos/210606/pexels-photo-210606.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         technologies: ["Laravel", "Blade", "MySQL", "Tailwind CSS"],
         github: "https://github.com/safiul0073/multilevel-marketing-application",
@@ -135,9 +137,9 @@ export const projects: Project[] = [
     {
         id: 11,
         title: "Matrimony Application",
-        description: "A matrimony application for connecting individuals for marriage",
+        description: "A matrimony platform with profile management, partner search, matching, and communication features.",
         longDescription:
-            "Developed a matrimony application that allows users to create profiles, search for potential matches, and communicate with each other. The application includes features like user authentication, profile management, and messaging functionality.",
+            "Developed a matrimony application that allows users to create profiles, search for potential matches, and communicate with each other. The application includes authentication, profile management, match discovery, and messaging functionality.",
         image: ighotokImage.src,
         technologies: ["Laravel", "Next.js", "Firebase", "Mysql", "Tailwind CSS"],
         github: "#",
@@ -146,9 +148,9 @@ export const projects: Project[] = [
     {
         id: 12,
         title: "Online Lottery System",
-        description: "An online lottery system for managing lottery tickets and draws",
+        description: "An online lottery platform for ticket creation, draw management, and participant workflows.",
         longDescription:
-            "Developed an online lottery system that allows users to create lottery tickets and participate in draws. The system includes features like user authentication, ticket management, and draw management.",
+            "Developed an online lottery system that allows users to create lottery tickets and participate in draws. The platform includes authentication, ticket management, participant workflows, and draw management features.",
         image: lottery.src,
         technologies: ["Laravel", "Next.js", "Firebase", "Mysql", "Tailwind CSS"],
         github: "#",
@@ -157,9 +159,9 @@ export const projects: Project[] = [
     {
         id: 13,
         title: "Dealer Management System",
-        description: "A system for managing dealer business. (Client is live in khulna)",
+        description: "A production dealer management system for sales, staff, inventory, transactions, and profit tracking.",
         longDescription:
-            "Developed a dealer management system that allows dealer owner to manage their dealer and customer interactions also his worker and manager. The system includes features like user worker registration, salary and duty management, product management, sales management, profit and loss calculation, every day transaction statement etc to help businesses optimize their sales processes. This application is my first production application which build myself also I commitment that I can give my client free service for lifetime and I'm doing. But not needed at all. Because the platform running very well and my client do went any changes and he satisfied. I develop it in 2021. Now it's 2026 and it's running very well.",
+            "Built a dealer management system for a live client in Khulna. The application helps the business owner manage workers, managers, customers, products, sales, salary and duty records, daily transactions, and profit/loss reporting. This was my first production application, developed in 2021, and it continues to run reliably for the client.",
         image: sagorstore.src,
         technologies: ["Laravel", "JQuery", "Tailwind CSS"],
         github: "#",
@@ -174,10 +176,10 @@ export const experiences: Experience[] = [
         position: "Senior Full Stack Developer",
         duration: "July 2024 - Present",
         description: [
-            "Lead a team of 5 developers in building and maintaining multiple client projects and Codecanyone projects",
+            "Lead a team of 12 developers building and maintaining client applications and commercial marketplace products",
             "Implemented CI/CD pipelines using GitHub Actions, reducing deployment time by 40%",
-            "Developed a dashboard for reusable components and templates, improving development efficiency",
-            "Build and maintain a Fully functional notification system for Email, SMS, and Firebase notifications",
+            "Developed reusable dashboards, components, and templates to improve team delivery speed",
+            "Build and maintain notification systems for email, SMS, and Firebase push notifications",
             "Mentored junior developers through code reviews and pair programming sessions",
         ],
         technologies: ["Laravel", "Next.js", "MySQL", "Docker", "Tailwind CSS"],
@@ -185,10 +187,10 @@ export const experiences: Experience[] = [
     {
         id: 2,
         company: "Arrowhead It Solution",
-        position: "Full Stack Developer(Part-Time)",
+        position: "Full Stack Developer (Part-Time)",
         duration: "Sep 2023 - Apr 2025",
         description: [
-            "Developed and maintained ERP system using Laravel and Vue.js ",
+            "Developed and maintained ERP modules using Laravel and Vue.js",
             "Guided junior developers in best practices and code optimization",
             "Collaborated with cross-functional teams to gather requirements and deliver solutions",
         ],

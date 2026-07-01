@@ -56,7 +56,9 @@ const Contact: React.FC = () => {
                 >
                     <h2 className="text-3xl font-bold text-dark-900 dark:text-white mb-2">Get In Touch</h2>
                     <div className="w-20 h-1 bg-primary-600 mx-auto mb-6"></div>
-                    <p className="text-dark-600 dark:text-dark-300 max-w-3xl mx-auto">Have a project in mind or want to collaborate? Feel free to reach out!</p>
+                    <p className="text-dark-600 dark:text-dark-300 max-w-3xl mx-auto">
+                        I&apos;m open to full-time roles, freelance work, and technical collaboration.
+                    </p>
                 </motion.div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
@@ -121,20 +123,20 @@ const Contact: React.FC = () => {
                             </motion.div>
                         </div>
 
-                        <div className="bg-dark-50 dark:bg-dark-800 p-6 rounded-lg">
-                            <h4 className="text-xl font-semibold text-dark-900 dark:text-white mb-4">Let&apos;s Build Something Amazing Together</h4>
+                        <div className="rounded-lg border border-dark-200 bg-dark-50 p-6 shadow-sm dark:border-dark-700 dark:bg-dark-800">
+                            <h4 className="text-xl font-semibold text-dark-900 dark:text-white mb-4">Professional Contact</h4>
                             <p className="text-dark-600 dark:text-dark-300 mb-4">
-                                I&apos;m currently available for freelance work and full-time positions. If you have a project that needs attention or are looking to add a
-                                dedicated developer to your team, I&apos;d love to hear from you.
+                                If my experience matches your team or project needs, send me a short message with the role, project scope, or technical challenge. I usually
+                                respond with availability and next steps.
                             </p>
                             <p className="text-dark-600 dark:text-dark-300">
-                                I specialize in building:
+                                Areas I work with:
                                 <br />
-                                • Full-stack web applications
+                                • Full stack web applications
                                 <br />
-                                • E-commerce solutions
+                                • Admin dashboards and business systems
                                 <br />
-                                • Content management systems
+                                • E-commerce, booking, ERP, and lead platforms
                                 <br />• RESTful APIs and integrations
                             </p>
                         </div>
@@ -185,7 +187,7 @@ const Contact: React.FC = () => {
                                             onChange={handleChange}
                                             required
                                             className="w-full px-4 py-3 rounded-lg border border-dark-200 dark:border-dark-700 bg-white dark:bg-dark-800 text-dark-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
-                                            placeholder="John Doe"
+                                            placeholder="Your name"
                                         />
                                     </div>
 
@@ -201,7 +203,7 @@ const Contact: React.FC = () => {
                                             onChange={handleChange}
                                             required
                                             className="w-full px-4 py-3 rounded-lg border border-dark-200 dark:border-dark-700 bg-white dark:bg-dark-800 text-dark-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
-                                            placeholder="johndoe@example.com"
+                                            placeholder="you@example.com"
                                         />
                                     </div>
                                 </div>
@@ -218,7 +220,7 @@ const Contact: React.FC = () => {
                                         onChange={handleChange}
                                         required
                                         className="w-full px-4 py-3 rounded-lg border border-dark-200 dark:border-dark-700 bg-white dark:bg-dark-800 text-dark-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
-                                        placeholder="Project Inquiry"
+                                        placeholder="Project inquiry"
                                     />
                                 </div>
 
@@ -234,7 +236,7 @@ const Contact: React.FC = () => {
                                         required
                                         rows={5}
                                         className="w-full px-4 py-3 rounded-lg border border-dark-200 dark:border-dark-700 bg-white dark:bg-dark-800 text-dark-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all resize-none"
-                                        placeholder="I'd like to discuss a project..."
+                                        placeholder="Tell me about the project, timeline, and what you need help with..."
                                     ></textarea>
                                 </div>
 

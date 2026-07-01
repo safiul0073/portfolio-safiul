@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Menu, X, Github, Linkedin, Twitter, Moon, Sun } from 'lucide-react';
+import { ExternalLink, Github, Linkedin, Menu, Moon, Sun, Twitter, X } from 'lucide-react';
 import { useTheme } from '@/context/ThemeContext';
 import { socialLinks } from '@/data/portfolio';
 
@@ -47,7 +47,7 @@ const Navbar: React.FC = () => {
       case 'twitter':
         return <Twitter size={20} />;
       default:
-        return null;
+        return <ExternalLink size={20} />;
     }
   };
 
@@ -67,9 +67,10 @@ const Navbar: React.FC = () => {
           {/* Logo/Name */}
           <motion.a 
             href="#hero"
-            className="text-xl font-bold text-dark-900 dark:text-white flex items-center"
+            className="flex items-center text-xl font-bold text-dark-900 dark:text-white"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
+            aria-label="Md Safiullah portfolio home"
           >
             <span className="text-primary-600 mr-1">&lt;</span>
             MS
@@ -77,12 +78,12 @@ const Navbar: React.FC = () => {
           </motion.a>
           
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
+          <nav className="hidden items-center space-x-7 md:flex">
             {navLinks.map((link) => (
               <motion.a
                 key={link.name}
                 href={link.href}
-                className="text-dark-700 dark:text-dark-200 hover:text-primary-600 dark:hover:text-primary-500 transition-colors font-medium"
+                className="text-sm font-medium text-dark-700 transition-colors hover:text-primary-600 dark:text-dark-200 dark:hover:text-primary-500"
                 whileHover={{ y: -2 }}
                 whileTap={{ y: 0 }}
                 onClick={handleNavLinkClick}
@@ -103,6 +104,7 @@ const Navbar: React.FC = () => {
                 className="text-dark-700 dark:text-dark-200 hover:text-primary-600 dark:hover:text-primary-500 transition-colors"
                 whileHover={{ y: -2, scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
+                aria-label={link.name}
               >
                 {renderSocialIcon(link.name)}
               </motion.a>
@@ -171,6 +173,7 @@ const Navbar: React.FC = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-dark-700 dark:text-dark-200 hover:text-primary-600 dark:hover:text-primary-500 transition-colors"
+                aria-label={link.name}
               >
                 {renderSocialIcon(link.name)}
               </a>
