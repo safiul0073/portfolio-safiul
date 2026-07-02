@@ -19,6 +19,27 @@ export const personalInfo = {
 
 export const projects: Project[] = [
     {
+        id: 14,
+        title: "TaskerHub - AI Task Marketplace",
+        description:
+            "A CodeCanyon-approved AI-powered task marketplace with admin panel, web app, REST API, and Expo mobile app.",
+        longDescription:
+            "Built a complete AI-powered task marketplace platform for clients, taskers, freelancers, and service providers. The package includes a Laravel admin/backend, Next.js web application, REST API, and Expo-based mobile app. It supports task posting, bidding, assignment, real-time chat, wallet and payments, withdrawals, KYC, reviews, support tickets, reports, multi-currency, multi-language, and AI assistance for proposal writing, comment writing, and tasker selection.",
+        highlights: [
+            "Accepted and published on CodeCanyon as a complete marketplace product package.",
+            "Built admin panel, web app, REST API, and Expo mobile app for Android and iOS workflows.",
+            "Implemented client and tasker flows for task posting, bidding, assignment, completion, reviews, and ratings.",
+            "Added AI proposal writing, AI comment writing, and AI-assisted tasker selection features.",
+            "Integrated wallet, deposits, withdrawals, commissions, reports, KYC, support tickets, and real-time chat.",
+            "Supported multiple payment gateways, multi-currency, multi-language, Firebase push notifications, and email notifications.",
+        ],
+        image: "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        technologies: ["Laravel", "Next.js", "Expo", "MySQL", "REST API", "Firebase", "AI"],
+        github: "#",
+        live: "https://codecanyon.net/item/taskerhub-ondemand-service-marketplace-mobile-app-with-admin-panel/63500652?s_rank=1",
+        featured: true,
+    },
+    {
         id: 1,
         title: "Property Management System",
         description: "A multi-role property platform for listings, rentals, investments, auctions, furniture sales, and service providers.",

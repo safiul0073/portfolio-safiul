@@ -3,7 +3,7 @@
 import { projects } from "@/data/portfolio";
 import { Project } from "@/types";
 import { AnimatePresence, motion } from "framer-motion";
-import { ExternalLink, Github, X } from "lucide-react";
+import { CheckCircle2, ExternalLink, Github, X } from "lucide-react";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 
@@ -82,6 +82,16 @@ const Projects: React.FC = () => {
                                 </div>
                                 <div className="p-6 flex-1 flex flex-col">
                                     <p className="mb-5 flex-1 leading-7 text-dark-600 dark:text-dark-300">{project.description}</p>
+                                    {project.highlights && (
+                                        <ul className="mb-5 space-y-2">
+                                            {project.highlights.slice(0, 2).map((highlight) => (
+                                                <li key={highlight} className="flex gap-2 text-sm leading-6 text-dark-600 dark:text-dark-300">
+                                                    <CheckCircle2 size={16} className="mt-1 shrink-0 text-primary-600" />
+                                                    <span>{highlight}</span>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    )}
                                     <div className="flex items-center justify-between gap-4">
                                         <span className="text-sm font-semibold text-primary-600">View details</span>
                                         {project.featured && (
@@ -154,6 +164,20 @@ const Projects: React.FC = () => {
 
                                     <h4 className="text-xl font-semibold text-dark-900 dark:text-white mb-3">Project Details</h4>
                                     <p className="text-dark-600 dark:text-dark-300 mb-6 leading-relaxed">{selectedProject.longDescription || selectedProject.description}</p>
+
+                                    {selectedProject.highlights && (
+                                        <div className="mb-6 rounded-lg border border-dark-200 bg-dark-50 p-5 dark:border-dark-700 dark:bg-dark-900">
+                                            <h5 className="mb-4 text-base font-semibold text-dark-900 dark:text-white">Key Highlights</h5>
+                                            <ul className="grid gap-3 md:grid-cols-2">
+                                                {selectedProject.highlights.map((highlight) => (
+                                                    <li key={highlight} className="flex gap-2 text-sm leading-6 text-dark-600 dark:text-dark-300">
+                                                        <CheckCircle2 size={16} className="mt-1 shrink-0 text-primary-600" />
+                                                        <span>{highlight}</span>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                    )}
 
                                     <div className="flex flex-wrap gap-4">
                                         {hasValidUrl(selectedProject.github) ? (
