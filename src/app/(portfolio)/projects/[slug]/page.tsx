@@ -45,21 +45,22 @@ export default function ProjectCaseStudyPage({ params }: ProjectPageProps) {
 
     return (
         <>
-            <header data-gsap-page-header className="border-b border-neutral-200 bg-neutral-50 pt-32 dark:border-neutral-800 dark:bg-neutral-900">
-                <div className="container mx-auto px-4 pb-14 sm:px-6 lg:px-8">
+            <header data-gsap-page-header className="relative overflow-hidden border-b border-neutral-200 bg-neutral-50 pt-28 dark:border-neutral-800 dark:bg-neutral-900">
+                <div aria-hidden="true" className="absolute inset-0 opacity-[0.035] [background-image:linear-gradient(to_right,currentColor_1px,transparent_1px),linear-gradient(to_bottom,currentColor_1px,transparent_1px)] [background-size:72px_72px] dark:opacity-[0.05]" />
+                <div className="container relative mx-auto px-4 pb-12 sm:px-6 lg:px-8">
                     <nav className="flex flex-wrap items-center gap-2 text-sm text-neutral-500">
                         <Link href="/" className="hover:text-neutral-950 dark:hover:text-white">Home</Link><span>/</span>
                         <Link href="/projects" className="hover:text-neutral-950 dark:hover:text-white">Projects</Link><span>/</span>
                         <span className="text-neutral-800 dark:text-neutral-200">{project.title}</span>
                     </nav>
-                    <div className="mt-10 grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
+                    <div className="mt-8 grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
                         <div className="max-w-4xl">
                             <div className="flex flex-wrap items-center gap-3">
                                 <p className="font-mono text-xs text-neutral-500">PROJECT {String(project.id).padStart(2, "0")}</p>
                                 {project.featured && <span className="border border-neutral-300 px-2 py-1 font-mono text-[10px] dark:border-neutral-700">FEATURED</span>}
                             </div>
-                            <h1 className="mt-5 text-4xl font-semibold leading-tight text-neutral-950 sm:text-5xl lg:text-6xl dark:text-white">{project.title}</h1>
-                            <p className="mt-6 max-w-3xl text-lg leading-8 text-neutral-600 dark:text-neutral-300">{project.description}</p>
+                            <h1 className="mt-5 max-w-4xl text-4xl font-semibold leading-[1.08] text-neutral-950 sm:text-5xl lg:text-[3.5rem] dark:text-white">{project.title}</h1>
+                            <p className="mt-5 max-w-3xl text-base leading-7 text-neutral-600 sm:text-lg sm:leading-8 dark:text-neutral-300">{project.description}</p>
                         </div>
                         <div className="flex flex-wrap gap-3">
                             {hasValidProjectUrl(project.github) ? (
@@ -80,13 +81,13 @@ export default function ProjectCaseStudyPage({ params }: ProjectPageProps) {
                 </div>
             </header>
 
-            <div data-gsap-section className="container mx-auto px-4 py-12 sm:px-6 lg:px-8">
-                <div className="relative aspect-[16/8] overflow-hidden border border-neutral-200 bg-neutral-200 dark:border-neutral-800 dark:bg-neutral-800">
+            <div data-gsap-section className="container mx-auto px-4 py-8 sm:px-6 md:py-10 lg:px-8">
+                <div className="relative aspect-[16/9] overflow-hidden border border-neutral-200 bg-neutral-200 shadow-xl shadow-neutral-950/[0.05] dark:border-neutral-800 dark:bg-neutral-800 dark:shadow-black/20 md:aspect-[16/8]">
                     <Image src={project.image} alt={project.title} fill priority sizes="100vw" className="object-cover" />
                 </div>
             </div>
 
-            <section data-gsap-section className="border-y border-neutral-200 bg-white py-16 dark:border-neutral-800 dark:bg-neutral-950 md:py-24">
+            <section data-gsap-section className="border-y border-neutral-200 bg-white py-16 dark:border-neutral-800 dark:bg-neutral-950 md:py-20">
                 <div className="container mx-auto grid gap-12 px-4 sm:px-6 lg:grid-cols-[0.7fr_1.3fr] lg:px-8">
                     <aside>
                         <p className="font-mono text-xs uppercase text-neutral-500">Technology stack</p>
@@ -110,7 +111,7 @@ export default function ProjectCaseStudyPage({ params }: ProjectPageProps) {
             </section>
 
             {relatedProjects.length > 0 && (
-                <section data-gsap-section className="bg-neutral-50 py-16 dark:bg-neutral-900 md:py-24">
+                <section data-gsap-section className="bg-neutral-50 py-16 dark:bg-neutral-900 md:py-20">
                     <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                         <div className="flex items-end justify-between gap-6 border-b border-neutral-200 pb-6 dark:border-neutral-800">
                             <div><p className="font-mono text-xs text-neutral-500">RELATED WORK</p><h2 className="mt-3 text-3xl font-semibold">Similar projects</h2></div>
@@ -118,7 +119,7 @@ export default function ProjectCaseStudyPage({ params }: ProjectPageProps) {
                         </div>
                         <div data-gsap-stagger className="mt-8 grid gap-6 md:grid-cols-3">
                             {relatedProjects.map((related) => (
-                                <Link data-gsap-item key={related.id} href={`/projects/${related.slug}`} className="group border border-neutral-200 bg-white p-5 dark:border-neutral-800 dark:bg-neutral-950">
+                                <Link data-gsap-item key={related.id} href={`/projects/${related.slug}`} className="group border border-neutral-200 bg-white p-5 transition duration-300 hover:-translate-y-1 hover:border-neutral-400 hover:shadow-lg hover:shadow-neutral-950/[0.05] dark:border-neutral-800 dark:bg-neutral-950 dark:hover:border-neutral-600">
                                     <p className="font-mono text-[10px] text-neutral-400">PROJECT {String(related.id).padStart(2, "0")}</p>
                                     <h3 className="mt-3 font-semibold group-hover:underline">{related.title}</h3>
                                     <p className="mt-3 text-sm leading-6 text-neutral-500">{related.description}</p>

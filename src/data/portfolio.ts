@@ -327,35 +327,80 @@ export const experiences: Experience[] = [
 ];
 
 export const skills: Skill[] = [
-    // Frontend
-    { name: "React", icon: "react", category: "frontend" },
-    { name: "Vue.js", icon: "vue", category: "frontend" },
-    { name: "Next.js", icon: "nextjs", category: "frontend" },
-    { name: "TypeScript", icon: "typescript", category: "frontend" },
-    { name: "Tailwind CSS", icon: "tailwind", category: "frontend" },
+    // Languages
+    { name: "PHP", icon: "php", category: "language" },
+    { name: "JavaScript", icon: "javascript", category: "language" },
+    { name: "TypeScript", icon: "typescript", category: "language" },
+    { name: "Python", icon: "python", category: "language" },
+    { name: "SQL", icon: "sql", category: "language" },
 
-    // Backend
+    // Backend development
     { name: "Laravel", icon: "laravel", category: "backend" },
+    { name: "REST API Development", icon: "api", category: "backend" },
+    { name: "Laravel Sanctum", icon: "sanctum", category: "backend" },
+    { name: "Eloquent ORM", icon: "eloquent", category: "backend" },
+    { name: "Queues", icon: "queue", category: "backend" },
+    { name: "Laravel Horizon", icon: "horizon", category: "backend" },
     { name: "Node.js", icon: "nodejs", category: "backend" },
     { name: "Express", icon: "express", category: "backend" },
+    { name: "Fastify", icon: "fastify", category: "backend" },
     { name: "NestJS", icon: "nestjs", category: "backend" },
-    { name: "PHP", icon: "php", category: "backend" },
+    { name: "FastAPI", icon: "fastapi", category: "backend" },
+    { name: "Django", icon: "django", category: "backend" },
 
-    // Database
+    // Frontend development
+    { name: "Next.js", icon: "nextjs", category: "frontend" },
+    { name: "React", icon: "react", category: "frontend" },
+    { name: "Vue.js", icon: "vue", category: "frontend" },
+    { name: "Inertia.js", icon: "inertia", category: "frontend" },
+    { name: "Tailwind CSS", icon: "tailwind", category: "frontend" },
+    { name: "Responsive UI Development", icon: "responsive", category: "frontend" },
+
+    // Architecture and integration
+    { name: "Clean Architecture", icon: "architecture", category: "architecture" },
+    { name: "SOLID Principles", icon: "solid", category: "architecture" },
+    { name: "Role-Based Access Control", icon: "rbac", category: "architecture" },
+    { name: "Third-Party API Integration", icon: "integration", category: "architecture" },
+    { name: "Payment Gateway Integration", icon: "payment", category: "architecture" },
+    { name: "GraphQL", icon: "graphql", category: "architecture" },
+
+    // Databases and caching
     { name: "MySQL", icon: "mysql", category: "database" },
     { name: "PostgreSQL", icon: "postgresql", category: "database" },
     { name: "MongoDB", icon: "mongodb", category: "database" },
     { name: "Redis", icon: "redis", category: "database" },
+    { name: "Prisma", icon: "prisma", category: "database" },
+    { name: "Drizzle ORM", icon: "drizzle", category: "database" },
+    { name: "Query Optimization", icon: "query", category: "database" },
 
-    // DevOps
+    // Real-time and messaging
+    { name: "Laravel Reverb", icon: "reverb", category: "realtime" },
+    { name: "WebSockets", icon: "websocket", category: "realtime" },
+    { name: "RabbitMQ", icon: "rabbitmq", category: "realtime" },
+    { name: "Firebase Cloud Messaging", icon: "firebase", category: "realtime" },
+
+    // Mobile development
+    { name: "React Native", icon: "react-native", category: "mobile" },
+    { name: "Expo", icon: "expo", category: "mobile" },
+    { name: "Flutter API Integration", icon: "flutter", category: "mobile" },
+
+    // DevOps and tools
+    { name: "Linux", icon: "linux", category: "devops" },
     { name: "Docker", icon: "docker", category: "devops" },
+    { name: "Nginx", icon: "nginx", category: "devops" },
+    { name: "Git", icon: "git", category: "devops" },
+    { name: "GitHub Actions", icon: "github-actions", category: "devops" },
     { name: "AWS", icon: "aws", category: "devops" },
     { name: "CI/CD", icon: "cicd", category: "devops" },
+    { name: "SonarQube", icon: "sonarqube", category: "devops" },
+    { name: "Cloudflare", icon: "cloudflare", category: "devops" },
+    { name: "DigitalOcean", icon: "digitalocean", category: "devops" },
 
-    // Other
-    { name: "Git", icon: "git", category: "other" },
-    { name: "RESTful APIs", icon: "api", category: "other" },
-    { name: "GraphQL", icon: "graphql", category: "other" },
+    // AI and automation
+    { name: "RAG", icon: "rag", category: "ai" },
+    { name: "Qdrant", icon: "qdrant", category: "ai" },
+    { name: "AI Chatbot Development", icon: "chatbot", category: "ai" },
+    { name: "AI-Powered Automation Workflows", icon: "automation", category: "ai" },
 ];
 
 export const education: Education[] = [

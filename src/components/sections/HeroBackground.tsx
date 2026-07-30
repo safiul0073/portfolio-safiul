@@ -71,7 +71,7 @@ const HeroBackground = () => {
             }
 
             context.beginPath();
-            context.strokeStyle = isDark ? "rgba(163,163,163,0.18)" : "rgba(115,115,115,0.18)";
+            context.strokeStyle = isDark ? "rgba(163,163,163,0.12)" : "rgba(115,115,115,0.11)";
             context.lineWidth = 1;
 
             for (let y = 0; y <= height + GRID_SIZE; y += GRID_SIZE) {

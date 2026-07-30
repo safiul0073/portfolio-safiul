@@ -25,7 +25,29 @@ export interface Experience {
 export interface Skill {
   name: string;
   icon: string;
-  category: 'frontend' | 'backend' | 'database' | 'devops' | 'other';
+  category:
+    | 'language'
+    | 'frontend'
+    | 'backend'
+    | 'architecture'
+    | 'database'
+    | 'realtime'
+    | 'mobile'
+    | 'devops'
+    | 'ai';
+}
+
+export interface Tool {
+  id: number;
+  slug: string;
+  name: string;
+  type: string;
+  platform: string;
+  description: string;
+  highlights: string[];
+  technologies: string[];
+  github: string;
+  featured?: boolean;
 }
 
 export interface Education {

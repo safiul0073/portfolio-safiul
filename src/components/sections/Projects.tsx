@@ -26,7 +26,7 @@ const matchesFilter = (project: Project, filter: ProjectFilter) => {
     if (filter === "laravel") return technologies.includes("laravel");
     if (filter === "nextjs") return technologies.includes("next.js");
     if (filter === "frontend") return technologies.some((technology) => ["vue.js", "react", "nuxt.js"].includes(technology));
-    return technologies.some((technology) => ["expo", "react native"].includes(technology));
+    return technologies.some((technology) => ["expo", "react native", "flutter", "flutter api"].includes(technology));
 };
 
 const Projects = ({ preview = false, showHeader = true }: { preview?: boolean; showHeader?: boolean }) => {
@@ -60,7 +60,7 @@ const Projects = ({ preview = false, showHeader = true }: { preview?: boolean; s
     }, []);
 
     return (
-        <section data-gsap-section id="projects" className="border-y border-neutral-200 bg-neutral-50 py-20 dark:border-neutral-800 dark:bg-neutral-900 md:py-28">
+        <section data-gsap-section id="projects" className="border-y border-neutral-200 bg-neutral-50 py-16 dark:border-neutral-800 dark:bg-neutral-900 md:py-20">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 {showHeader && (
                     <SectionHeader
@@ -71,15 +71,15 @@ const Projects = ({ preview = false, showHeader = true }: { preview?: boolean; s
                 )}
 
                 {!preview && (
-                    <div className="mb-10 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-                        <div className="overflow-x-auto">
-                            <div className="inline-flex min-w-max border border-neutral-200 bg-white p-1 dark:border-neutral-800 dark:bg-neutral-950">
+                    <div className="mb-8 flex flex-col gap-4 border-b border-neutral-200 pb-5 sm:flex-row sm:items-center sm:justify-between dark:border-neutral-800">
+                        <div>
+                            <div className="grid grid-cols-2 gap-px border border-neutral-200 bg-white p-1 sm:inline-flex dark:border-neutral-800 dark:bg-neutral-950">
                                 {projectFilters.map((filter) => (
                                     <button
                                         key={filter.id}
                                         type="button"
                                         onClick={() => setActiveFilter(filter.id)}
-                                        className={`px-4 py-2 text-sm font-medium transition-colors ${
+                                        className={`px-4 py-2 text-sm font-medium transition-colors last:col-span-2 sm:last:col-span-1 ${
                                             activeFilter === filter.id
                                                 ? "bg-neutral-950 text-white dark:bg-white dark:text-neutral-950"
                                                 : "text-neutral-600 hover:bg-neutral-100 dark:text-neutral-400 dark:hover:bg-neutral-900"
@@ -95,17 +95,18 @@ const Projects = ({ preview = false, showHeader = true }: { preview?: boolean; s
                 )}
 
                 <div data-gsap-stagger className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-                    {visibleProjects.map((project) => (
-                        <article data-gsap-item key={project.id} className="group flex h-full flex-col overflow-hidden border border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-950">
+                    {visibleProjects.map((project, index) => (
+                        <article data-gsap-item key={project.id} className="group flex h-full flex-col overflow-hidden border border-neutral-200 bg-white transition duration-300 hover:-translate-y-1 hover:border-neutral-400 hover:shadow-xl hover:shadow-neutral-950/[0.06] dark:border-neutral-800 dark:bg-neutral-950 dark:hover:border-neutral-600 dark:hover:shadow-black/20">
                             <Link href={`/projects/${project.slug}`} className="relative block aspect-[16/10] overflow-hidden bg-neutral-200 dark:bg-neutral-800">
                                 <Image
                                     src={project.image}
                                     alt={project.title}
                                     fill
+                                    priority={index === 0}
                                     sizes="(min-width: 1280px) 33vw, (min-width: 768px) 50vw, 100vw"
                                     className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
                                 />
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/5 to-transparent" />
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/5 to-transparent transition-opacity duration-300 group-hover:opacity-90" />
                                 {project.featured && <span className="absolute left-4 top-4 bg-white px-2.5 py-1 font-mono text-[10px] text-neutral-950">FEATURED</span>}
                                 <div className="absolute bottom-4 left-4 right-4 flex flex-wrap gap-1.5">
                                     {project.technologies.slice(0, 3).map((technology) => (
@@ -113,10 +114,10 @@ const Projects = ({ preview = false, showHeader = true }: { preview?: boolean; s
                                     ))}
                                 </div>
                             </Link>
-                            <div className="flex flex-1 flex-col p-6">
+                            <div className="flex flex-1 flex-col p-5 sm:p-6">
                                 <p className="font-mono text-[11px] text-neutral-400">PROJECT {String(project.id).padStart(2, "0")}</p>
                                 <h3 className="mt-3 text-xl font-semibold leading-7 text-neutral-950 dark:text-white">
-                                    <Link href={`/projects/${project.slug}`} className="hover:underline">{project.title}</Link>
+                                    <Link href={`/projects/${project.slug}`} className="decoration-1 underline-offset-4 hover:underline">{project.title}</Link>
                                 </h3>
                                 <p className="mt-3 flex-1 text-sm leading-6 text-neutral-600 dark:text-neutral-400">{project.description}</p>
                                 {project.highlights && (
@@ -127,7 +128,7 @@ const Projects = ({ preview = false, showHeader = true }: { preview?: boolean; s
                                     </ul>
                                 )}
                                 <div className="mt-6 flex items-center justify-between border-t border-neutral-200 pt-4 dark:border-neutral-800">
-                                    <Link href={`/projects/${project.slug}`} className="inline-flex items-center gap-1.5 text-sm font-semibold text-neutral-950 dark:text-white">
+                                    <Link href={`/projects/${project.slug}`} className="inline-flex items-center gap-1.5 text-sm font-semibold text-neutral-950 transition-opacity hover:opacity-60 dark:text-white">
                                         View case study <ArrowUpRight size={15} />
                                     </Link>
                                     <button type="button" onClick={() => openProject(project)} aria-label={`Quick view ${project.title}`} title="Quick view" className="p-2 text-neutral-500 transition-colors hover:bg-neutral-100 hover:text-neutral-950 dark:hover:bg-neutral-900 dark:hover:text-white">

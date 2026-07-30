@@ -7,16 +7,16 @@ const Experience = ({ preview = false, showHeader = true }: { preview?: boolean;
     const visibleExperiences = preview ? experiences.slice(0, 2) : experiences;
 
     return (
-        <section data-gsap-section id="experience" className="border-y border-neutral-200 bg-neutral-50 py-20 dark:border-neutral-800 dark:bg-neutral-900 md:py-28">
+        <section data-gsap-section id="experience" className="border-y border-neutral-200 bg-neutral-50 py-16 dark:border-neutral-800 dark:bg-neutral-900 md:py-20">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 {showHeader && <SectionHeader index="03 / EXPERIENCE" title="Work shaped by real delivery" description="Roles, responsibilities, and education that shaped my backend-focused full stack practice." />}
-                <div className="grid gap-12 lg:grid-cols-[1.35fr_0.65fr]">
+                <div className="grid gap-12 lg:grid-cols-[1.35fr_0.65fr] lg:gap-16">
                     <div>
                         <div className="mb-6 flex items-center gap-3"><Briefcase size={20} /><h3 className="text-xl font-semibold">Work experience</h3></div>
-                        <div data-gsap-stagger className="border-l border-neutral-300 pl-6 dark:border-neutral-700">
+                        <div data-gsap-stagger className="border-l border-neutral-300 pl-6 sm:pl-8 dark:border-neutral-700">
                             {visibleExperiences.map((experience) => (
                                 <article data-gsap-item key={experience.id} className="relative border-b border-neutral-200 py-7 first:pt-0 last:border-0 dark:border-neutral-800">
-                                    <span className="absolute -left-[29px] top-2 h-2 w-2 bg-neutral-950 dark:bg-white" />
+                                    <span className="absolute -left-[29px] top-2 h-2 w-2 bg-neutral-950 sm:-left-[37px] dark:bg-white" />
                                     <div className="flex flex-col justify-between gap-2 sm:flex-row sm:items-start">
                                         <div>
                                             <h4 className="text-xl font-semibold text-neutral-950 dark:text-white">{experience.position}</h4>
@@ -58,7 +58,7 @@ const Experience = ({ preview = false, showHeader = true }: { preview?: boolean;
                             </article>
                         ))}
                         {!preview && (
-                            <div className="mt-10 border border-neutral-200 bg-white p-6 dark:border-neutral-800 dark:bg-neutral-950">
+                            <div className="mt-10 border-t border-neutral-300 bg-white/70 p-6 dark:border-neutral-700 dark:bg-neutral-950/60">
                                 <p className="font-mono text-xs uppercase text-neutral-500">Additional strengths</p>
                                 <ul className="mt-5 space-y-4 text-sm leading-6 text-neutral-600 dark:text-neutral-400">
                                     <li><strong className="text-neutral-900 dark:text-white">Problem solving:</strong> Analytical debugging and architecture decisions for complex workflows.</li>

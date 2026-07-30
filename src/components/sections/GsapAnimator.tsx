@@ -10,6 +10,7 @@ const GsapAnimator = () => {
 
     useEffect(() => {
         gsap.registerPlugin(ScrollTrigger);
+        let refreshTimer = 0;
 
         const frame = window.requestAnimationFrame(() => {
             const context = gsap.context(() => {
@@ -25,18 +26,18 @@ const GsapAnimator = () => {
                 media.add("(prefers-reduced-motion: no-preference)", () => {
                     gsap.fromTo(
                         "[data-gsap-page-header]",
-                        { autoAlpha: 0, y: 30 },
-                        { autoAlpha: 1, y: 0, duration: 0.8, ease: "power3.out" }
+                        { autoAlpha: 0, y: 24 },
+                        { autoAlpha: 1, y: 0, duration: 0.72, ease: "power3.out" }
                     );
 
                     gsap.utils.toArray<HTMLElement>("[data-gsap-section]").forEach((section) => {
                         gsap.fromTo(
                             section,
-                            { autoAlpha: 0, y: 36 },
+                            { autoAlpha: 0, y: 28 },
                             {
                                 autoAlpha: 1,
                                 y: 0,
-                                duration: 0.8,
+                                duration: 0.72,
                                 ease: "power3.out",
                                 scrollTrigger: { trigger: section, start: "top 86%", once: true },
                             }
@@ -49,20 +50,20 @@ const GsapAnimator = () => {
 
                         gsap.fromTo(
                             items,
-                            { autoAlpha: 0, y: 24 },
+                            { autoAlpha: 0, y: 18 },
                             {
                                 autoAlpha: 1,
                                 y: 0,
-                                duration: 0.65,
+                                duration: 0.58,
                                 ease: "power2.out",
-                                stagger: 0.07,
+                                stagger: 0.055,
                                 scrollTrigger: { trigger: group, start: "top 88%", once: true },
                             }
                         );
                     });
                 });
 
-                window.setTimeout(() => ScrollTrigger.refresh(), 100);
+                refreshTimer = window.setTimeout(() => ScrollTrigger.refresh(), 100);
             });
 
             (window as Window & { __portfolioGsapContext?: gsap.Context }).__portfolioGsapContext = context;
@@ -70,6 +71,7 @@ const GsapAnimator = () => {
 
         return () => {
             window.cancelAnimationFrame(frame);
+            window.clearTimeout(refreshTimer);
             const win = window as Window & { __portfolioGsapContext?: gsap.Context };
             win.__portfolioGsapContext?.revert();
             delete win.__portfolioGsapContext;

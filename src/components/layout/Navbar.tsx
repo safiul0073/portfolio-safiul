@@ -40,6 +40,7 @@ const Navbar: React.FC = () => {
     { name: 'Projects', href: '/projects' },
     { name: 'Experience', href: '/experience' },
     { name: 'Skills', href: '/skills' },
+    { name: 'Tools', href: '/tools' },
     { name: 'Contact', href: '/contact' },
   ];
 
@@ -60,17 +61,17 @@ const Navbar: React.FC = () => {
 
   return (
     <motion.header 
-      className={`fixed w-full z-50 transition-all duration-300 ${
+      className={`fixed z-50 w-full border-b transition-all duration-300 ${
         scrolled 
-          ? 'border-b border-neutral-200 bg-white/90 py-3 shadow-sm backdrop-blur-sm dark:border-neutral-800 dark:bg-neutral-950/90'
-          : 'bg-transparent py-5'
+          ? 'border-neutral-200 bg-white/90 py-2.5 shadow-sm backdrop-blur-xl dark:border-neutral-800 dark:bg-neutral-950/90'
+          : 'border-neutral-200/70 bg-white/75 py-3.5 backdrop-blur-md dark:border-neutral-800/70 dark:bg-neutral-950/75'
       }`}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center">
+        <div className="flex items-center justify-between">
           {/* Logo/Name */}
           <motion.div
             whileHover={{ scale: 1.03 }}
@@ -78,17 +79,19 @@ const Navbar: React.FC = () => {
           >
           <Link
             href="/"
-            className="flex items-center text-xl font-bold text-neutral-950 dark:text-white"
+            className="flex items-center gap-3 text-neutral-950 dark:text-white"
             aria-label="Md Safiullah portfolio home"
           >
-            <span className="mr-1 text-neutral-500">&lt;</span>
-            MS
-            <span className="ml-1 text-neutral-500">/&gt;</span>
+            <span className="flex h-9 w-9 items-center justify-center border border-neutral-300 bg-white font-mono text-xs font-bold dark:border-neutral-700 dark:bg-neutral-900">MS</span>
+            <span className="hidden sm:block">
+              <span className="block text-sm font-semibold leading-none">Md Safiullah</span>
+              <span className="mt-1 block font-mono text-[9px] uppercase text-neutral-500">Full stack developer</span>
+            </span>
           </Link>
           </motion.div>
           
           {/* Desktop Navigation */}
-          <nav className="hidden items-center space-x-7 md:flex">
+          <nav className="hidden items-center space-x-5 lg:flex">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
@@ -106,7 +109,7 @@ const Navbar: React.FC = () => {
           </nav>
           
           {/* Social Links & Theme Toggle */}
-          <div className="hidden md:flex items-center space-x-4">
+          <div className="hidden items-center space-x-3 lg:flex">
             {socialLinks.map((link) => (
               <motion.a
                 key={link.name}
@@ -124,7 +127,7 @@ const Navbar: React.FC = () => {
             
             <motion.button
               onClick={toggleTheme}
-              className="rounded-full border border-neutral-200 bg-white p-2 text-neutral-700 transition-colors hover:border-neutral-950 hover:text-neutral-950 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-200 dark:hover:border-white dark:hover:text-white"
+              className="border border-neutral-200 bg-white p-2 text-neutral-700 transition-colors hover:border-neutral-950 hover:text-neutral-950 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-200 dark:hover:border-white dark:hover:text-white"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
               aria-label="Toggle theme"
@@ -134,10 +137,10 @@ const Navbar: React.FC = () => {
           </div>
           
           {/* Mobile Menu Button */}
-          <div className="flex items-center md:hidden">
+          <div className="flex items-center lg:hidden">
             <motion.button
               onClick={toggleTheme}
-              className="mr-2 rounded-full border border-neutral-200 bg-white p-2 text-neutral-700 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-200"
+              className="mr-2 border border-neutral-200 bg-white p-2 text-neutral-700 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-200"
               whileTap={{ scale: 0.95 }}
               aria-label="Toggle theme"
             >
@@ -146,7 +149,7 @@ const Navbar: React.FC = () => {
             
             <motion.button
               onClick={toggleMenu}
-              className="rounded-md border border-neutral-200 bg-white p-2 text-neutral-700 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-200"
+              className="border border-neutral-200 bg-white p-2 text-neutral-700 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-200"
               whileTap={{ scale: 0.95 }}
               aria-label="Toggle menu"
             >
@@ -158,7 +161,7 @@ const Navbar: React.FC = () => {
       
       {/* Mobile Menu */}
       <motion.div
-        className={`md:hidden ${isOpen ? 'block' : 'hidden'}`}
+        className={`lg:hidden ${isOpen ? 'block' : 'hidden'}`}
         initial={{ opacity: 0, height: 0 }}
         animate={isOpen ? { opacity: 1, height: 'auto' } : { opacity: 0, height: 0 }}
         transition={{ duration: 0.3 }}

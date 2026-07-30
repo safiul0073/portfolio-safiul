@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 export default function ContactPage() {
     return (
         <>
-            <PageHeader index="05" eyebrow="Contact" title="Let's discuss useful work." description="Share your role, product, or technical challenge. I am available for selected full-time, freelance, and collaborative opportunities." />
+            <PageHeader index="06" eyebrow="Contact" title="Let's discuss useful work." description="Share your role, product, or technical challenge. I am available for selected full-time, freelance, and collaborative opportunities." />
             <Contact showHeader={false} />
         </>
     );

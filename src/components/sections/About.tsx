@@ -11,7 +11,7 @@ const strengths = [
 ];
 
 const About = ({ preview = false, showHeader = true }: { preview?: boolean; showHeader?: boolean }) => (
-    <section data-gsap-section id="about" className="bg-white py-20 dark:bg-neutral-950 md:py-28">
+    <section data-gsap-section id="about" className="bg-white py-16 dark:bg-neutral-950 md:py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             {showHeader && (
                 <SectionHeader
@@ -20,9 +20,9 @@ const About = ({ preview = false, showHeader = true }: { preview?: boolean; show
                     description="A practical look at how I build, lead, and ship full stack web products."
                 />
             )}
-            <div className="grid items-start gap-12 lg:grid-cols-[1.1fr_0.9fr]">
+            <div className="grid items-start gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
                 <div>
-                    <p className="text-xl leading-9 text-neutral-700 dark:text-neutral-300">
+                    <p className="max-w-2xl text-xl leading-9 text-neutral-800 dark:text-neutral-200">
                         I&apos;m a full stack developer with a backend-first mindset and 4+ years of experience delivering production applications for clients and product teams.
                     </p>
                     <p className="mt-5 leading-8 text-neutral-600 dark:text-neutral-400">
@@ -33,14 +33,14 @@ const About = ({ preview = false, showHeader = true }: { preview?: boolean; show
                             I specialize in Laravel, Next.js, React, Vue, APIs, database design, and deployment workflows. I care about clean architecture, maintainable code, clear communication, and systems that remain dependable after launch.
                         </p>
                     )}
-                    <div data-gsap-stagger className="mt-8 grid gap-3 text-sm text-neutral-600 sm:grid-cols-2 dark:text-neutral-400">
-                        <a data-gsap-item href={`mailto:${personalInfo.email}`} className="flex items-center gap-3 border-t border-neutral-200 py-4 hover:text-neutral-950 dark:border-neutral-800 dark:hover:text-white">
+                    <div data-gsap-stagger className="mt-8 grid text-sm text-neutral-600 sm:grid-cols-2 dark:text-neutral-400">
+                        <a data-gsap-item href={`mailto:${personalInfo.email}`} className="flex items-center gap-3 border-y border-neutral-200 py-4 transition-colors hover:text-neutral-950 sm:pr-5 dark:border-neutral-800 dark:hover:text-white">
                             <Mail size={18} /> {personalInfo.email}
                         </a>
-                        <div data-gsap-item className="flex items-center gap-3 border-t border-neutral-200 py-4 dark:border-neutral-800">
+                        <div data-gsap-item className="flex items-center gap-3 border-b border-neutral-200 py-4 sm:border-y sm:pl-5 dark:border-neutral-800">
                             <MapPin size={18} /> {personalInfo.location}
                         </div>
-                        <div data-gsap-item className="flex items-center gap-3 border-t border-neutral-200 py-4 dark:border-neutral-800">
+                        <div data-gsap-item className="flex items-center gap-3 border-b border-neutral-200 py-4 dark:border-neutral-800">
                             <Calendar size={18} /> Available for new projects
                         </div>
                     </div>
@@ -56,13 +56,16 @@ const About = ({ preview = false, showHeader = true }: { preview?: boolean; show
                         )}
                     </div>
                 </div>
-                <div className="border border-neutral-200 bg-neutral-50 p-6 dark:border-neutral-800 dark:bg-neutral-900 sm:p-8">
+                <div className="border-t border-neutral-300 bg-neutral-50/70 p-6 dark:border-neutral-700 dark:bg-neutral-900/70 sm:p-8">
                     <p className="font-mono text-xs uppercase text-neutral-500">Delivery strengths</p>
-                    <div data-gsap-stagger className="mt-7 space-y-7">
-                        {strengths.map((strength) => (
-                            <div data-gsap-item key={strength.label}>
-                                <p className="font-medium text-neutral-800 dark:text-neutral-200">{strength.label}</p>
-                                <p className="mt-2 text-sm leading-6 text-neutral-600 dark:text-neutral-400">{strength.description}</p>
+                    <div data-gsap-stagger className="mt-6">
+                        {strengths.map((strength, index) => (
+                            <div data-gsap-item key={strength.label} className="grid grid-cols-[32px_1fr] gap-3 border-t border-neutral-200 py-5 first:border-0 first:pt-0 dark:border-neutral-800">
+                                <span className="font-mono text-[10px] text-neutral-400">{String(index + 1).padStart(2, "0")}</span>
+                                <div>
+                                    <p className="font-medium text-neutral-800 dark:text-neutral-200">{strength.label}</p>
+                                    <p className="mt-2 text-sm leading-6 text-neutral-600 dark:text-neutral-400">{strength.description}</p>
+                                </div>
                             </div>
                         ))}
                     </div>

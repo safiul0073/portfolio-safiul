@@ -4,6 +4,7 @@ import About from "@/components/sections/About";
 import Projects from "@/components/sections/Projects";
 import Experience from "@/components/sections/Experience";
 import Skills from "@/components/sections/Skills";
+import Tools from "@/components/sections/Tools";
 import Contact from "@/components/sections/Contact";
 
 export const metadata: Metadata = {
@@ -19,6 +20,7 @@ export default function HomePage() {
             <Projects preview />
             <Experience preview />
             <Skills preview />
+            <Tools preview />
             <Contact preview />
         </>
     );
