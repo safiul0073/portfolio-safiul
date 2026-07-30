@@ -1,5 +1,6 @@
 export interface Project {
   id: number;
+  slug: string;
   title: string;
   description: string;
   longDescription?: string;
@@ -8,6 +9,7 @@ export interface Project {
   technologies: string[];
   github?: string;
   live?: string;
+  codecanyon?: string;
   featured?: boolean;
 }
 
@@ -23,7 +25,6 @@ export interface Experience {
 export interface Skill {
   name: string;
   icon: string;
-  proficiency: number;
   category: 'frontend' | 'backend' | 'database' | 'devops' | 'other';
 }
 

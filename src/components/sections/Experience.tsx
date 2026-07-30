@@ -1,149 +1,73 @@
-/** @format */
+import Link from "next/link";
+import { ArrowUpRight, Briefcase, GraduationCap } from "lucide-react";
+import SectionHeader from "@/components/layout/SectionHeader";
+import { education, experiences } from "@/data/portfolio";
 
-import React from "react";
-import { motion } from "framer-motion";
-import { Briefcase, GraduationCap } from "lucide-react";
-import { experiences, education } from "@/data/portfolio";
-
-const Experience: React.FC = () => {
-    const containerVariants = {
-        hidden: { opacity: 0 },
-        visible: {
-            opacity: 1,
-            transition: {
-                staggerChildren: 0.2,
-            },
-        },
-    };
-
-    const itemVariants = {
-        hidden: { opacity: 0, y: 20 },
-        visible: {
-            opacity: 1,
-            y: 0,
-            transition: { duration: 0.5 },
-        },
-    };
+const Experience = ({ preview = false, showHeader = true }: { preview?: boolean; showHeader?: boolean }) => {
+    const visibleExperiences = preview ? experiences.slice(0, 2) : experiences;
 
     return (
-        <section id="experience" className="py-20 bg-white dark:bg-dark-900">
+        <section data-gsap-section id="experience" className="border-y border-neutral-200 bg-neutral-50 py-20 dark:border-neutral-800 dark:bg-neutral-900 md:py-28">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: "-100px" }}
-                    transition={{ duration: 0.5 }}
-                    className="mb-12 text-center"
-                >
-                    <h2 className="text-3xl font-bold text-dark-900 dark:text-white mb-2">Experience & Education</h2>
-                    <div className="w-20 h-1 bg-primary-600 mx-auto mb-6"></div>
-                    <p className="text-dark-600 dark:text-dark-300 max-w-3xl mx-auto">
-                        Roles, responsibilities, and education that shaped my backend-focused full stack work.
-                    </p>
-                </motion.div>
-
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                    {/* Work Experience */}
+                {showHeader && <SectionHeader index="03 / EXPERIENCE" title="Work shaped by real delivery" description="Roles, responsibilities, and education that shaped my backend-focused full stack practice." />}
+                <div className="grid gap-12 lg:grid-cols-[1.35fr_0.65fr]">
                     <div>
-                        <div className="flex items-center mb-8">
-                            <Briefcase size={24} className="text-primary-600 mr-3" />
-                            <h3 className="text-2xl font-bold text-dark-900 dark:text-white">Work Experience</h3>
-                        </div>
-
-                        <motion.div
-                            variants={containerVariants}
-                            initial="hidden"
-                            whileInView="visible"
-                            viewport={{ once: true, margin: "-100px" }}
-                            className="relative pl-8 border-l-2 border-primary-200 dark:border-primary-900 space-y-10"
-                        >
-                            {experiences.map((exp) => (
-                                <motion.div key={exp.id} variants={itemVariants} className="relative">
-                                    <div className="absolute w-4 h-4 bg-primary-500 rounded-full -left-[1.15rem] top-1.5 ring-4 ring-primary-100 dark:ring-primary-900/30"></div>
-                                    <div className="rounded-lg border border-dark-200 bg-dark-50 p-6 shadow-sm dark:border-dark-700 dark:bg-dark-800">
-                                        <h4 className="text-xl font-semibold text-dark-900 dark:text-white mb-1">{exp.position}</h4>
-                                        <p className="text-primary-600 dark:text-primary-400 font-medium mb-2">{exp.company}</p>
-                                        <p className="text-dark-500 dark:text-dark-400 text-sm mb-4">{exp.duration}</p>
-
-                                        <ul className="space-y-2 mb-4">
-                                            {exp.description.map((desc: string, index: number) => (
-                                                <li key={index} className="text-dark-600 dark:text-dark-300 flex items-start">
-                                                    <span className="text-primary-600 mr-2">•</span>
-                                                    <span className="leading-7">{desc}</span>
+                        <div className="mb-6 flex items-center gap-3"><Briefcase size={20} /><h3 className="text-xl font-semibold">Work experience</h3></div>
+                        <div data-gsap-stagger className="border-l border-neutral-300 pl-6 dark:border-neutral-700">
+                            {visibleExperiences.map((experience) => (
+                                <article data-gsap-item key={experience.id} className="relative border-b border-neutral-200 py-7 first:pt-0 last:border-0 dark:border-neutral-800">
+                                    <span className="absolute -left-[29px] top-2 h-2 w-2 bg-neutral-950 dark:bg-white" />
+                                    <div className="flex flex-col justify-between gap-2 sm:flex-row sm:items-start">
+                                        <div>
+                                            <h4 className="text-xl font-semibold text-neutral-950 dark:text-white">{experience.position}</h4>
+                                            <p className="mt-1 text-neutral-600 dark:text-neutral-400">{experience.company}</p>
+                                        </div>
+                                        <p className="font-mono text-xs text-neutral-500">{experience.duration}</p>
+                                    </div>
+                                    {!preview && (
+                                        <ul className="mt-5 space-y-3">
+                                            {experience.description.map((item) => (
+                                                <li key={item} className="flex gap-3 text-sm leading-6 text-neutral-600 dark:text-neutral-400">
+                                                    <span className="mt-2 h-1 w-1 shrink-0 bg-neutral-500" />{item}
                                                 </li>
                                             ))}
                                         </ul>
-
-                                        <div className="flex flex-wrap gap-2">
-                                            {exp.technologies.map((tech: string, index: number) => (
-                                                <span key={index} className="rounded-md bg-dark-200 px-2 py-1 text-xs text-dark-700 dark:bg-dark-700 dark:text-dark-300">
-                                                    {tech}
-                                                </span>
-                                            ))}
-                                        </div>
+                                    )}
+                                    <div className="mt-5 flex flex-wrap gap-2">
+                                        {experience.technologies.map((technology) => (
+                                            <span key={technology} className="border border-neutral-200 px-2.5 py-1 text-xs text-neutral-600 dark:border-neutral-700 dark:text-neutral-400">{technology}</span>
+                                        ))}
                                     </div>
-                                </motion.div>
+                                </article>
                             ))}
-                        </motion.div>
-                    </div>
-
-                    {/* Education */}
-                    <div>
-                        <div className="flex items-center mb-8">
-                            <GraduationCap size={24} className="text-primary-600 mr-3" />
-                            <h3 className="text-2xl font-bold text-dark-900 dark:text-white">Education</h3>
                         </div>
-
-                        <motion.div
-                            variants={containerVariants}
-                            initial="hidden"
-                            whileInView="visible"
-                            viewport={{ once: true, margin: "-100px" }}
-                            className="relative pl-8 border-l-2 border-primary-200 dark:border-primary-900 space-y-10"
-                        >
-                            {education.map((edu) => (
-                                <motion.div key={edu.id} variants={itemVariants} className="relative">
-                                    <div className="absolute w-4 h-4 bg-primary-500 rounded-full -left-[1.15rem] top-1.5 ring-4 ring-primary-100 dark:ring-primary-900/30"></div>
-                                    <div className="rounded-lg border border-dark-200 bg-dark-50 p-6 shadow-sm dark:border-dark-700 dark:bg-dark-800">
-                                        <h4 className="text-xl font-semibold text-dark-900 dark:text-white mb-1">{edu.degree}</h4>
-                                        <p className="text-primary-600 dark:text-primary-400 font-medium mb-2">{edu.institution}</p>
-                                        <p className="text-dark-500 dark:text-dark-400 text-sm mb-4">{edu.duration}</p>
-
-                                        {edu.description && <p className="text-dark-600 dark:text-dark-300">{edu.description}</p>}
-                                    </div>
-                                </motion.div>
-                            ))}
-                        </motion.div>
-
-                        {/* Skills Card */}
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true, margin: "-100px" }}
-                            transition={{ duration: 0.5, delay: 0.2 }}
-                            className="mt-12 rounded-lg bg-gradient-to-br from-primary-500 to-secondary-500 p-[1px]"
-                        >
-                            <div className="bg-white dark:bg-dark-800 p-6 rounded-lg">
-                                <h4 className="text-xl font-semibold text-dark-900 dark:text-white mb-4">Additional Skills</h4>
-
-                                <div className="space-y-2">
-                                    <p className="text-dark-600 dark:text-dark-300">
-                                        <span className="font-medium text-primary-600">Problem Solving:</span> Strong analytical thinking for debugging, architecture decisions,
-                                        and complex business workflows.
-                                    </p>
-                                    <p className="text-dark-600 dark:text-dark-300">
-                                        <span className="font-medium text-primary-600">Collaboration:</span> Comfortable working with designers, developers, managers, and clients.
-                                    </p>
-                                    <p className="text-dark-600 dark:text-dark-300">
-                                        <span className="font-medium text-primary-600">Project Leadership:</span> Experienced in leading small teams, reviewing code, and shipping
-                                        client-facing applications.
-                                    </p>
-                                    <p className="text-dark-600 dark:text-dark-300">
-                                        <span className="font-medium text-primary-600">Communication:</span> Clear and effective communication with team members and clients.
-                                    </p>
-                                </div>
+                        {preview && (
+                            <Link href="/experience" className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-neutral-950 dark:text-white">
+                                View complete experience <ArrowUpRight size={16} />
+                            </Link>
+                        )}
+                    </div>
+                    <div>
+                        <div className="mb-6 flex items-center gap-3"><GraduationCap size={20} /><h3 className="text-xl font-semibold">Education</h3></div>
+                        {education.map((item) => (
+                            <article key={item.id} className="border-t border-neutral-300 py-6 dark:border-neutral-700">
+                                <h4 className="font-semibold text-neutral-950 dark:text-white">{item.degree}</h4>
+                                <p className="mt-2 text-sm text-neutral-600 dark:text-neutral-400">{item.institution}</p>
+                                <p className="mt-3 font-mono text-xs text-neutral-500">{item.duration}</p>
+                                {!preview && item.description && <p className="mt-4 text-sm leading-6 text-neutral-600 dark:text-neutral-400">{item.description}</p>}
+                            </article>
+                        ))}
+                        {!preview && (
+                            <div className="mt-10 border border-neutral-200 bg-white p-6 dark:border-neutral-800 dark:bg-neutral-950">
+                                <p className="font-mono text-xs uppercase text-neutral-500">Additional strengths</p>
+                                <ul className="mt-5 space-y-4 text-sm leading-6 text-neutral-600 dark:text-neutral-400">
+                                    <li><strong className="text-neutral-900 dark:text-white">Problem solving:</strong> Analytical debugging and architecture decisions for complex workflows.</li>
+                                    <li><strong className="text-neutral-900 dark:text-white">Collaboration:</strong> Effective work with designers, developers, managers, and clients.</li>
+                                    <li><strong className="text-neutral-900 dark:text-white">Project leadership:</strong> Team guidance, code review, mentoring, and production delivery.</li>
+                                    <li><strong className="text-neutral-900 dark:text-white">Communication:</strong> Clear technical and project communication across teams.</li>
+                                </ul>
                             </div>
-                        </motion.div>
+                        )}
                     </div>
                 </div>
             </div>

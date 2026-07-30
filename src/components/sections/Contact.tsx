@@ -1,269 +1,113 @@
-/** @format */
+"use client";
 
-import React, { useState } from "react";
-import { motion } from "framer-motion";
-import { Mail, MapPin, Phone, Send, Loader2 } from "lucide-react";
+import { useState } from "react";
+import Link from "next/link";
+import { ArrowUpRight, Loader2, Mail, MapPin, Phone, Send } from "lucide-react";
+import SectionHeader from "@/components/layout/SectionHeader";
 import { personalInfo } from "@/data/portfolio";
 
-const Contact: React.FC = () => {
-    const [formState, setFormState] = useState({
-        name: "",
-        email: "",
-        subject: "",
-        message: "",
-    });
+const serviceAreas = [
+    "Full stack web applications",
+    "Admin dashboards and business systems",
+    "E-commerce, booking, ERP, and lead platforms",
+    "REST APIs and third-party integrations",
+];
 
+const Contact = ({ preview = false, showHeader = true }: { preview?: boolean; showHeader?: boolean }) => {
+    const [formState, setFormState] = useState({ name: "", email: "", subject: "", message: "" });
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitted, setSubmitted] = useState(false);
     const [error, setError] = useState("");
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        const { name, value } = e.target;
-        setFormState((prev) => ({ ...prev, [name]: value }));
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        const { name, value } = event.target;
+        setFormState((current) => ({ ...current, [name]: value }));
     };
 
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
+    const handleSubmit = async (event: React.FormEvent) => {
+        event.preventDefault();
         setIsSubmitting(true);
         setError("");
-
         try {
-            // Simulate form submission
             await new Promise((resolve) => setTimeout(resolve, 1500));
             setSubmitted(true);
-            setFormState({
-                name: "",
-                email: "",
-                subject: "",
-                message: "",
-            });
-        } catch (err) {
+            setFormState({ name: "", email: "", subject: "", message: "" });
+        } catch {
             setError("Something went wrong. Please try again later.");
         } finally {
             setIsSubmitting(false);
         }
     };
 
+    if (preview) {
+        return (
+            <section data-gsap-section id="contact" className="border-t border-neutral-200 bg-neutral-950 py-20 text-white dark:border-neutral-800 md:py-28">
+                <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="grid items-end gap-10 lg:grid-cols-[1fr_auto]">
+                        <div>
+                            <p className="font-mono text-xs uppercase text-neutral-400">05 / CONTACT</p>
+                            <h2 className="mt-5 max-w-4xl text-4xl font-semibold leading-tight sm:text-5xl">Have a role, product, or technical challenge to discuss?</h2>
+                            <p className="mt-5 max-w-2xl leading-7 text-neutral-400">I&apos;m open to full-time roles, freelance work, and focused technical collaboration.</p>
+                        </div>
+                        <Link href="/contact" className="inline-flex items-center justify-center gap-2 bg-white px-6 py-3 font-medium text-neutral-950 hover:bg-neutral-200">
+                            Start a conversation <ArrowUpRight size={18} />
+                        </Link>
+                    </div>
+                </div>
+            </section>
+        );
+    }
+
+    const inputClass = "w-full border border-neutral-300 bg-white px-4 py-3 text-neutral-900 placeholder:text-neutral-400 focus:border-neutral-950 dark:border-neutral-700 dark:bg-neutral-950 dark:text-white dark:focus:border-white";
+
     return (
-        <section id="contact" className="py-20 bg-white dark:bg-dark-900">
+        <section data-gsap-section id="contact" className="bg-white py-20 dark:bg-neutral-950 md:py-28">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: "-100px" }}
-                    transition={{ duration: 0.5 }}
-                    className="mb-12 text-center"
-                >
-                    <h2 className="text-3xl font-bold text-dark-900 dark:text-white mb-2">Get In Touch</h2>
-                    <div className="w-20 h-1 bg-primary-600 mx-auto mb-6"></div>
-                    <p className="text-dark-600 dark:text-dark-300 max-w-3xl mx-auto">
-                        I&apos;m open to full-time roles, freelance work, and technical collaboration.
-                    </p>
-                </motion.div>
-
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                    {/* Contact Information */}
-                    <motion.div initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, margin: "-100px" }} transition={{ duration: 0.5 }}>
-                        <h3 className="text-2xl font-bold text-dark-900 dark:text-white mb-6">
-                            Contact <span className="text-primary-600">Information</span>
-                        </h3>
-
-                        <div className="space-y-6 mb-8">
-                            <motion.div
-                                className="flex items-start"
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: 0.1, duration: 0.5 }}
-                            >
-                                <div className="bg-primary-100 dark:bg-primary-900/30 p-3 rounded-full mr-4">
-                                    <Mail size={20} className="text-primary-600" />
-                                </div>
-                                <div>
-                                    <h4 className="text-lg font-semibold text-dark-800 dark:text-white mb-1">Email</h4>
-                                    <a
-                                        href={`mailto:${personalInfo.email}`}
-                                        className="text-dark-600 dark:text-dark-300 hover:text-primary-600 dark:hover:text-primary-500 transition-colors"
-                                    >
-                                        {personalInfo.email}
-                                    </a>
-                                </div>
-                            </motion.div>
-
-                            <motion.div
-                                className="flex items-start"
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: 0.2, duration: 0.5 }}
-                            >
-                                <div className="bg-primary-100 dark:bg-primary-900/30 p-3 rounded-full mr-4">
-                                    <MapPin size={20} className="text-primary-600" />
-                                </div>
-                                <div>
-                                    <h4 className="text-lg font-semibold text-dark-800 dark:text-white mb-1">Location</h4>
-                                    <p className="text-dark-600 dark:text-dark-300">{personalInfo.location}</p>
-                                </div>
-                            </motion.div>
-
-                            <motion.div
-                                className="flex items-start"
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: 0.3, duration: 0.5 }}
-                            >
-                                <div className="bg-primary-100 dark:bg-primary-900/30 p-3 rounded-full mr-4">
-                                    <Phone size={20} className="text-primary-600" />
-                                </div>
-                                <div>
-                                    <h4 className="text-lg font-semibold text-dark-800 dark:text-white mb-1">Phone</h4>
-                                    <p className="text-dark-600 dark:text-dark-300">Available upon request</p>
-                                </div>
-                            </motion.div>
+                {showHeader && <SectionHeader index="05 / CONTACT" title="Start a conversation" description="Share the role, project scope, or technical challenge, and I will respond with availability and useful next steps." />}
+                <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr]">
+                    <div>
+                        <div data-gsap-stagger className="divide-y divide-neutral-200 border-y border-neutral-200 dark:divide-neutral-800 dark:border-neutral-800">
+                            <a data-gsap-item href={`mailto:${personalInfo.email}`} className="flex items-start gap-4 py-5">
+                                <Mail size={20} /><div><p className="text-sm font-semibold">Email</p><p className="mt-1 text-sm text-neutral-500">{personalInfo.email}</p></div>
+                            </a>
+                            <div data-gsap-item className="flex items-start gap-4 py-5">
+                                <MapPin size={20} /><div><p className="text-sm font-semibold">Location</p><p className="mt-1 text-sm text-neutral-500">{personalInfo.location}</p></div>
+                            </div>
+                            <div data-gsap-item className="flex items-start gap-4 py-5">
+                                <Phone size={20} /><div><p className="text-sm font-semibold">Phone</p><p className="mt-1 text-sm text-neutral-500">Available upon request</p></div>
+                            </div>
                         </div>
-
-                        <div className="rounded-lg border border-dark-200 bg-dark-50 p-6 shadow-sm dark:border-dark-700 dark:bg-dark-800">
-                            <h4 className="text-xl font-semibold text-dark-900 dark:text-white mb-4">Professional Contact</h4>
-                            <p className="text-dark-600 dark:text-dark-300 mb-4">
-                                If my experience matches your team or project needs, send me a short message with the role, project scope, or technical challenge. I usually
-                                respond with availability and next steps.
-                            </p>
-                            <p className="text-dark-600 dark:text-dark-300">
-                                Areas I work with:
-                                <br />
-                                • Full stack web applications
-                                <br />
-                                • Admin dashboards and business systems
-                                <br />
-                                • E-commerce, booking, ERP, and lead platforms
-                                <br />• RESTful APIs and integrations
-                            </p>
+                        <div className="mt-8 border border-neutral-200 bg-neutral-50 p-6 dark:border-neutral-800 dark:bg-neutral-900">
+                            <h3 className="font-semibold">Areas I work with</h3>
+                            <ul className="mt-4 space-y-3">
+                                {serviceAreas.map((area) => <li key={area} className="flex gap-3 text-sm leading-6 text-neutral-600 dark:text-neutral-400"><span className="mt-2 h-1 w-1 shrink-0 bg-neutral-500" />{area}</li>)}
+                            </ul>
                         </div>
-                    </motion.div>
+                    </div>
 
-                    {/* Contact Form */}
-                    <motion.div
-                        initial={{ opacity: 0, x: 50 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true, margin: "-100px" }}
-                        transition={{ duration: 0.5, delay: 0.2 }}
-                    >
-                        <h3 className="text-2xl font-bold text-dark-900 dark:text-white mb-6">
-                            Send Me a <span className="text-primary-600">Message</span>
-                        </h3>
-
+                    <div>
                         {submitted ? (
-                            <motion.div
-                                className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-6 text-center"
-                                initial={{ opacity: 0, scale: 0.9 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                transition={{ duration: 0.3 }}
-                            >
-                                <div className="bg-green-100 dark:bg-green-900/30 p-3 rounded-full inline-flex justify-center mb-4">
-                                    <Send size={24} className="text-green-600 dark:text-green-400" />
-                                </div>
-                                <h4 className="text-xl font-semibold text-dark-900 dark:text-white mb-2">Message Sent!</h4>
-                                <p className="text-dark-600 dark:text-dark-300">Thank you for reaching out. I&apos;ll get back to you as soon as possible.</p>
-                                <button
-                                    onClick={() => setSubmitted(false)}
-                                    className="mt-6 px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-md transition-colors"
-                                >
-                                    Send Another Message
-                                </button>
-                            </motion.div>
+                            <div className="border border-neutral-300 bg-neutral-50 p-8 text-center dark:border-neutral-700 dark:bg-neutral-900">
+                                <Send size={28} className="mx-auto" />
+                                <h3 className="mt-5 text-2xl font-semibold">Message sent</h3>
+                                <p className="mt-3 text-neutral-600 dark:text-neutral-400">Thank you for reaching out. I&apos;ll get back to you as soon as possible.</p>
+                                <button type="button" onClick={() => setSubmitted(false)} className="mt-6 bg-neutral-950 px-5 py-3 text-sm font-medium text-white dark:bg-white dark:text-neutral-950">Send another message</button>
+                            </div>
                         ) : (
-                            <form onSubmit={handleSubmit} className="space-y-6">
-                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                                    <div>
-                                        <label htmlFor="name" className="block text-dark-700 dark:text-dark-300 mb-2 font-medium">
-                                            Name
-                                        </label>
-                                        <input
-                                            type="text"
-                                            id="name"
-                                            name="name"
-                                            value={formState.name}
-                                            onChange={handleChange}
-                                            required
-                                            className="w-full px-4 py-3 rounded-lg border border-dark-200 dark:border-dark-700 bg-white dark:bg-dark-800 text-dark-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
-                                            placeholder="Your name"
-                                        />
-                                    </div>
-
-                                    <div>
-                                        <label htmlFor="email" className="block text-dark-700 dark:text-dark-300 mb-2 font-medium">
-                                            Email
-                                        </label>
-                                        <input
-                                            type="email"
-                                            id="email"
-                                            name="email"
-                                            value={formState.email}
-                                            onChange={handleChange}
-                                            required
-                                            className="w-full px-4 py-3 rounded-lg border border-dark-200 dark:border-dark-700 bg-white dark:bg-dark-800 text-dark-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
-                                            placeholder="you@example.com"
-                                        />
-                                    </div>
+                            <form onSubmit={handleSubmit} className="space-y-5">
+                                <div className="grid gap-5 sm:grid-cols-2">
+                                    <label className="text-sm font-medium">Name<input required name="name" value={formState.name} onChange={handleChange} className={`${inputClass} mt-2`} placeholder="Your name" /></label>
+                                    <label className="text-sm font-medium">Email<input required type="email" name="email" value={formState.email} onChange={handleChange} className={`${inputClass} mt-2`} placeholder="you@example.com" /></label>
                                 </div>
-
-                                <div>
-                                    <label htmlFor="subject" className="block text-dark-700 dark:text-dark-300 mb-2 font-medium">
-                                        Subject
-                                    </label>
-                                    <input
-                                        type="text"
-                                        id="subject"
-                                        name="subject"
-                                        value={formState.subject}
-                                        onChange={handleChange}
-                                        required
-                                        className="w-full px-4 py-3 rounded-lg border border-dark-200 dark:border-dark-700 bg-white dark:bg-dark-800 text-dark-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
-                                        placeholder="Project inquiry"
-                                    />
-                                </div>
-
-                                <div>
-                                    <label htmlFor="message" className="block text-dark-700 dark:text-dark-300 mb-2 font-medium">
-                                        Message
-                                    </label>
-                                    <textarea
-                                        id="message"
-                                        name="message"
-                                        value={formState.message}
-                                        onChange={handleChange}
-                                        required
-                                        rows={5}
-                                        className="w-full px-4 py-3 rounded-lg border border-dark-200 dark:border-dark-700 bg-white dark:bg-dark-800 text-dark-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all resize-none"
-                                        placeholder="Tell me about the project, timeline, and what you need help with..."
-                                    ></textarea>
-                                </div>
-
-                                {error && <div className="bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 p-3 rounded-md">{error}</div>}
-
-                                <motion.button
-                                    type="submit"
-                                    disabled={isSubmitting}
-                                    className="w-full px-6 py-3 bg-primary-600 hover:bg-primary-700 disabled:bg-primary-400 text-white font-medium rounded-md shadow-md hover:shadow-lg transition-all flex items-center justify-center"
-                                    whileHover={!isSubmitting ? { scale: 1.02 } : {}}
-                                    whileTap={!isSubmitting ? { scale: 0.98 } : {}}
-                                >
-                                    {isSubmitting ? (
-                                        <>
-                                            <Loader2 size={20} className="mr-2 animate-spin" />
-                                            Sending...
-                                        </>
-                                    ) : (
-                                        <>
-                                            <Send size={20} className="mr-2" />
-                                            Send Message
-                                        </>
-                                    )}
-                                </motion.button>
+                                <label className="block text-sm font-medium">Subject<input required name="subject" value={formState.subject} onChange={handleChange} className={`${inputClass} mt-2`} placeholder="Project inquiry" /></label>
+                                <label className="block text-sm font-medium">Message<textarea required name="message" rows={6} value={formState.message} onChange={handleChange} className={`${inputClass} mt-2 resize-none`} placeholder="Tell me about the project, timeline, and what you need help with..." /></label>
+                                {error && <div className="border border-neutral-400 bg-neutral-100 p-3 text-sm dark:border-neutral-600 dark:bg-neutral-900">{error}</div>}
+                                <button type="submit" disabled={isSubmitting} className="inline-flex w-full items-center justify-center gap-2 bg-neutral-950 px-6 py-3 font-medium text-white disabled:bg-neutral-500 dark:bg-white dark:text-neutral-950">
+                                    {isSubmitting ? <><Loader2 size={19} className="animate-spin" />Sending...</> : <><Send size={19} />Send message</>}
+                                </button>
                             </form>
                         )}
-                    </motion.div>
+                    </div>
                 </div>
             </div>
         </section>

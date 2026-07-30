@@ -1,4 +1,5 @@
 /** @format */
+"use client";
 
 import React, { createContext, useContext, useState, useEffect, ReactNode } from "react";
 
@@ -13,21 +14,25 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     const [theme, setTheme] = useState<Theme>("light");
+
     useEffect(() => {
-        const savedTheme = localStorage.getItem("theme");
-        if (savedTheme) {
-            setTheme(savedTheme as Theme);
+        const savedTheme = window.localStorage.getItem("theme");
+        if (savedTheme === "light" || savedTheme === "dark") {
+            setTheme(savedTheme);
+            return;
+        }
+        if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+            setTheme("dark");
         }
     }, []);
+
     useEffect(() => {
-        // Update the HTML class for Tailwind Dark Mode
         if (theme === "dark") {
             document.documentElement.classList.add("dark");
         } else {
             document.documentElement.classList.remove("dark");
         }
 
-        // Save the theme preference
         localStorage.setItem("theme", theme);
     }, [theme]);
 
@@ -38,7 +43,6 @@ export const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) =
     return <ThemeContext.Provider value={{ theme, toggleTheme }}>{children}</ThemeContext.Provider>;
 };
 
-// Custom hook to use the theme context
 export const useTheme = (): ThemeContextType => {
     const context = useContext(ThemeContext);
     if (context === undefined) {

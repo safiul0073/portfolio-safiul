@@ -1,6 +1,10 @@
+"use client";
+
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ExternalLink, Github, Linkedin, Menu, Moon, Sun, Twitter, X } from 'lucide-react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useTheme } from '@/context/ThemeContext';
 import { socialLinks } from '@/data/portfolio';
 
@@ -8,6 +12,7 @@ const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { theme, toggleTheme } = useTheme();
+  const pathname = usePathname();
   
   const toggleMenu = () => setIsOpen(!isOpen);
   
@@ -30,13 +35,15 @@ const Navbar: React.FC = () => {
   };
   
   const navLinks = [
-    { name: 'Home', href: '#hero' },
-    { name: 'About', href: '#about' },
-    { name: 'Projects', href: '#projects' },
-    { name: 'Experience', href: '#experience' },
-    { name: 'Skills', href: '#skills' },
-    { name: 'Contact', href: '#contact' },
+    { name: 'Home', href: '/' },
+    { name: 'About', href: '/about' },
+    { name: 'Projects', href: '/projects' },
+    { name: 'Experience', href: '/experience' },
+    { name: 'Skills', href: '/skills' },
+    { name: 'Contact', href: '/contact' },
   ];
+
+  const isActive = (href: string) => href === '/' ? pathname === '/' : pathname.startsWith(href);
   
   const renderSocialIcon = (name: string) => {
     switch (name.toLowerCase()) {
@@ -55,7 +62,7 @@ const Navbar: React.FC = () => {
     <motion.header 
       className={`fixed w-full z-50 transition-all duration-300 ${
         scrolled 
-          ? 'bg-white/90 dark:bg-dark-900/90 backdrop-blur-sm shadow-md py-3' 
+          ? 'border-b border-neutral-200 bg-white/90 py-3 shadow-sm backdrop-blur-sm dark:border-neutral-800 dark:bg-neutral-950/90'
           : 'bg-transparent py-5'
       }`}
       initial={{ y: -100 }}
@@ -65,31 +72,36 @@ const Navbar: React.FC = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
           {/* Logo/Name */}
-          <motion.a 
-            href="#hero"
-            className="flex items-center text-xl font-bold text-dark-900 dark:text-white"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+          <motion.div
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.98 }}
+          >
+          <Link
+            href="/"
+            className="flex items-center text-xl font-bold text-neutral-950 dark:text-white"
             aria-label="Md Safiullah portfolio home"
           >
-            <span className="text-primary-600 mr-1">&lt;</span>
+            <span className="mr-1 text-neutral-500">&lt;</span>
             MS
-            <span className="text-primary-600 ml-1">/&gt;</span>
-          </motion.a>
+            <span className="ml-1 text-neutral-500">/&gt;</span>
+          </Link>
+          </motion.div>
           
           {/* Desktop Navigation */}
           <nav className="hidden items-center space-x-7 md:flex">
             {navLinks.map((link) => (
-              <motion.a
+              <Link
                 key={link.name}
                 href={link.href}
-                className="text-sm font-medium text-dark-700 transition-colors hover:text-primary-600 dark:text-dark-200 dark:hover:text-primary-500"
-                whileHover={{ y: -2 }}
-                whileTap={{ y: 0 }}
+                className={`relative py-2 text-sm font-medium transition-colors ${
+                  isActive(link.href)
+                    ? 'text-neutral-950 after:absolute after:inset-x-0 after:-bottom-0.5 after:h-px after:bg-neutral-950 dark:text-white dark:after:bg-white'
+                    : 'text-neutral-600 hover:text-neutral-950 dark:text-neutral-300 dark:hover:text-white'
+                }`}
                 onClick={handleNavLinkClick}
               >
                 {link.name}
-              </motion.a>
+              </Link>
             ))}
           </nav>
           
@@ -101,7 +113,7 @@ const Navbar: React.FC = () => {
                 href={link.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-dark-700 dark:text-dark-200 hover:text-primary-600 dark:hover:text-primary-500 transition-colors"
+                className="text-neutral-600 transition-colors hover:text-neutral-950 dark:text-neutral-300 dark:hover:text-white"
                 whileHover={{ y: -2, scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
                 aria-label={link.name}
@@ -112,7 +124,7 @@ const Navbar: React.FC = () => {
             
             <motion.button
               onClick={toggleTheme}
-              className="p-2 rounded-full bg-dark-100 dark:bg-dark-800 text-dark-700 dark:text-dark-200 hover:text-primary-600 dark:hover:text-primary-500 transition-colors"
+              className="rounded-full border border-neutral-200 bg-white p-2 text-neutral-700 transition-colors hover:border-neutral-950 hover:text-neutral-950 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-200 dark:hover:border-white dark:hover:text-white"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
               aria-label="Toggle theme"
@@ -125,7 +137,7 @@ const Navbar: React.FC = () => {
           <div className="flex items-center md:hidden">
             <motion.button
               onClick={toggleTheme}
-              className="p-2 mr-2 rounded-full bg-dark-100 dark:bg-dark-800 text-dark-700 dark:text-dark-200"
+              className="mr-2 rounded-full border border-neutral-200 bg-white p-2 text-neutral-700 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-200"
               whileTap={{ scale: 0.95 }}
               aria-label="Toggle theme"
             >
@@ -134,7 +146,7 @@ const Navbar: React.FC = () => {
             
             <motion.button
               onClick={toggleMenu}
-              className="p-2 rounded-md bg-dark-100 dark:bg-dark-800 text-dark-700 dark:text-dark-200"
+              className="rounded-md border border-neutral-200 bg-white p-2 text-neutral-700 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-200"
               whileTap={{ scale: 0.95 }}
               aria-label="Toggle menu"
             >
@@ -151,28 +163,32 @@ const Navbar: React.FC = () => {
         animate={isOpen ? { opacity: 1, height: 'auto' } : { opacity: 0, height: 0 }}
         transition={{ duration: 0.3 }}
       >
-        <div className="pt-2 pb-4 px-4 bg-white dark:bg-dark-900 shadow-lg">
+        <div className="border-b border-neutral-200 bg-white px-4 pb-4 pt-2 shadow-lg dark:border-neutral-800 dark:bg-neutral-950">
           <nav className="flex flex-col space-y-3">
             {navLinks.map((link) => (
-              <a
+              <Link
                 key={link.name}
                 href={link.href}
-                className="text-dark-700 dark:text-dark-200 hover:text-primary-600 dark:hover:text-primary-500 py-2 transition-colors font-medium"
+                className={`border-b py-3 font-medium transition-colors last:border-0 ${
+                  isActive(link.href)
+                    ? 'border-neutral-200 text-neutral-950 dark:border-neutral-800 dark:text-white'
+                    : 'border-neutral-100 text-neutral-600 hover:text-neutral-950 dark:border-neutral-900 dark:text-neutral-300 dark:hover:text-white'
+                }`}
                 onClick={handleNavLinkClick}
               >
                 {link.name}
-              </a>
+              </Link>
             ))}
           </nav>
           
-          <div className="flex space-x-4 mt-4 pt-4 border-t border-dark-200 dark:border-dark-700">
+          <div className="mt-4 flex space-x-4 border-t border-neutral-200 pt-4 dark:border-neutral-800">
             {socialLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-dark-700 dark:text-dark-200 hover:text-primary-600 dark:hover:text-primary-500 transition-colors"
+                className="text-neutral-700 transition-colors hover:text-neutral-950 dark:text-neutral-200 dark:hover:text-white"
                 aria-label={link.name}
               >
                 {renderSocialIcon(link.name)}
