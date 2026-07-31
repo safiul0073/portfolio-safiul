@@ -1,10 +1,13 @@
 const bcrypt = require('bcryptjs');
 
-let users = [
+const adminEmail = process.env.ADMIN_EMAIL || "anis@gmail.com";
+const adminPassword = process.env.ADMIN_PASSWORD || "anis522115";
+
+const users = [
   {
     id: 1,
-    email: "anis@gmail.com",
-    password: bcrypt.hashSync('anis522115', 10) // store hashed password
+    email: adminEmail,
+    password: bcrypt.hashSync(adminPassword, 10)
   }
 ];
 

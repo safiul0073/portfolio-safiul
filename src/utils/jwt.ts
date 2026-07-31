@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 
-const secret = 'your_jwt_secret'; // store this securely in environment variables
+const secret = process.env.JWT_SECRET || 'your_jwt_secret';
 
 export function generateToken(user: any) {
   return jwt.sign({ id: user.id, email: user.email }, secret, {

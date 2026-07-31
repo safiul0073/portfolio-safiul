@@ -15,6 +15,7 @@ const serviceAreas = [
 
 const Contact = ({ preview = false, showHeader = true }: { preview?: boolean; showHeader?: boolean }) => {
     const [formState, setFormState] = useState({ name: "", email: "", subject: "", message: "" });
+    const [website, setWebsite] = useState("");
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitted, setSubmitted] = useState(false);
     const [error, setError] = useState("");
@@ -29,11 +30,26 @@ const Contact = ({ preview = false, showHeader = true }: { preview?: boolean; sh
         setIsSubmitting(true);
         setError("");
         try {
-            await new Promise((resolve) => setTimeout(resolve, 1500));
+            const response = await fetch("/api/contact", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ ...formState, website }),
+            });
+            const result = (await response.json().catch(() => null)) as { message?: string } | null;
+
+            if (!response.ok) {
+                throw new Error(result?.message || "The message could not be delivered.");
+            }
+
             setSubmitted(true);
             setFormState({ name: "", email: "", subject: "", message: "" });
-        } catch {
-            setError("Something went wrong. Please try again later.");
+            setWebsite("");
+        } catch (submitError) {
+            setError(
+                submitError instanceof Error
+                    ? submitError.message
+                    : "Something went wrong. Please try again later.",
+            );
         } finally {
             setIsSubmitting(false);
         }
@@ -95,6 +111,18 @@ const Contact = ({ preview = false, showHeader = true }: { preview?: boolean; sh
                             </div>
                         ) : (
                             <form onSubmit={handleSubmit} className="border-t border-neutral-300 pt-6 dark:border-neutral-700">
+                                <div className="absolute left-[-9999px] top-auto h-px w-px overflow-hidden" aria-hidden="true">
+                                    <label>
+                                        Website
+                                        <input
+                                            name="website"
+                                            value={website}
+                                            onChange={(event) => setWebsite(event.target.value)}
+                                            tabIndex={-1}
+                                            autoComplete="off"
+                                        />
+                                    </label>
+                                </div>
                                 <div className="mb-6 flex items-end justify-between gap-4">
                                     <div>
                                         <p className="font-mono text-[10px] uppercase text-neutral-500">Project inquiry</p>
@@ -104,12 +132,12 @@ const Contact = ({ preview = false, showHeader = true }: { preview?: boolean; sh
                                 </div>
                                 <div className="space-y-5">
                                     <div className="grid gap-5 sm:grid-cols-2">
-                                        <label className="text-sm font-medium">Name<input required name="name" value={formState.name} onChange={handleChange} className={`${inputClass} mt-2`} placeholder="Your name" /></label>
-                                        <label className="text-sm font-medium">Email<input required type="email" name="email" value={formState.email} onChange={handleChange} className={`${inputClass} mt-2`} placeholder="you@example.com" /></label>
+                                        <label className="text-sm font-medium">Name<input required minLength={2} maxLength={80} autoComplete="name" name="name" value={formState.name} onChange={handleChange} className={`${inputClass} mt-2`} placeholder="Your name" /></label>
+                                        <label className="text-sm font-medium">Email<input required maxLength={254} autoComplete="email" type="email" name="email" value={formState.email} onChange={handleChange} className={`${inputClass} mt-2`} placeholder="you@example.com" /></label>
                                     </div>
-                                    <label className="block text-sm font-medium">Subject<input required name="subject" value={formState.subject} onChange={handleChange} className={`${inputClass} mt-2`} placeholder="Project inquiry" /></label>
-                                    <label className="block text-sm font-medium">Message<textarea required name="message" rows={6} value={formState.message} onChange={handleChange} className={`${inputClass} mt-2 resize-none`} placeholder="Tell me about the project, timeline, and what you need help with..." /></label>
-                                    {error && <div className="border border-neutral-400 bg-neutral-100 p-3 text-sm dark:border-neutral-600 dark:bg-neutral-900">{error}</div>}
+                                    <label className="block text-sm font-medium">Subject<input required minLength={3} maxLength={120} name="subject" value={formState.subject} onChange={handleChange} className={`${inputClass} mt-2`} placeholder="Project inquiry" /></label>
+                                    <label className="block text-sm font-medium">Message<textarea required minLength={20} maxLength={5000} name="message" rows={6} value={formState.message} onChange={handleChange} className={`${inputClass} mt-2 resize-none`} placeholder="Tell me about the project, timeline, and what you need help with..." /></label>
+                                    {error && <div role="alert" aria-live="polite" className="border border-neutral-400 bg-neutral-100 p-3 text-sm dark:border-neutral-600 dark:bg-neutral-900">{error}</div>}
                                     <button type="submit" disabled={isSubmitting} className="inline-flex w-full items-center justify-center gap-2 bg-neutral-950 px-6 py-3 font-medium text-white disabled:bg-neutral-500 dark:bg-white dark:text-neutral-950">
                                         {isSubmitting ? <><Loader2 size={19} className="animate-spin" />Sending...</> : <><Send size={19} />Send message</>}
                                     </button>
