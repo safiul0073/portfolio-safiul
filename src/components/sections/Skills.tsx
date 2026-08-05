@@ -15,6 +15,9 @@ import {
 import SectionHeader from "@/components/layout/SectionHeader";
 import { skills } from "@/data/portfolio";
 import type { Skill } from "@/types";
+import { Button } from "@/components/ui/button";
+import { Container } from "@/components/ui/container";
+import { Section } from "@/components/ui/section";
 
 const capabilityGroups: Array<{
     id: Skill["category"];
@@ -86,8 +89,8 @@ const Skills = ({ preview = false, showHeader = true }: { preview?: boolean; sho
 
     if (preview) {
         return (
-            <section data-gsap-section id="skills" className="bg-white py-16 dark:bg-neutral-950 md:py-20">
-                <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <Section id="skills">
+                <Container>
                     {showHeader && (
                         <SectionHeader
                             index="04 / CAPABILITIES"
@@ -95,37 +98,43 @@ const Skills = ({ preview = false, showHeader = true }: { preview?: boolean; sho
                             description="Backend-first engineering supported by modern frontend, data, infrastructure, mobile, and AI capabilities."
                         />
                     )}
-                    <div data-gsap-stagger className="grid gap-px border border-neutral-200 bg-neutral-200 sm:grid-cols-2 lg:grid-cols-4 dark:border-neutral-800 dark:bg-neutral-800">
+                    <div data-reveal-group className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
                         {featuredSkills.map((skill, index) => (
-                            <div data-gsap-item key={skill.name} className="flex min-h-28 flex-col justify-between bg-white p-5 transition-colors hover:bg-neutral-50 dark:bg-neutral-950 dark:hover:bg-neutral-900">
+                            <div
+                                data-reveal
+                                key={skill.name}
+                                className="flex min-h-32 flex-col justify-between rounded-lg bg-surface-muted p-5 transition-shadow duration-base ease-out hover:shadow-md"
+                            >
                                 <div className="flex items-center justify-between gap-3">
                                     <CategoryIcon category={skill.category} />
-                                    <span className="font-mono text-[10px] text-neutral-400">{String(index + 1).padStart(2, "0")}</span>
+                                    <span className="type-label">{String(index + 1).padStart(2, "0")}</span>
                                 </div>
                                 <div className="mt-6">
-                                    <p className="font-semibold text-neutral-950 dark:text-white">{skill.name}</p>
-                                    <p className="mt-1 text-xs text-neutral-500">{categoryLabel(skill.category)}</p>
+                                    <p className="font-semibold text-fg">{skill.name}</p>
+                                    <p className="type-body-xs mt-1.5 text-fg-subtle">{categoryLabel(skill.category)}</p>
                                 </div>
                             </div>
                         ))}
                     </div>
-                    <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-neutral-200 pt-6 dark:border-neutral-800">
-                        <p className="inline-flex items-center gap-2 text-sm text-neutral-500">
-                            <Layers3 size={16} />
+                    <div className="mt-10 flex flex-wrap items-center justify-between gap-4 border-t border-line/60 pt-8">
+                        <p className="type-body-sm inline-flex items-center gap-2 text-fg-subtle">
+                            <Layers3 size={16} className="shrink-0" />
                             {capabilityGroups.length} capability areas and {skills.length} documented skills
                         </p>
-                        <Link href="/skills" className="inline-flex items-center gap-2 text-sm font-semibold text-neutral-950 dark:text-white">
-                            View complete skill set <ArrowUpRight size={16} />
-                        </Link>
+                        <Button asChild variant="link" className="text-sm font-semibold">
+                            <Link href="/skills">
+                                View complete skill set <ArrowUpRight size={16} />
+                            </Link>
+                        </Button>
                     </div>
-                </div>
-            </section>
+                </Container>
+            </Section>
         );
     }
 
     return (
-        <section data-gsap-section id="skills" className="bg-white py-16 dark:bg-neutral-950 md:py-20">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <Section id="skills">
+            <Container>
                 {showHeader && (
                     <SectionHeader
                         index="04 / CAPABILITIES"
@@ -134,41 +143,44 @@ const Skills = ({ preview = false, showHeader = true }: { preview?: boolean; sho
                     />
                 )}
 
-                <div className="grid border-y border-neutral-200 dark:border-neutral-800 lg:grid-cols-[0.72fr_1.28fr]">
-                    <div className="py-8 lg:border-r lg:border-neutral-200 lg:pr-12 dark:lg:border-neutral-800">
-                        <p className="font-mono text-[11px] uppercase text-neutral-500">Core expertise</p>
-                        <h2 className="mt-4 max-w-md text-3xl font-semibold leading-tight text-neutral-950 dark:text-white">
-                            Backend depth with complete product delivery.
-                        </h2>
-                        <p className="mt-4 max-w-md text-sm leading-7 text-neutral-600 dark:text-neutral-400">
-                            My strongest work sits at the intersection of application architecture, reliable APIs, usable interfaces, and production operations.
+                <div className="grid gap-10 lg:grid-cols-[1fr_1.6fr]">
+                    <div className="py-2">
+                        <p className="type-eyebrow">Core expertise</p>
+                        <h2 className="type-h2 mt-4 max-w-md">Backend depth with complete product delivery.</h2>
+                        <p className="type-body-sm mt-4 max-w-md">
+                            My strongest work sits at the intersection of application architecture, reliable APIs,
+                            usable interfaces, and production operations.
                         </p>
-                        <div className="mt-8 flex gap-8">
+                        <div className="mt-8 flex gap-10">
                             <div>
-                                <p className="text-3xl font-semibold text-neutral-950 dark:text-white">{capabilityGroups.length}</p>
-                                <p className="mt-1 text-xs text-neutral-500">Capability areas</p>
+                                <p className="type-stat">{capabilityGroups.length}</p>
+                                <p className="type-body-xs mt-1.5 text-fg-subtle">Capability areas</p>
                             </div>
                             <div>
-                                <p className="text-3xl font-semibold text-neutral-950 dark:text-white">{skills.length}</p>
-                                <p className="mt-1 text-xs text-neutral-500">Skills documented</p>
+                                <p className="type-stat">{skills.length}</p>
+                                <p className="type-body-xs mt-1.5 text-fg-subtle">Skills documented</p>
                             </div>
                         </div>
                     </div>
-                    <div data-gsap-stagger className="grid gap-px border-t border-neutral-200 bg-neutral-200 dark:border-neutral-800 dark:bg-neutral-800 sm:grid-cols-2 lg:border-t-0">
+                    <div data-reveal-group className="grid gap-4 sm:grid-cols-2 lg:pl-12">
                         {coreExpertise.map((item, index) => (
-                            <div data-gsap-item key={item.title} className="bg-neutral-50 p-6 dark:bg-neutral-900 sm:p-7">
-                                <span className="font-mono text-[10px] text-neutral-400">{String(index + 1).padStart(2, "0")}</span>
-                                <h3 className="mt-5 font-semibold text-neutral-950 dark:text-white">{item.title}</h3>
-                                <p className="mt-2 text-sm leading-6 text-neutral-600 dark:text-neutral-400">{item.description}</p>
+                            <div data-reveal key={item.title} className="rounded-lg bg-surface-muted p-6 sm:p-7">
+                                <span className="type-label">{String(index + 1).padStart(2, "0")}</span>
+                                <h3 className="type-card-title mt-5">{item.title}</h3>
+                                <p className="type-body-sm mt-2">{item.description}</p>
                             </div>
                         ))}
                     </div>
                 </div>
 
-                <nav aria-label="Skill categories" className="mt-10 flex flex-wrap gap-x-5 gap-y-3 border-b border-neutral-200 pb-5 dark:border-neutral-800">
+                <nav aria-label="Skill categories" className="mt-14 flex flex-wrap gap-x-5 gap-y-3 border-b border-line/60 pb-5">
                     {capabilityGroups.map((group, index) => (
-                        <a key={group.id} href={`#skills-${group.id}`} className="inline-flex items-center gap-2 text-xs text-neutral-500 transition-colors hover:text-neutral-950 dark:hover:text-white">
-                            <span className="font-mono text-[10px] text-neutral-400">{String(index + 1).padStart(2, "0")}</span>
+                        <a
+                            key={group.id}
+                            href={`#skills-${group.id}`}
+                            className="inline-flex items-center gap-2 text-xs text-fg-subtle transition-colors duration-base ease-out hover:text-fg"
+                        >
+                            <span className="type-label">{String(index + 1).padStart(2, "0")}</span>
                             {group.label}
                         </a>
                     ))}
@@ -182,25 +194,25 @@ const Skills = ({ preview = false, showHeader = true }: { preview?: boolean; sho
                             <article
                                 id={`skills-${group.id}`}
                                 key={group.id}
-                                data-gsap-stagger
-                                className="scroll-mt-24 border-b border-neutral-200 py-9 dark:border-neutral-800 lg:grid lg:grid-cols-[260px_1fr] lg:gap-12"
+                                data-reveal-group
+                                className="border-b border-line/60 py-10 lg:grid lg:grid-cols-[minmax(200px,260px)_1fr] lg:gap-12"
                             >
-                                <div data-gsap-item>
+                                <div data-reveal>
                                     <div className="flex items-center gap-3">
-                                        <span className="flex h-10 w-10 items-center justify-center border border-neutral-200 text-neutral-700 dark:border-neutral-800 dark:text-neutral-300">
+                                        <span className="flex h-10 w-10 items-center justify-center rounded-full bg-surface-muted text-fg-muted ring-1 ring-line/60">
                                             <CategoryIcon category={group.id} />
                                         </span>
-                                        <span className="font-mono text-[10px] text-neutral-400">{String(index + 1).padStart(2, "0")}</span>
+                                        <span className="type-label">{String(index + 1).padStart(2, "0")}</span>
                                     </div>
-                                    <h2 className="mt-5 text-xl font-semibold text-neutral-950 dark:text-white">{group.label}</h2>
-                                    <p className="mt-3 text-sm leading-6 text-neutral-600 dark:text-neutral-400">{group.description}</p>
+                                    <h2 className="type-h3 mt-5">{group.label}</h2>
+                                    <p className="type-body-sm mt-3">{group.description}</p>
                                 </div>
-                                <div className="mt-6 flex content-start flex-wrap gap-2 lg:mt-0">
+                                <div className="mt-6 flex flex-wrap content-start gap-2 lg:mt-0">
                                     {groupSkills.map((skill) => (
                                         <span
-                                            data-gsap-item
+                                            data-reveal
                                             key={skill.name}
-                                            className="inline-flex min-h-11 items-center border border-neutral-200 bg-neutral-50 px-4 py-2 text-sm font-medium text-neutral-800 transition-colors hover:border-neutral-400 hover:bg-white dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-200 dark:hover:border-neutral-600 dark:hover:bg-neutral-950"
+                                            className="inline-flex min-h-11 items-center rounded-full bg-surface-muted px-4 py-2 text-sm font-medium text-fg ring-1 ring-line/50"
                                         >
                                             {skill.name}
                                         </span>
@@ -211,19 +223,22 @@ const Skills = ({ preview = false, showHeader = true }: { preview?: boolean; sho
                     })}
                 </div>
 
-                <div className="mt-10 flex flex-col justify-between gap-6 border-t border-neutral-300 pt-8 dark:border-neutral-700 sm:flex-row sm:items-center">
+                <div className="mt-14 flex flex-col justify-between gap-6 border-t border-line/60 pt-10 sm:flex-row sm:items-center">
                     <div>
-                        <p className="font-mono text-[10px] uppercase text-neutral-500">Current professional profile</p>
-                        <p className="mt-2 max-w-2xl text-sm leading-6 text-neutral-600 dark:text-neutral-400">
-                            These capabilities are aligned with my current CV and applied across production platforms, client systems, and commercial products.
+                        <p className="type-eyebrow">Current professional profile</p>
+                        <p className="type-body-sm mt-3 max-w-2xl">
+                            These capabilities are aligned with my current CV and applied across production platforms,
+                            client systems, and commercial products.
                         </p>
                     </div>
-                    <a href="/safiul_cv.pdf" className="inline-flex shrink-0 items-center gap-2 text-sm font-semibold text-neutral-950 dark:text-white">
-                        View resume <ArrowUpRight size={16} />
-                    </a>
+                    <Button asChild variant="link" className="shrink-0 text-sm font-semibold">
+                        <a href="/safiul_cv.pdf">
+                            View resume <ArrowUpRight size={16} />
+                        </a>
+                    </Button>
                 </div>
-            </div>
-        </section>
+            </Container>
+        </Section>
     );
 };
 

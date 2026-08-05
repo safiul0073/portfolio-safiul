@@ -1,17 +1,21 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { personalInfo, socialLinks } from "@/data/portfolio";
+import { Container } from "@/components/ui/container";
+
+const footerLinkClass =
+    "inline-flex items-center gap-1 text-sm text-fg-muted transition-colors duration-base ease-out hover:text-fg";
 
 const Footer = () => (
-    <footer className="border-t border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-950">
-        <div className="container mx-auto grid gap-8 px-4 py-10 sm:px-6 md:grid-cols-[1fr_auto] md:items-end lg:px-8">
+    <footer className="border-t border-line/60 bg-surface">
+        <Container className="grid gap-8 py-12 md:grid-cols-[1fr_auto] md:items-end">
             <div>
-                <p className="font-mono text-[10px] uppercase text-neutral-400">Designed and developed by</p>
-                <p className="mt-2 text-lg font-semibold text-neutral-950 dark:text-white">{personalInfo.name}</p>
-                <p className="mt-2 max-w-xl text-sm leading-6 text-neutral-500 dark:text-neutral-400">
+                <p className="type-label">Designed and developed by</p>
+                <p className="type-card-title mt-3">{personalInfo.name}</p>
+                <p className="type-body-sm mt-3 max-w-xl">
                     Senior full stack developer building maintainable web products, APIs, and business platforms.
                 </p>
-                <p className="mt-5 text-xs text-neutral-400 dark:text-neutral-500">
+                <p className="type-body-xs mt-5 text-fg-faint">
                     © {new Date().getFullYear()} {personalInfo.name}. Built with Next.js and Tailwind CSS.
                 </p>
             </div>
@@ -22,20 +26,20 @@ const Footer = () => (
                         href={link.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 text-sm text-neutral-600 transition-colors hover:text-neutral-950 dark:text-neutral-400 dark:hover:text-white"
+                        className={footerLinkClass}
                     >
                         {link.name}
                         <ArrowUpRight size={14} />
                     </a>
                 ))}
-                <Link href="/tools" className="text-sm text-neutral-600 transition-colors hover:text-neutral-950 dark:text-neutral-400 dark:hover:text-white">
+                <Link href="/tools" className={footerLinkClass}>
                     Tools
                 </Link>
-                <Link href="/contact" className="text-sm font-medium text-neutral-950 dark:text-white">
+                <Link href="/contact" className="text-sm font-medium text-fg underline-offset-4 transition-colors duration-base ease-out hover:underline">
                     Contact
                 </Link>
             </div>
-        </div>
+        </Container>
     </footer>
 );
 

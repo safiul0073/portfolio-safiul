@@ -19,6 +19,51 @@ export const personalInfo = {
 
 export const projects: Project[] = [
     {
+        id: 17,
+        slug: "wapro-whatsapp-automation-saas",
+        title: "WaPro - WhatsApp Automation & Growth Engine",
+        description:
+            "A self-hosted WhatsApp marketing, automation, and CRM SaaS script on Laravel 13, with a shared team inbox on the WhatsApp Cloud API, broadcast campaigns, visual automation flows, and AI chatbots.",
+        longDescription:
+            "Built WaPro, a modular Laravel 13 platform that lets a business run its entire WhatsApp presence from one place. Teams work a shared inbox on the official WhatsApp Cloud API with chat assignment, attachments, and full thread history; marketers run segmented broadcast campaigns with scheduling and per-recipient delivery tracking; and operations teams automate replies through keyword, first-message, and off-hours triggers or a visual flow builder. AI chatbots answer from an uploaded knowledge base using document chunking and embeddings with optional Qdrant vector search, across nine LLM providers including self-hosted Ollama. Around that sits a full multi-tenant SaaS: workspaces with owner/administrator/manager/staff roles, subscription plans with feature restrictions, fourteen payment gateways, multi-currency billing, a frontend CMS, a Sanctum-secured REST API with Swagger documentation, and a super admin panel for analytics, billing, gateway and WhatsApp configuration, AI provider tracking, audit logs, and 2FA.",
+        highlights: [
+            "Built a shared team inbox on the official WhatsApp Cloud API with chat assignment, attachments, thread history, and Meta app integration.",
+            "Developed broadcast campaigns with scheduling, contact segmentation, per-recipient delivery tracking, and reporting.",
+            "Implemented automation as both a visual flow builder and rule-based auto-replies triggered by keyword, first message, or off-hours.",
+            "Integrated nine LLM providers — OpenAI, Anthropic, Gemini, Groq, DeepSeek, Mistral, OpenRouter, xAI, and self-hosted Ollama — over a knowledge base with document chunking, embeddings, and optional Qdrant vector search.",
+            "Delivered multi-tenant SaaS infrastructure: workspaces with four permission roles, subscription plans with feature limits, 14 payment gateways, and multi-currency billing.",
+            "Built the surrounding platform — CRM with leads and Google Places lookup, Meta-synced template library, embeddable chat widget, Telegram and SMS channels, frontend CMS, Swagger-documented REST API, RTL-capable translation editor, and audit logs with 2FA.",
+        ],
+        image: "https://images.pexels.com/photos/6963944/pexels-photo-6963944.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        technologies: ["Laravel", "PHP", "WhatsApp Cloud API", "Tailwind CSS", "Alpine.js", "MySQL", "Qdrant", "Stripe"],
+        github: "#",
+        live: "https://demo.pixelaxis.net/wapro/",
+        featured: true,
+    },
+    {
+        id: 16,
+        slug: "neuraldesk-ai-chatbot-saas",
+        title: "NeuralDesk - AI Chatbot Trainer & Embedding SaaS",
+        description:
+            "A self-hosted AI support chatbot platform and SaaS script built on Laravel 13, with multi-provider LLM support, vector knowledge training, and an embeddable chat widget.",
+        longDescription:
+            "Built NeuralDesk, a complete self-hosted AI customer support platform sold as a CodeCanyon SaaS script. Site owners create chatbots with a custom persona, greeting, and starter questions, then train them on documents, Q&A pairs, and free text with optional Qdrant vector embeddings. The trained bot ships to any website through a single script tag and answers from that knowledge base, with human handoff into a realtime agent inbox when a conversation needs a person. The product runs as a full SaaS: subscription plans with feature limits, team staff accounts with scoped permissions, six payment gateways, multi-currency billing and refunds, plus an editable frontend CMS, a Sanctum-secured REST API with Swagger documentation, and an admin panel covering analytics, roles and permissions, email templates, audit logs, 2FA, media, and translations.",
+        highlights: [
+            "Built chatbot training on documents, Q&A pairs, and free text, backed by Qdrant vector embeddings for retrieval-augmented answers.",
+            "Integrated eight LLM providers behind one interface — OpenAI, Anthropic, Gemini, Groq, Mistral, DeepSeek, xAI, and Cohere.",
+            "Shipped an embeddable chat widget deployed with a single script tag, with persistent sessions, typing indicators, timestamps, and notifications.",
+            "Developed a realtime agent inbox with human handoff, sound alerts, and conversation threading over Pusher with an automatic polling fallback.",
+            "Implemented the SaaS layer: subscription plans with feature restrictions, scoped team accounts, six payment gateways, multi-currency, and refund management.",
+            "Delivered the surrounding platform — frontend CMS with blog and themes, Sanctum REST API with Swagger docs, roles and permissions, 2FA, audit logs, and translation management.",
+        ],
+        image: "https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        technologies: ["Laravel", "PHP", "Tailwind CSS", "Alpine.js", "MySQL", "Qdrant", "OpenAI", "Stripe"],
+        github: "#",
+        live: "https://demo.pixelaxis.net/neuraldesk/",
+        codecanyon: "https://codecanyon.net/item/neuraldesk-ai-chatbot-trainer-embedding-saas/64604309",
+        featured: true,
+    },
+    {
         id: 15,
         slug: "jirato-transport-booking-platform",
         title: "Jirato - Transport Booking API Platform",

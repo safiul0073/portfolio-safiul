@@ -1,27 +1,235 @@
-  @tailwind base;
-  @tailwind components;
-  @tailwind utilities;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-  @layer base {
-    html {
-      scroll-behavior: smooth;
-    }
+@layer base {
+  /* ---------------------------------------------------------------------
+     Design tokens.
+     Colors are stored as space-separated RGB channels so Tailwind's
+     <alpha-value> works (e.g. bg-surface/80 on the navbar).
+     --------------------------------------------------------------------- */
+  :root {
+    color-scheme: light;
 
-    body {
-      @apply bg-white text-neutral-900 antialiased dark:bg-neutral-950 dark:text-white;
-    }
+    /* surfaces */
+    --surface: 255 255 255;
+    --surface-muted: 250 250 250;
+    --surface-sunken: 245 245 245;
 
-    ::selection {
-      @apply bg-neutral-950 text-white dark:bg-white dark:text-neutral-950;
-    }
+    /* text */
+    --fg: 10 10 10;
+    --fg-muted: 82 82 82;
+    --fg-subtle: 115 115 115;
+    --fg-faint: 163 163 163;
 
-    :focus-visible {
-      @apply outline-none ring-2 ring-neutral-950 ring-offset-2 ring-offset-white dark:ring-white dark:ring-offset-neutral-950;
+    /* lines */
+    --line: 229 229 229;
+    --line-strong: 212 212 212;
+
+    /* solid fills (buttons, rules, dots) */
+    --solid: 10 10 10;
+    --solid-hover: 38 38 38;
+    --solid-fg: 255 255 255;
+
+    /* shape + chrome */
+    --radius-sm: 8px;
+    --radius: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 22px;
+    --nav-h: 60px;
+
+    /* elevation — separation by depth rather than by outline */
+    --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.04);
+    --shadow-md: 0 2px 6px rgb(0 0 0 / 0.05), 0 12px 28px -18px rgb(0 0 0 / 0.25);
+    --shadow-lg: 0 4px 10px rgb(0 0 0 / 0.06), 0 22px 48px -24px rgb(0 0 0 / 0.35);
+
+    /* motion */
+    --dur-1: 120ms;
+    --dur-2: 180ms;
+    --dur-3: 320ms;
+    --dur-4: 520ms;
+    --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+    --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+    --reveal-y: 14px;
+  }
+
+  @media (min-width: 640px) {
+    :root {
+      --nav-h: 68px;
     }
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    html {
-      scroll-behavior: auto;
-    }
+  .dark {
+    color-scheme: dark;
+
+    --surface: 10 10 10;
+    --surface-muted: 23 23 23;
+    --surface-sunken: 23 23 23;
+
+    --fg: 255 255 255;
+    --fg-muted: 163 163 163;
+    --fg-subtle: 138 138 138;
+    --fg-faint: 115 115 115;
+
+    --line: 38 38 38;
+    --line-strong: 64 64 64;
+
+    --solid: 255 255 255;
+    --solid-hover: 229 229 229;
+    --solid-fg: 10 10 10;
+
+    /* Shadows read as nothing on near-black; depth comes from the ring instead. */
+    --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.5);
+    --shadow-md: 0 2px 6px rgb(0 0 0 / 0.45), 0 12px 28px -18px rgb(0 0 0 / 0.7);
+    --shadow-lg: 0 4px 10px rgb(0 0 0 / 0.5), 0 22px 48px -24px rgb(0 0 0 / 0.8);
   }
+
+  /* Always-dark band, independent of the active theme. */
+  [data-band="inverse"] {
+    color-scheme: dark;
+
+    --surface: 10 10 10;
+    --surface-muted: 23 23 23;
+    --surface-sunken: 23 23 23;
+
+    --fg: 255 255 255;
+    --fg-muted: 163 163 163;
+    --fg-subtle: 138 138 138;
+    --fg-faint: 115 115 115;
+
+    --line: 38 38 38;
+    --line-strong: 64 64 64;
+
+    --solid: 255 255 255;
+    --solid-hover: 229 229 229;
+    --solid-fg: 10 10 10;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: calc(var(--nav-h) + 2rem);
+    scrollbar-gutter: stable;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-surface text-fg antialiased;
+    text-wrap: pretty;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    text-wrap: balance;
+  }
+
+  ::selection {
+    @apply bg-fg text-surface;
+  }
+
+  :focus-visible {
+    outline: 2px solid rgb(var(--fg));
+    outline-offset: 2px;
+  }
+
+  :where(a, button, [role="button"]) {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* ---------------------------------------------------------------------
+     Scroll reveal.
+     Gated on `html.js`, which the blocking script in the root layout sets
+     before first paint — so content is never visible, then hidden, then
+     revealed. Without JS the rule never matches and everything stays visible.
+     --------------------------------------------------------------------- */
+  html.js [data-reveal] {
+    opacity: 0;
+    transform: translate3d(0, var(--reveal-y), 0);
+    transition:
+      opacity var(--dur-4) var(--ease-out),
+      transform var(--dur-4) var(--ease-out);
+    transition-delay: var(--reveal-delay, 0ms);
+    will-change: opacity, transform;
+  }
+
+  html.js [data-reveal][data-revealed] {
+    opacity: 1;
+    transform: none;
+    will-change: auto;
+  }
+}
+
+@layer components {
+  /* ---------------------------------------------------------------------
+     Type scale. One class per role — utilities still override these.
+     --------------------------------------------------------------------- */
+  .type-display {
+    @apply text-fg font-semibold text-[2.5rem] leading-[1.05] tracking-[-0.03em] sm:text-[3.25rem] lg:text-[4rem];
+  }
+
+  .type-h1 {
+    @apply text-fg font-semibold text-[2rem] leading-[1.08] tracking-[-0.025em] sm:text-[2.75rem] lg:text-[3.25rem];
+  }
+
+  .type-h2 {
+    @apply text-fg font-semibold text-[1.75rem] leading-[1.15] tracking-[-0.02em] sm:text-[2.25rem];
+  }
+
+  .type-h3 {
+    @apply text-fg font-semibold text-xl leading-[1.3] tracking-[-0.01em] sm:text-2xl;
+  }
+
+  .type-card-title {
+    @apply text-fg font-semibold text-lg leading-[1.35] tracking-[-0.01em];
+  }
+
+  .type-stat {
+    @apply text-fg font-semibold text-3xl leading-none tracking-[-0.02em] sm:text-4xl;
+  }
+
+  .type-lead {
+    @apply text-fg-muted text-lg leading-[1.6] sm:text-xl sm:leading-[1.6];
+  }
+
+  .type-body {
+    @apply text-fg-muted text-base leading-[1.7];
+  }
+
+  .type-body-sm {
+    @apply text-fg-muted text-sm leading-[1.65];
+  }
+
+  .type-body-xs {
+    @apply text-fg-muted text-xs leading-[1.6];
+  }
+
+  .type-eyebrow {
+    @apply text-fg-subtle font-mono text-xs font-medium uppercase tracking-[0.18em];
+  }
+
+  .type-label {
+    @apply text-fg-faint font-mono text-[11px] font-medium uppercase tracking-[0.14em];
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  html.js [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

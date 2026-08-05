@@ -3,7 +3,9 @@ import Link from "next/link";
 import { ArrowDown, ArrowUpRight, Download, Mail, MapPin } from "lucide-react";
 import { experiences, personalInfo, projects } from "@/data/portfolio";
 import profileImage from "@/profile.png";
-import HeroBackground from "@/components/sections/HeroBackground";
+import GridBackdrop from "@/components/motion/GridBackdrop";
+import { Button } from "@/components/ui/button";
+import { Container } from "@/components/ui/container";
 
 const Hero = () => {
     const metrics = [
@@ -13,60 +15,85 @@ const Hero = () => {
     ];
 
     return (
-        <section id="hero" className="relative isolate overflow-hidden border-b border-neutral-200 bg-white pt-16 dark:border-neutral-800 dark:bg-neutral-950">
-            <HeroBackground />
-            <div data-gsap-page-header className="container relative z-10 mx-auto grid items-center gap-10 px-4 py-8 sm:px-6 sm:py-12 lg:min-h-[620px] lg:grid-cols-[minmax(0,1.5fr)_minmax(220px,0.5fr)] lg:gap-12 lg:px-8 lg:py-8">
+        <section id="hero" className="relative isolate overflow-hidden border-b border-line/60 bg-surface pt-nav">
+            <GridBackdrop />
+            <Container className="relative z-10 grid items-center gap-10 py-12 sm:py-16 lg:min-h-[calc(100svh-var(--nav-h))] lg:grid-cols-[minmax(0,1.5fr)_minmax(220px,0.5fr)] lg:gap-12 lg:py-20">
                 <div className="max-w-4xl">
                     <div className="flex items-center gap-4">
-                        <div data-hero-avatar className="group relative h-20 w-20 shrink-0 rounded-full border border-neutral-300 bg-neutral-100 p-1 shadow-lg shadow-neutral-950/10 dark:border-neutral-700 dark:bg-neutral-900 lg:hidden">
+                        <div className="group relative h-20 w-20 shrink-0 rounded-full bg-surface-sunken p-1 shadow-md ring-1 ring-line/70 lg:hidden">
                             <div className="relative h-full w-full overflow-hidden rounded-full">
-                                <Image src={profileImage} alt={`${personalInfo.name} profile photo`} priority fill sizes="80px" className="object-cover transition duration-700 ease-out" />
+                                <Image
+                                    src={profileImage}
+                                    alt={`${personalInfo.name} profile photo`}
+                                    priority
+                                    fill
+                                    sizes="80px"
+                                    className="object-cover"
+                                />
                             </div>
                         </div>
-                        <div className="inline-flex items-center gap-2 border border-neutral-200 bg-white/85 px-3 py-2 text-xs font-medium text-neutral-700 backdrop-blur dark:border-neutral-800 dark:bg-neutral-950/85 dark:text-neutral-300 sm:text-sm">
-                            <span className="h-2 w-2 bg-neutral-950 dark:bg-white" />
+                        <div className="inline-flex items-center gap-2 rounded-full bg-surface/85 px-4 py-2 text-xs font-medium text-fg-muted shadow-sm ring-1 ring-line/60 backdrop-blur sm:text-sm">
+                            <span className="h-2 w-2 rounded-full bg-fg" />
                             Available for selected opportunities
                         </div>
                     </div>
-                    <p className="mt-6 font-mono text-xs uppercase text-neutral-500 sm:text-sm dark:text-neutral-400">Hello, I&apos;m {personalInfo.name}</p>
-                    <h1 className="mt-4 max-w-4xl text-4xl font-semibold leading-[1.06] text-neutral-950 sm:text-6xl xl:text-[4rem] dark:text-white">
-                        I build reliable web products, end to end.
-                    </h1>
-                    <p className="mt-5 max-w-3xl text-base leading-7 text-neutral-600 sm:text-lg sm:leading-8 dark:text-neutral-300">
-                        Senior full stack developer with 4+ years of experience building maintainable products with Laravel, Next.js, React, Vue, and MySQL.
+
+                    <p className="type-eyebrow mt-7">Hello, I&apos;m {personalInfo.name}</p>
+                    <h1 className="type-display mt-4 max-w-4xl">I build reliable web products, end to end.</h1>
+                    <p className="type-lead mt-6 max-w-3xl">
+                        Senior full stack developer with 4+ years of experience building maintainable products with
+                        Laravel, Next.js, React, Vue, and MySQL.
                     </p>
 
-                    <div className="mt-5 flex flex-wrap gap-x-6 gap-y-3 text-xs text-neutral-500 sm:text-sm dark:text-neutral-400">
-                        <span className="inline-flex items-center gap-2"><MapPin size={16} />{personalInfo.location}</span>
-                        <a href={`mailto:${personalInfo.email}`} className="inline-flex items-center gap-2 transition-colors hover:text-neutral-950 dark:hover:text-white">
-                            <Mail size={16} />{personalInfo.email}
+                    <div className="mt-6 flex flex-wrap gap-x-6 gap-y-3 text-sm text-fg-subtle">
+                        <span className="inline-flex items-center gap-2">
+                            <MapPin size={16} className="shrink-0" />
+                            {personalInfo.location}
+                        </span>
+                        <a
+                            href={`mailto:${personalInfo.email}`}
+                            className="inline-flex min-w-0 items-center gap-2 transition-colors duration-base ease-out hover:text-fg"
+                        >
+                            <Mail size={16} className="shrink-0" />
+                            <span className="break-all">{personalInfo.email}</span>
                         </a>
                     </div>
 
-                    <div className="mt-7 flex flex-wrap gap-3">
-                        <Link href="/projects" className="group inline-flex items-center gap-2 bg-neutral-950 px-6 py-3 font-medium text-white transition-colors hover:bg-neutral-800 dark:bg-white dark:text-neutral-950 dark:hover:bg-neutral-200">
-                            Explore projects <ArrowUpRight size={18} />
-                        </Link>
-                        <a href="/safiul_cv.pdf" className="inline-flex items-center gap-2 border border-neutral-300 bg-white px-6 py-3 font-medium text-neutral-900 transition-colors hover:bg-neutral-100 dark:border-neutral-700 dark:bg-neutral-950 dark:text-white dark:hover:bg-neutral-900">
-                            Resume <Download size={18} />
-                        </a>
+                    <div className="mt-8 flex flex-wrap gap-3">
+                        <Button asChild size="lg">
+                            <Link href="/projects">
+                                Explore projects <ArrowUpRight size={18} />
+                            </Link>
+                        </Button>
+                        <Button asChild variant="outline" size="lg">
+                            <a href="/safiul_cv.pdf">
+                                Resume <Download size={18} />
+                            </a>
+                        </Button>
                     </div>
 
-                    <div data-gsap-stagger className="mt-8 grid max-w-2xl grid-cols-3 border-y border-neutral-200 bg-white/45 sm:mt-10 dark:border-neutral-800 dark:bg-neutral-950/40">
+                    <div
+                        data-reveal-group
+                        className="mt-12 grid max-w-2xl grid-cols-1 gap-3 sm:grid-cols-3"
+                    >
                         {metrics.map((metric) => (
-                            <div data-gsap-item key={metric.label} className="border-r border-neutral-200 px-3 py-4 first:pl-0 last:border-0 dark:border-neutral-800">
-                                <p className="text-2xl font-semibold text-neutral-950 sm:text-3xl dark:text-white">{metric.value}</p>
-                                <p className="mt-1 text-xs leading-5 text-neutral-500 sm:text-sm dark:text-neutral-400">{metric.label}</p>
+                            <div
+                                data-reveal
+                                key={metric.label}
+                                className="rounded-lg bg-surface-muted px-5 py-5"
+                            >
+                                <p className="type-stat">{metric.value}</p>
+                                <p className="type-body-sm mt-1.5 text-fg-subtle">{metric.label}</p>
                             </div>
                         ))}
                     </div>
                 </div>
 
                 <div className="hidden lg:flex lg:flex-col lg:items-center lg:justify-self-end">
-                    <div data-hero-avatar className="group relative h-56 w-56 rounded-full xl:h-60 xl:w-60">
-                        <div className="absolute -inset-5 rounded-full border border-neutral-300/80 dark:border-neutral-700/80" />
-                        <div className="absolute -inset-10 rounded-full border border-neutral-200/70 dark:border-neutral-800/70" />
-                        <div className="relative h-full w-full overflow-hidden rounded-full border border-neutral-300 bg-neutral-100 p-1.5 shadow-2xl shadow-neutral-950/15 dark:border-neutral-700 dark:bg-neutral-900">
+                    <div className="group relative h-56 w-56 rounded-full xl:h-60 xl:w-60">
+                        <div className="absolute -inset-5 rounded-full border border-line-strong/80" />
+                        <div className="absolute -inset-10 rounded-full border border-line/70" />
+                        <div className="relative h-full w-full overflow-hidden rounded-full bg-surface-sunken p-1.5 shadow-lg ring-1 ring-line/70">
                             <div className="relative h-full w-full overflow-hidden rounded-full">
                                 <Image
                                     src={profileImage}
@@ -74,19 +101,25 @@ const Hero = () => {
                                     priority
                                     fill
                                     sizes="240px"
-                                    className="object-cover transition duration-700 ease-out group-hover:scale-[1.025]"
+                                    className="object-cover transition-transform duration-reveal ease-out group-hover:scale-[1.025]"
                                 />
                             </div>
                         </div>
                     </div>
                     <div className="mt-10 text-center">
-                        <p className="font-semibold text-neutral-950 dark:text-white">{personalInfo.name}</p>
-                        <p className="mt-1 text-sm text-neutral-500 dark:text-neutral-400">{experiences[0].position}</p>
-                        <span className="mt-3 block font-mono text-[11px] text-neutral-400">DHAKA / BD</span>
+                        <p className="type-card-title">{personalInfo.name}</p>
+                        <p className="type-body-sm mt-1.5 text-fg-subtle">{experiences[0].position}</p>
+                        <span className="type-label mt-3 block">DHAKA / BD</span>
                     </div>
                 </div>
-            </div>
-            <Link href="/about" aria-label="Continue to about page" className="absolute bottom-5 left-1/2 hidden -translate-x-1/2 text-neutral-400 transition-colors hover:text-neutral-950 xl:block dark:hover:text-white"><ArrowDown size={20} /></Link>
+            </Container>
+            <Link
+                href="/about"
+                aria-label="Continue to about page"
+                className="absolute bottom-5 left-1/2 hidden -translate-x-1/2 text-fg-faint transition-colors duration-base ease-out hover:text-fg xl:block"
+            >
+                <ArrowDown size={20} />
+            </Link>
         </section>
     );
 };

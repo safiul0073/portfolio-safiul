@@ -2,6 +2,9 @@ import Link from "next/link";
 import { ArrowUpRight, Calendar, Download, Mail, MapPin } from "lucide-react";
 import SectionHeader from "@/components/layout/SectionHeader";
 import { personalInfo } from "@/data/portfolio";
+import { Button } from "@/components/ui/button";
+import { Container } from "@/components/ui/container";
+import { Section } from "@/components/ui/section";
 
 const strengths = [
     { label: "Backend Architecture", description: "APIs, service boundaries, authentication, and scalable application workflows." },
@@ -11,8 +14,8 @@ const strengths = [
 ];
 
 const About = ({ preview = false, showHeader = true }: { preview?: boolean; showHeader?: boolean }) => (
-    <section data-gsap-section id="about" className="bg-white py-16 dark:bg-neutral-950 md:py-20">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+    <Section id="about">
+        <Container>
             {showHeader && (
                 <SectionHeader
                     index="01 / PROFILE"
@@ -22,57 +25,77 @@ const About = ({ preview = false, showHeader = true }: { preview?: boolean; show
             )}
             <div className="grid items-start gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
                 <div>
-                    <p className="max-w-2xl text-xl leading-9 text-neutral-800 dark:text-neutral-200">
-                        I&apos;m a full stack developer with a backend-first mindset and 4+ years of experience delivering production applications for clients and product teams.
+                    <p className="type-lead max-w-2xl text-fg">
+                        I&apos;m a full stack developer with a backend-first mindset and 4+ years of experience
+                        delivering production applications for clients and product teams.
                     </p>
-                    <p className="mt-5 leading-8 text-neutral-600 dark:text-neutral-400">
-                        My work spans property platforms, ERP systems, e-commerce, booking products, lead management tools, commercial marketplaces, and custom business dashboards.
+                    <p className="type-body mt-5">
+                        My work spans property platforms, ERP systems, e-commerce, booking products, lead management
+                        tools, commercial marketplaces, and custom business dashboards.
                     </p>
                     {!preview && (
-                        <p className="mt-5 leading-8 text-neutral-600 dark:text-neutral-400">
-                            I specialize in Laravel, Next.js, React, Vue, APIs, database design, and deployment workflows. I care about clean architecture, maintainable code, clear communication, and systems that remain dependable after launch.
+                        <p className="type-body mt-5">
+                            I specialize in Laravel, Next.js, React, Vue, APIs, database design, and deployment
+                            workflows. I care about clean architecture, maintainable code, clear communication, and
+                            systems that remain dependable after launch.
                         </p>
                     )}
-                    <div data-gsap-stagger className="mt-8 grid text-sm text-neutral-600 sm:grid-cols-2 dark:text-neutral-400">
-                        <a data-gsap-item href={`mailto:${personalInfo.email}`} className="flex items-center gap-3 border-y border-neutral-200 py-4 transition-colors hover:text-neutral-950 sm:pr-5 dark:border-neutral-800 dark:hover:text-white">
-                            <Mail size={18} /> {personalInfo.email}
+
+                    <div data-reveal-group className="type-body-sm mt-8 grid sm:grid-cols-2">
+                        <a
+                            data-reveal
+                            href={`mailto:${personalInfo.email}`}
+                            className="flex min-w-0 items-center gap-3 border-y border-line/60 py-4 transition-colors duration-base ease-out hover:text-fg sm:pr-5"
+                        >
+                            <Mail size={18} className="shrink-0" />
+                            <span className="break-all">{personalInfo.email}</span>
                         </a>
-                        <div data-gsap-item className="flex items-center gap-3 border-b border-neutral-200 py-4 sm:border-y sm:pl-5 dark:border-neutral-800">
-                            <MapPin size={18} /> {personalInfo.location}
+                        <div data-reveal className="flex items-center gap-3 border-b border-line/60 py-4 sm:border-y sm:pl-5">
+                            <MapPin size={18} className="shrink-0" /> {personalInfo.location}
                         </div>
-                        <div data-gsap-item className="flex items-center gap-3 border-b border-neutral-200 py-4 dark:border-neutral-800">
-                            <Calendar size={18} /> Available for new projects
+                        <div data-reveal className="flex items-center gap-3 border-b border-line/60 py-4">
+                            <Calendar size={18} className="shrink-0" /> Available for new projects
                         </div>
                     </div>
+
                     <div className="mt-8 flex flex-wrap gap-3">
                         {preview ? (
-                            <Link href="/about" className="inline-flex items-center gap-2 bg-neutral-950 px-5 py-3 text-sm font-medium text-white dark:bg-white dark:text-neutral-950">
-                                Read full profile <ArrowUpRight size={17} />
-                            </Link>
+                            <Button asChild>
+                                <Link href="/about">
+                                    Read full profile <ArrowUpRight size={17} />
+                                </Link>
+                            </Button>
                         ) : (
-                            <a href="/safiul_cv.pdf" className="inline-flex items-center gap-2 bg-neutral-950 px-5 py-3 text-sm font-medium text-white dark:bg-white dark:text-neutral-950">
-                                Download resume <Download size={17} />
-                            </a>
+                            <Button asChild>
+                                <a href="/safiul_cv.pdf">
+                                    Download resume <Download size={17} />
+                                </a>
+                            </Button>
                         )}
                     </div>
                 </div>
-                <div className="border-t border-neutral-300 bg-neutral-50/70 p-6 dark:border-neutral-700 dark:bg-neutral-900/70 sm:p-8">
-                    <p className="font-mono text-xs uppercase text-neutral-500">Delivery strengths</p>
-                    <div data-gsap-stagger className="mt-6">
+
+                <div className="rounded-lg bg-surface-muted p-6 ring-1 ring-line/50 sm:p-8">
+                    <p className="type-eyebrow">Delivery strengths</p>
+                    <div data-reveal-group className="mt-6">
                         {strengths.map((strength, index) => (
-                            <div data-gsap-item key={strength.label} className="grid grid-cols-[32px_1fr] gap-3 border-t border-neutral-200 py-5 first:border-0 first:pt-0 dark:border-neutral-800">
-                                <span className="font-mono text-[10px] text-neutral-400">{String(index + 1).padStart(2, "0")}</span>
+                            <div
+                                data-reveal
+                                key={strength.label}
+                                className="grid grid-cols-[32px_1fr] gap-3 border-t border-line/60 py-5 first:border-0 first:pt-0"
+                            >
+                                <span className="type-label pt-1">{String(index + 1).padStart(2, "0")}</span>
                                 <div>
-                                    <p className="font-medium text-neutral-800 dark:text-neutral-200">{strength.label}</p>
-                                    <p className="mt-2 text-sm leading-6 text-neutral-600 dark:text-neutral-400">{strength.description}</p>
+                                    <p className="font-medium text-fg">{strength.label}</p>
+                                    <p className="type-body-sm mt-2">{strength.description}</p>
                                 </div>
                             </div>
                         ))}
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </Container>
+    </Section>
 );
 
 export default About;

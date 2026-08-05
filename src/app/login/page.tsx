@@ -39,7 +39,7 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center">
+    <div className="min-h-screen flex items-center justify-center bg-white text-neutral-900 [color-scheme:light]">
       <form
         className="flex flex-col gap-4 md:w-1/2 mx-auto p-4"
         onSubmit={handleSubmit}

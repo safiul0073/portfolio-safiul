@@ -1,14 +1,21 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import Image from "next/image";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowUpRight, Check, ExternalLink, Eye, Github, X } from "lucide-react";
+import { ArrowUpRight, Check, Eye, X } from "lucide-react";
 import SectionHeader from "@/components/layout/SectionHeader";
+import ProjectLinks from "@/components/projects/ProjectLinks";
 import { projects } from "@/data/portfolio";
-import { hasValidProjectUrl } from "@/lib/portfolio";
 import type { Project } from "@/types";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Chip } from "@/components/ui/chip";
+import { Container } from "@/components/ui/container";
+import { Section } from "@/components/ui/section";
+import { cn } from "@/lib/utils";
 
 type ProjectFilter = "all" | "laravel" | "nextjs" | "frontend" | "mobile";
 
@@ -19,6 +26,8 @@ const projectFilters: Array<{ id: ProjectFilter; label: string }> = [
     { id: "frontend", label: "Vue / React" },
     { id: "mobile", label: "Mobile" },
 ];
+
+const FOCUSABLE = 'a[href],button:not([disabled]),[tabindex]:not([tabindex="-1"])';
 
 const matchesFilter = (project: Project, filter: ProjectFilter) => {
     if (filter === "all") return true;
@@ -32,36 +41,165 @@ const matchesFilter = (project: Project, filter: ProjectFilter) => {
 const Projects = ({ preview = false, showHeader = true }: { preview?: boolean; showHeader?: boolean }) => {
     const [selectedProject, setSelectedProject] = useState<Project | null>(null);
     const [activeFilter, setActiveFilter] = useState<ProjectFilter>("all");
+    const [mounted, setMounted] = useState(false);
+    const panelRef = useRef<HTMLDivElement>(null);
+    const openerRef = useRef<HTMLElement | null>(null);
+
+    useEffect(() => setMounted(true), []);
 
     const visibleProjects = useMemo(() => {
         if (preview) return projects.filter((project) => project.featured).slice(0, 6);
         return projects.filter((project) => matchesFilter(project, activeFilter));
     }, [activeFilter, preview]);
 
-    const openProject = (project: Project) => {
+    const openProject = (project: Project, event: React.MouseEvent<HTMLButtonElement>) => {
+        openerRef.current = event.currentTarget;
         setSelectedProject(project);
         document.body.style.overflow = "hidden";
     };
 
-    const closeProject = () => {
-        setSelectedProject(null);
-        document.body.style.overflow = "";
-    };
+    const closeProject = useCallback(() => setSelectedProject(null), []);
 
-    useEffect(() => {
-        const handleKeyDown = (event: KeyboardEvent) => {
-            if (event.key === "Escape") closeProject();
-        };
-        window.addEventListener("keydown", handleKeyDown);
-        return () => {
-            window.removeEventListener("keydown", handleKeyDown);
-            document.body.style.overflow = "";
-        };
+    // The scroll lock is released in onExitComplete so it does not snap back
+    // while the panel is still animating out.
+    const releaseScrollLock = useCallback(() => {
+        document.body.style.overflow = "";
+        openerRef.current?.focus();
+        openerRef.current = null;
     }, []);
 
+    useEffect(() => {
+        if (!selectedProject) return;
+
+        const panel = panelRef.current;
+        panel?.querySelector<HTMLElement>("[data-modal-close]")?.focus();
+
+        const handleKeyDown = (event: KeyboardEvent) => {
+            if (event.key === "Escape") {
+                closeProject();
+                return;
+            }
+            if (event.key !== "Tab" || !panel) return;
+
+            const focusable = Array.from(panel.querySelectorAll<HTMLElement>(FOCUSABLE));
+            if (!focusable.length) return;
+
+            const first = focusable[0];
+            const last = focusable[focusable.length - 1];
+            const active = document.activeElement;
+
+            if (event.shiftKey && (active === first || !panel.contains(active))) {
+                event.preventDefault();
+                last.focus();
+            } else if (!event.shiftKey && active === last) {
+                event.preventDefault();
+                first.focus();
+            }
+        };
+
+        window.addEventListener("keydown", handleKeyDown);
+        return () => window.removeEventListener("keydown", handleKeyDown);
+    }, [selectedProject, closeProject]);
+
+    // Safety net: never leave the page locked if this unmounts while open.
+    useEffect(
+        () => () => {
+            document.body.style.overflow = "";
+        },
+        [],
+    );
+
+    const modal = (
+        <AnimatePresence onExitComplete={releaseScrollLock}>
+            {selectedProject && (
+                <motion.div
+                    key="project-quick-view"
+                    className="fixed inset-0 z-[60] flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
+                    onClick={closeProject}
+                >
+                    <motion.div
+                        ref={panelRef}
+                        role="dialog"
+                        aria-modal="true"
+                        aria-labelledby="project-quick-view-title"
+                        className="relative max-h-[90vh] w-full max-w-3xl overflow-auto rounded-xl bg-surface shadow-lg"
+                        initial={{ opacity: 0, y: 24, scale: 0.98 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: 16, scale: 0.98 }}
+                        transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
+                        onClick={(event) => event.stopPropagation()}
+                    >
+                        <button
+                            type="button"
+                            data-modal-close
+                            onClick={closeProject}
+                            aria-label="Close project details"
+                            className="absolute right-4 top-4 z-10 rounded-full bg-surface p-2 text-fg shadow-md transition-colors duration-base ease-out hover:bg-surface-muted"
+                        >
+                            <X size={20} />
+                        </button>
+
+                        <div className="relative aspect-[16/10] bg-surface-sunken sm:aspect-[16/8]">
+                            <Image
+                                src={selectedProject.image}
+                                alt={selectedProject.title}
+                                fill
+                                sizes="768px"
+                                className="object-cover"
+                            />
+                            <div className="absolute inset-0 hidden bg-gradient-to-t from-black/80 via-transparent to-transparent sm:block" />
+                            <h3
+                                id="project-quick-view-title"
+                                className="type-h3 absolute bottom-6 left-6 right-6 hidden text-white sm:block"
+                            >
+                                {selectedProject.title}
+                            </h3>
+                        </div>
+
+                        <div className="p-6 sm:p-8">
+                            {/* Below sm the title sits in the body — the image band is too
+                                short to hold two or three lines of heading. */}
+                            <h3 className="type-h3 mb-5 sm:hidden">{selectedProject.title}</h3>
+                            <div className="flex flex-wrap gap-2">
+                                {selectedProject.technologies.map((technology) => (
+                                    <Chip key={technology}>{technology}</Chip>
+                                ))}
+                            </div>
+                            <p className="type-body mt-6">
+                                {selectedProject.longDescription || selectedProject.description}
+                            </p>
+                            {selectedProject.highlights && (
+                                <ul className="mt-6 grid gap-3 sm:grid-cols-2">
+                                    {selectedProject.highlights.map((highlight) => (
+                                        <li key={highlight} className="type-body-sm flex gap-2">
+                                            <Check size={16} className="mt-1 shrink-0" />
+                                            {highlight}
+                                        </li>
+                                    ))}
+                                </ul>
+                            )}
+                            <div className="mt-8 flex flex-wrap gap-3 border-t border-line/60 pt-6">
+                                <Button asChild size="sm">
+                                    <Link href={`/projects/${selectedProject.slug}`} onClick={closeProject}>
+                                        Full case study <ArrowUpRight size={16} />
+                                    </Link>
+                                </Button>
+                                <ProjectLinks project={selectedProject} size="sm" />
+                            </div>
+                        </div>
+                    </motion.div>
+                </motion.div>
+            )}
+        </AnimatePresence>
+    );
+
     return (
-        <section data-gsap-section id="projects" className="border-y border-neutral-200 bg-neutral-50 py-16 dark:border-neutral-800 dark:bg-neutral-900 md:py-20">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <Section id="projects" band="muted" divider="y">
+            <Container>
                 {showHeader && (
                     <SectionHeader
                         index="02 / SELECTED WORK"
@@ -71,144 +209,132 @@ const Projects = ({ preview = false, showHeader = true }: { preview?: boolean; s
                 )}
 
                 {!preview && (
-                    <div className="mb-8 flex flex-col gap-4 border-b border-neutral-200 pb-5 sm:flex-row sm:items-center sm:justify-between dark:border-neutral-800">
-                        <div>
-                            <div className="grid grid-cols-2 gap-px border border-neutral-200 bg-white p-1 sm:inline-flex dark:border-neutral-800 dark:bg-neutral-950">
-                                {projectFilters.map((filter) => (
-                                    <button
-                                        key={filter.id}
-                                        type="button"
-                                        onClick={() => setActiveFilter(filter.id)}
-                                        className={`px-4 py-2 text-sm font-medium transition-colors last:col-span-2 sm:last:col-span-1 ${
-                                            activeFilter === filter.id
-                                                ? "bg-neutral-950 text-white dark:bg-white dark:text-neutral-950"
-                                                : "text-neutral-600 hover:bg-neutral-100 dark:text-neutral-400 dark:hover:bg-neutral-900"
-                                        }`}
-                                    >
-                                        {filter.label}
-                                    </button>
-                                ))}
-                            </div>
+                    <div className="mb-10 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                        <div
+                            role="group"
+                            aria-label="Filter projects by technology"
+                            className="grid grid-cols-2 gap-1 rounded-full bg-surface-muted p-1 ring-1 ring-line/50 sm:inline-flex"
+                        >
+                            {projectFilters.map((filter) => (
+                                <Button
+                                    key={filter.id}
+                                    type="button"
+                                    size="sm"
+                                    variant={activeFilter === filter.id ? "solid" : "ghost"}
+                                    aria-pressed={activeFilter === filter.id}
+                                    onClick={() => setActiveFilter(filter.id)}
+                                    className="last:col-span-2 sm:last:col-span-1"
+                                >
+                                    {filter.label}
+                                </Button>
+                            ))}
                         </div>
-                        <p className="font-mono text-xs text-neutral-500">{visibleProjects.length} PROJECTS</p>
+                        <p className="type-label">{visibleProjects.length} projects</p>
                     </div>
                 )}
 
-                <div data-gsap-stagger className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+                {/* Keyed on the filter so the grid remounts and re-staggers cleanly. */}
+                <div key={activeFilter} data-reveal-group className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
                     {visibleProjects.map((project, index) => (
-                        <article data-gsap-item key={project.id} className="group flex h-full flex-col overflow-hidden border border-neutral-200 bg-white transition duration-300 hover:-translate-y-1 hover:border-neutral-400 hover:shadow-xl hover:shadow-neutral-950/[0.06] dark:border-neutral-800 dark:bg-neutral-950 dark:hover:border-neutral-600 dark:hover:shadow-black/20">
-                            <Link href={`/projects/${project.slug}`} className="relative block aspect-[16/10] overflow-hidden bg-neutral-200 dark:bg-neutral-800">
+                        <Card
+                            data-reveal
+                            as="article"
+                            interactive
+                            padding="none"
+                            key={project.id}
+                            className="h-full overflow-hidden"
+                        >
+                            <Link
+                                href={`/projects/${project.slug}`}
+                                className="relative block aspect-[16/10] overflow-hidden bg-surface-sunken"
+                                tabIndex={-1}
+                                aria-hidden="true"
+                            >
                                 <Image
                                     src={project.image}
-                                    alt={project.title}
+                                    alt=""
                                     fill
                                     priority={index === 0}
-                                    sizes="(min-width: 1280px) 33vw, (min-width: 768px) 50vw, 100vw"
-                                    className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                                    sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                                    className="object-cover transition-transform duration-reveal ease-out group-hover:scale-[1.04]"
                                 />
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/5 to-transparent transition-opacity duration-300 group-hover:opacity-90" />
-                                {project.featured && <span className="absolute left-4 top-4 bg-white px-2.5 py-1 font-mono text-[10px] text-neutral-950">FEATURED</span>}
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/5 to-transparent transition-opacity duration-slow ease-out group-hover:opacity-90" />
+                                {project.featured && (
+                                    <span className="type-label absolute left-4 top-4 bg-white px-2.5 py-1 text-neutral-950">
+                                        Featured
+                                    </span>
+                                )}
                                 <div className="absolute bottom-4 left-4 right-4 flex flex-wrap gap-1.5">
                                     {project.technologies.slice(0, 3).map((technology) => (
-                                        <span key={technology} className="border border-white/25 bg-black/35 px-2 py-1 text-[11px] text-white backdrop-blur">{technology}</span>
+                                        <span
+                                            key={technology}
+                                            className="type-label border border-white/25 bg-black/35 px-2 py-1 text-white backdrop-blur"
+                                        >
+                                            {technology}
+                                        </span>
                                     ))}
                                 </div>
                             </Link>
+
                             <div className="flex flex-1 flex-col p-5 sm:p-6">
-                                <p className="font-mono text-[11px] text-neutral-400">PROJECT {String(project.id).padStart(2, "0")}</p>
-                                <h3 className="mt-3 text-xl font-semibold leading-7 text-neutral-950 dark:text-white">
-                                    <Link href={`/projects/${project.slug}`} className="decoration-1 underline-offset-4 hover:underline">{project.title}</Link>
+                                <p className="type-label">Project {String(project.id).padStart(2, "0")}</p>
+                                <h3 className="type-card-title mt-3">
+                                    <Link
+                                        href={`/projects/${project.slug}`}
+                                        className="decoration-1 underline-offset-4 hover:underline"
+                                    >
+                                        {project.title}
+                                    </Link>
                                 </h3>
-                                <p className="mt-3 flex-1 text-sm leading-6 text-neutral-600 dark:text-neutral-400">{project.description}</p>
+                                <p className="type-body-sm mt-3 flex-1">{project.description}</p>
                                 {project.highlights && (
-                                    <ul className="mt-5 space-y-2 border-t border-neutral-200 pt-4 dark:border-neutral-800">
+                                    <ul className="mt-5 space-y-2 border-t border-line/60 pt-4">
                                         {project.highlights.slice(0, preview ? 1 : 2).map((highlight) => (
-                                            <li key={highlight} className="flex gap-2 text-xs leading-5 text-neutral-500 dark:text-neutral-400"><Check size={14} className="mt-0.5 shrink-0" />{highlight}</li>
+                                            <li key={highlight} className="type-body-xs flex gap-2 text-fg-subtle">
+                                                <Check size={14} className="mt-0.5 shrink-0" />
+                                                {highlight}
+                                            </li>
                                         ))}
                                     </ul>
                                 )}
-                                <div className="mt-6 flex items-center justify-between border-t border-neutral-200 pt-4 dark:border-neutral-800">
-                                    <Link href={`/projects/${project.slug}`} className="inline-flex items-center gap-1.5 text-sm font-semibold text-neutral-950 transition-opacity hover:opacity-60 dark:text-white">
-                                        View case study <ArrowUpRight size={15} />
-                                    </Link>
-                                    <button type="button" onClick={() => openProject(project)} aria-label={`Quick view ${project.title}`} title="Quick view" className="p-2 text-neutral-500 transition-colors hover:bg-neutral-100 hover:text-neutral-950 dark:hover:bg-neutral-900 dark:hover:text-white">
+                                <div className="mt-6 flex items-center justify-between border-t border-line/60 pt-4">
+                                    <Button asChild variant="link" className="text-sm font-semibold">
+                                        <Link href={`/projects/${project.slug}`}>
+                                            View case study <ArrowUpRight size={15} />
+                                        </Link>
+                                    </Button>
+                                    <button
+                                        type="button"
+                                        onClick={(event) => openProject(project, event)}
+                                        aria-label={`Quick view ${project.title}`}
+                                        title="Quick view"
+                                        className={cn(
+                                            "p-2 text-fg-subtle transition-colors duration-base ease-out",
+                                            "hover:bg-surface-muted hover:text-fg",
+                                        )}
+                                    >
                                         <Eye size={18} />
                                     </button>
                                 </div>
                             </div>
-                        </article>
+                        </Card>
                     ))}
                 </div>
 
                 {preview && (
-                    <div className="mt-10 text-right">
-                        <Link href="/projects" className="inline-flex items-center gap-2 bg-neutral-950 px-5 py-3 text-sm font-medium text-white dark:bg-white dark:text-neutral-950">
-                            View all {projects.length} projects <ArrowUpRight size={16} />
-                        </Link>
+                    <div className="mt-10 flex justify-end">
+                        <Button asChild>
+                            <Link href="/projects">
+                                View all {projects.length} projects <ArrowUpRight size={16} />
+                            </Link>
+                        </Button>
                     </div>
                 )}
-            </div>
+            </Container>
 
-            <AnimatePresence>
-                {selectedProject && (
-                    <motion.div
-                        className="fixed inset-0 z-[60] flex items-center justify-center bg-neutral-950/80 p-4 backdrop-blur-sm"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        onClick={closeProject}
-                    >
-                        <motion.div
-                            role="dialog"
-                            aria-modal="true"
-                            aria-label={`${selectedProject.title} quick view`}
-                            className="relative max-h-[90vh] w-full max-w-3xl overflow-auto bg-white shadow-2xl dark:bg-neutral-950"
-                            initial={{ opacity: 0, y: 24, scale: 0.98 }}
-                            animate={{ opacity: 1, y: 0, scale: 1 }}
-                            exit={{ opacity: 0, y: 16, scale: 0.98 }}
-                            transition={{ duration: 0.22 }}
-                            onClick={(event) => event.stopPropagation()}
-                        >
-                            <button type="button" onClick={closeProject} aria-label="Close project details" className="absolute right-4 top-4 z-10 bg-white p-2 text-neutral-950 shadow dark:bg-neutral-950 dark:text-white"><X size={20} /></button>
-                            <div className="relative aspect-[16/8] bg-neutral-200 dark:bg-neutral-800">
-                                <Image src={selectedProject.image} alt={selectedProject.title} fill sizes="768px" className="object-cover" />
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-                                <h3 className="absolute bottom-6 left-6 right-6 text-2xl font-semibold text-white sm:text-3xl">{selectedProject.title}</h3>
-                            </div>
-                            <div className="p-6 sm:p-8">
-                                <div className="flex flex-wrap gap-2">
-                                    {selectedProject.technologies.map((technology) => <span key={technology} className="border border-neutral-200 px-2.5 py-1 text-xs text-neutral-600 dark:border-neutral-800 dark:text-neutral-400">{technology}</span>)}
-                                </div>
-                                <p className="mt-6 leading-7 text-neutral-600 dark:text-neutral-400">{selectedProject.longDescription || selectedProject.description}</p>
-                                {selectedProject.highlights && (
-                                    <ul className="mt-6 grid gap-3 sm:grid-cols-2">
-                                        {selectedProject.highlights.map((highlight) => <li key={highlight} className="flex gap-2 text-sm leading-6 text-neutral-600 dark:text-neutral-400"><Check size={16} className="mt-1 shrink-0" />{highlight}</li>)}
-                                    </ul>
-                                )}
-                                <div className="mt-8 flex flex-wrap gap-3 border-t border-neutral-200 pt-6 dark:border-neutral-800">
-                                    <Link href={`/projects/${selectedProject.slug}`} onClick={closeProject} className="inline-flex items-center gap-2 bg-neutral-950 px-4 py-2 text-sm font-medium text-white dark:bg-white dark:text-neutral-950">
-                                        Full case study <ArrowUpRight size={16} />
-                                    </Link>
-                                    {hasValidProjectUrl(selectedProject.github) ? (
-                                        <a href={selectedProject.github} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 border border-neutral-300 px-4 py-2 text-sm dark:border-neutral-700"><Github size={16} />View code</a>
-                                    ) : (
-                                        <span className="inline-flex items-center gap-2 border border-neutral-200 px-4 py-2 text-sm text-neutral-400 dark:border-neutral-800"><Github size={16} />Private repository</span>
-                                    )}
-                                    {hasValidProjectUrl(selectedProject.live) ? (
-                                        <a href={selectedProject.live} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 border border-neutral-300 px-4 py-2 text-sm dark:border-neutral-700"><ExternalLink size={16} />Live demo</a>
-                                    ) : (
-                                        <span className="inline-flex items-center gap-2 border border-neutral-200 px-4 py-2 text-sm text-neutral-400 dark:border-neutral-800"><ExternalLink size={16} />Demo unavailable</span>
-                                    )}
-                                    {hasValidProjectUrl(selectedProject.codecanyon) && (
-                                        <a href={selectedProject.codecanyon} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 border border-neutral-300 px-4 py-2 text-sm dark:border-neutral-700"><ExternalLink size={16} />CodeCanyon</a>
-                                    )}
-                                </div>
-                            </div>
-                        </motion.div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
-        </section>
+            {/* Portalled to the body so no ancestor can become its containing block. */}
+            {mounted ? createPortal(modal, document.body) : null}
+        </Section>
     );
 };
 

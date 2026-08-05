@@ -1,51 +1,77 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { ExternalLink, Github, Linkedin, Menu, Moon, Sun, Twitter, X } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useTheme } from '@/context/ThemeContext';
 import { socialLinks } from '@/data/portfolio';
+import { Container } from '@/components/ui/container';
+import { cn } from '@/lib/utils';
+
+const navLinks = [
+  { name: 'Home', href: '/' },
+  { name: 'About', href: '/about' },
+  { name: 'Projects', href: '/projects' },
+  { name: 'Experience', href: '/experience' },
+  { name: 'Skills', href: '/skills' },
+  { name: 'Tools', href: '/tools' },
+  { name: 'Contact', href: '/contact' },
+];
+
+const iconButtonClass =
+  'inline-flex h-10 w-10 items-center justify-center rounded-full bg-surface text-fg-muted ring-1 ring-line/60 ' +
+  'transition-[color,border-color,transform] duration-micro ease-out ' +
+  'hover:text-fg hover:ring-fg/40 active:scale-95';
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { theme, toggleTheme } = useTheme();
   const pathname = usePathname();
-  
-  const toggleMenu = () => setIsOpen(!isOpen);
-  
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
-    };
-    
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-  
-  // Close menu on mobile when clicking a link
-  const handleNavLinkClick = () => {
-    if (isOpen) setIsOpen(false);
-  };
-  
-  const navLinks = [
-    { name: 'Home', href: '/' },
-    { name: 'About', href: '/about' },
-    { name: 'Projects', href: '/projects' },
-    { name: 'Experience', href: '/experience' },
-    { name: 'Skills', href: '/skills' },
-    { name: 'Tools', href: '/tools' },
-    { name: 'Contact', href: '/contact' },
-  ];
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
 
-  const isActive = (href: string) => href === '/' ? pathname === '/' : pathname.startsWith(href);
-  
+  const closeMenu = useCallback(() => setIsOpen(false), []);
+
+  useEffect(() => {
+    let frame = 0;
+    const handleScroll = () => {
+      if (frame) return;
+      frame = window.requestAnimationFrame(() => {
+        frame = 0;
+        setScrolled(window.scrollY > 24);
+      });
+    };
+
+    // Run once so a reload deep in the page renders the correct variant.
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => {
+      window.cancelAnimationFrame(frame);
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  // Close on navigation.
+  useEffect(() => {
+    setIsOpen(false);
+  }, [pathname]);
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key !== 'Escape') return;
+      setIsOpen(false);
+      menuButtonRef.current?.focus();
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen]);
+
+  const isActive = (href: string) => (href === '/' ? pathname === '/' : pathname.startsWith(href));
+
   const renderSocialIcon = (name: string) => {
     switch (name.toLowerCase()) {
       case 'github':
@@ -60,147 +86,136 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <motion.header 
-      className={`fixed z-50 w-full border-b transition-all duration-300 ${
-        scrolled 
-          ? 'border-neutral-200 bg-white/90 py-2.5 shadow-sm backdrop-blur-xl dark:border-neutral-800 dark:bg-neutral-950/90'
-          : 'border-neutral-200/70 bg-white/75 py-3.5 backdrop-blur-md dark:border-neutral-800/70 dark:bg-neutral-950/75'
-      }`}
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.5 }}
+    <header
+      className={cn(
+        'fixed z-50 w-full border-b transition-[background-color,border-color,box-shadow] duration-base ease-out',
+        scrolled
+          ? 'border-line/70 bg-surface/90 shadow-sm backdrop-blur-xl'
+          : 'border-transparent bg-surface/70 backdrop-blur-md',
+      )}
     >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between">
-          {/* Logo/Name */}
-          <motion.div
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.98 }}
-          >
+      <Container>
+        {/* Constant height keeps --nav-h truthful for scroll-padding and page offsets. */}
+        <div className="flex h-nav items-center justify-between">
           <Link
             href="/"
-            className="flex items-center gap-3 text-neutral-950 dark:text-white"
+            className="flex items-center gap-3 text-fg transition-transform duration-micro ease-out hover:-translate-y-px active:scale-95"
             aria-label="Md Safiullah portfolio home"
           >
-            <span className="flex h-9 w-9 items-center justify-center border border-neutral-300 bg-white font-mono text-xs font-bold dark:border-neutral-700 dark:bg-neutral-900">MS</span>
+            <span className="flex h-9 w-9 items-center justify-center rounded-md bg-surface font-mono text-xs font-bold ring-1 ring-line-strong/70">
+              MS
+            </span>
             <span className="hidden sm:block">
               <span className="block text-sm font-semibold leading-none">Md Safiullah</span>
-              <span className="mt-1 block font-mono text-[9px] uppercase text-neutral-500">Full stack developer</span>
+              <span className="type-label mt-1.5 block">Full stack developer</span>
             </span>
           </Link>
-          </motion.div>
-          
-          {/* Desktop Navigation */}
-          <nav className="hidden items-center space-x-5 lg:flex">
+
+          <nav className="hidden items-center gap-6 md:flex">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
                 href={link.href}
-                className={`relative py-2 text-sm font-medium transition-colors ${
+                className={cn(
+                  'relative py-2 text-sm font-medium transition-colors duration-base ease-out',
                   isActive(link.href)
-                    ? 'text-neutral-950 after:absolute after:inset-x-0 after:-bottom-0.5 after:h-px after:bg-neutral-950 dark:text-white dark:after:bg-white'
-                    : 'text-neutral-600 hover:text-neutral-950 dark:text-neutral-300 dark:hover:text-white'
-                }`}
-                onClick={handleNavLinkClick}
+                    ? 'text-fg after:absolute after:inset-x-0 after:-bottom-0.5 after:h-px after:bg-fg'
+                    : 'text-fg-muted hover:text-fg',
+                )}
               >
                 {link.name}
               </Link>
             ))}
           </nav>
-          
-          {/* Social Links & Theme Toggle */}
-          <div className="hidden items-center space-x-3 lg:flex">
-            {socialLinks.map((link) => (
-              <motion.a
-                key={link.name}
-                href={link.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-neutral-600 transition-colors hover:text-neutral-950 dark:text-neutral-300 dark:hover:text-white"
-                whileHover={{ y: -2, scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-                aria-label={link.name}
-              >
-                {renderSocialIcon(link.name)}
-              </motion.a>
-            ))}
-            
-            <motion.button
-              onClick={toggleTheme}
-              className="border border-neutral-200 bg-white p-2 text-neutral-700 transition-colors hover:border-neutral-950 hover:text-neutral-950 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-200 dark:hover:border-white dark:hover:text-white"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-              aria-label="Toggle theme"
-            >
-              {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
-            </motion.button>
-          </div>
-          
-          {/* Mobile Menu Button */}
-          <div className="flex items-center lg:hidden">
-            <motion.button
-              onClick={toggleTheme}
-              className="mr-2 border border-neutral-200 bg-white p-2 text-neutral-700 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-200"
-              whileTap={{ scale: 0.95 }}
-              aria-label="Toggle theme"
-            >
-              {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
-            </motion.button>
-            
-            <motion.button
-              onClick={toggleMenu}
-              className="border border-neutral-200 bg-white p-2 text-neutral-700 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-200"
-              whileTap={{ scale: 0.95 }}
-              aria-label="Toggle menu"
-            >
-              {isOpen ? <X size={24} /> : <Menu size={24} />}
-            </motion.button>
-          </div>
-        </div>
-      </div>
-      
-      {/* Mobile Menu */}
-      <motion.div
-        className={`lg:hidden ${isOpen ? 'block' : 'hidden'}`}
-        initial={{ opacity: 0, height: 0 }}
-        animate={isOpen ? { opacity: 1, height: 'auto' } : { opacity: 0, height: 0 }}
-        transition={{ duration: 0.3 }}
-      >
-        <div className="border-b border-neutral-200 bg-white px-4 pb-4 pt-2 shadow-lg dark:border-neutral-800 dark:bg-neutral-950">
-          <nav className="flex flex-col space-y-3">
-            {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                href={link.href}
-                className={`border-b py-3 font-medium transition-colors last:border-0 ${
-                  isActive(link.href)
-                    ? 'border-neutral-200 text-neutral-950 dark:border-neutral-800 dark:text-white'
-                    : 'border-neutral-100 text-neutral-600 hover:text-neutral-950 dark:border-neutral-900 dark:text-neutral-300 dark:hover:text-white'
-                }`}
-                onClick={handleNavLinkClick}
-              >
-                {link.name}
-              </Link>
-            ))}
-          </nav>
-          
-          <div className="mt-4 flex space-x-4 border-t border-neutral-200 pt-4 dark:border-neutral-800">
+
+          <div className="hidden items-center gap-3 md:flex">
             {socialLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-neutral-700 transition-colors hover:text-neutral-950 dark:text-neutral-200 dark:hover:text-white"
+                className="text-fg-muted transition-[color,transform] duration-micro ease-out hover:-translate-y-0.5 hover:text-fg active:scale-95"
                 aria-label={link.name}
               >
                 {renderSocialIcon(link.name)}
               </a>
             ))}
+
+            <button onClick={toggleTheme} className={iconButtonClass} aria-label="Toggle theme">
+              {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+            </button>
+          </div>
+
+          <div className="flex items-center gap-2 md:hidden">
+            <button onClick={toggleTheme} className={iconButtonClass} aria-label="Toggle theme">
+              {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+            </button>
+
+            <button
+              ref={menuButtonRef}
+              onClick={() => setIsOpen((open) => !open)}
+              className={iconButtonClass}
+              aria-label={isOpen ? 'Close menu' : 'Open menu'}
+              aria-expanded={isOpen}
+              aria-controls="mobile-menu"
+            >
+              {isOpen ? <X size={20} /> : <Menu size={20} />}
+            </button>
           </div>
         </div>
-      </motion.div>
-    </motion.header>
+      </Container>
+
+      {/* grid-rows 0fr -> 1fr animates height without measuring, and the wrapper
+          keeps overflow hidden so content never spills while it opens. */}
+      <div
+        id="mobile-menu"
+        className={cn(
+          'grid overflow-hidden transition-[grid-template-rows,opacity] duration-slow ease-smooth md:hidden',
+          isOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0',
+        )}
+        aria-hidden={!isOpen}
+      >
+        <div className="min-h-0">
+          <div className="border-b border-line/60 bg-surface px-5 pb-5 pt-2 shadow-lg sm:px-6">
+            <nav className="flex flex-col">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  tabIndex={isOpen ? undefined : -1}
+                  className={cn(
+                    'border-b border-line/60 py-3 pl-3 text-sm font-medium transition-colors duration-base ease-out last:border-0',
+                    isActive(link.href)
+                      ? 'border-l-2 border-l-fg text-fg'
+                      : 'border-l-2 border-l-transparent text-fg-muted hover:text-fg',
+                  )}
+                  onClick={closeMenu}
+                >
+                  {link.name}
+                </Link>
+              ))}
+            </nav>
+
+            <div className="mt-5 flex gap-5 border-t border-line/60 pt-5">
+              {socialLinks.map((link) => (
+                <a
+                  key={link.name}
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  tabIndex={isOpen ? undefined : -1}
+                  className="text-fg-muted transition-colors duration-base ease-out hover:text-fg"
+                  aria-label={link.name}
+                >
+                  {renderSocialIcon(link.name)}
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
   );
 };
 
