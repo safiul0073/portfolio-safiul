@@ -19,6 +19,29 @@ export const personalInfo = {
 
 export const projects: Project[] = [
     {
+        id: 18,
+        slug: "wacatelog-whatsapp-catalog-manager-saas",
+        title: "Wacatelog - WhatsApp Catalog Manager SaaS",
+        description:
+            "A self-hosted WhatsApp commerce platform and SaaS script built on Laravel, allowing merchants to operate stores directly within WhatsApp.",
+        longDescription:
+            "Built Wacatelog, a comprehensive WhatsApp commerce platform designed as a multi-tenant SaaS script. It empowers merchants to run their entire storefront natively within WhatsApp by syncing their product catalogs directly to the WhatsApp Business Catalog. The system facilitates end-to-end commerce workflows including browsing products, taking orders directly in chat conversations, generating and sending secure payment links, and automating post-purchase follow-up communications. The platform incorporates a complete SaaS administration layer, merchant dashboards, and reliable REST APIs for seamless order and inventory management.",
+        highlights: [
+            "Architected a robust, modular SaaS platform using the Laravel framework to serve multiple merchants.",
+            "Integrated seamless synchronization between merchant product databases and the WhatsApp Business Catalog.",
+            "Developed automated conversational commerce flows for capturing customer orders directly within WhatsApp chats.",
+            "Implemented secure payment gateways to generate and send dynamic payment links directly to customers.",
+            "Built automated follow-up communication sequences to enhance customer engagement and retention.",
+            "Designed a comprehensive merchant dashboard for managing products, orders, customers, and overall business operations.",
+        ],
+        image: "https://images.pexels.com/photos/5082567/pexels-photo-5082567.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        technologies: ["Laravel", "PHP", "WhatsApp Cloud API", "Tailwind CSS", "MySQL", "SaaS Architecture"],
+        github: "#",
+        live: "https://preview.codecanyon.net/item/wacatelog-whatsapp-catalog-manager-saas/full_screen_preview/64875668",
+        codecanyon: "https://codecanyon.net/item/wacatelog-whatsapp-catalog-manager-saas/64875668?s_rank=1",
+        featured: true,
+    },
+    {
         id: 17,
         slug: "wapro-whatsapp-automation-saas",
         title: "WaPro - WhatsApp Automation & Growth Engine",

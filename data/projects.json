@@ -38,5 +38,19 @@
     "short_list": [
       "Architected and implemented a real-time lead management system to enhance sales and customer relationship management."
     ]
+  },
+  {
+    "id": 4,
+    "name": "Wacatelog - WhatsApp Catalog Manager SaaS",
+    "stacks": "Laravel, SaaS Architecture, MySQL",
+    "description": "<p>WACatelog is a comprehensive WhatsApp commerce platform and SaaS script. It enables merchants to operate their stores directly within WhatsApp, sync product catalogs, take orders, and manage operations.</p>",
+    "website": "https://preview.codecanyon.net/item/wacatelog-whatsapp-catalog-manager-saas/full_screen_preview/64875668",
+    "repository": "https://codecanyon.net/item/wacatelog-whatsapp-catalog-manager-saas/64875668?s_rank=1",
+    "short_list": [
+      "Built on a modern, modular architecture using the Laravel framework.",
+      "Allows merchants to operate their stores directly within WhatsApp.",
+      "Enables syncing product catalogs to the WhatsApp Business Catalog.",
+      "Facilitates taking orders directly in chat, sending payment links, and automating follow-up communications."
+    ]
   }
 ]
