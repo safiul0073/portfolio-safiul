@@ -8,9 +8,17 @@ import { Section } from "@/components/ui/section";
 
 const strengths = [
     { label: "Backend Architecture", description: "APIs, service boundaries, authentication, and scalable application workflows." },
-    { label: "Full Stack Delivery", description: "End-to-end product development across Laravel, Next.js, React, and Vue." },
+    { label: "Full Stack Delivery", description: "End-to-end product development across Laravel, Node.js, Nest.js, Next.js, React, and Vue." },
     { label: "Data & Reporting", description: "Relational data modeling, query optimization, dashboards, and operational reporting." },
     { label: "Deployment & CI/CD", description: "Docker-based environments, automated delivery, and production operations." },
+    {
+        label: "AI Automation & Chatbots",
+        description: "Retrieval-backed assistants, LLM API integration, and chatbots for WhatsApp, Messenger, and in-app widgets.",
+    },
+    {
+        label: "Stack Adaptability",
+        description: "Switching stacks and getting productive inside an unfamiliar codebase quickly.",
+    },
 ];
 
 const About = ({ preview = false, showHeader = true }: { preview?: boolean; showHeader?: boolean }) => (
@@ -31,12 +39,16 @@ const About = ({ preview = false, showHeader = true }: { preview?: boolean; show
                     </p>
                     <p className="type-body mt-5">
                         My work spans property platforms, ERP systems, e-commerce, booking products, lead management
-                        tools, commercial marketplaces, and custom business dashboards.
+                        tools, commercial marketplaces, custom business dashboards, and AI chatbots and automation
+                        built into those products.
                     </p>
                     {!preview && (
                         <p className="type-body mt-5">
-                            I specialize in Laravel, Next.js, React, Vue, APIs, database design, and deployment
-                            workflows. I care about clean architecture, maintainable code, clear communication, and
+                            I specialize in Laravel, Node.js, Nest.js, Next.js, React, Vue, APIs, database design, and deployment
+                            workflows, and I build AI automation on top of them with LLM APIs, retrieval and vector
+                            search, and chat assistants for WhatsApp, Messenger, and the web. I am not tied to one
+                            stack: I move into an unfamiliar framework or an existing codebase quickly and start
+                            shipping in it. I care about clean architecture, maintainable code, clear communication, and
                             systems that remain dependable after launch.
                         </p>
                     )}

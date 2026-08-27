@@ -32,7 +32,7 @@ const capabilityGroups: Array<{
     { id: "realtime", label: "Real-Time & Messaging", description: "Live application events, private communication, background delivery, and push notifications." },
     { id: "mobile", label: "Mobile Development", description: "Backend integration and cross-platform delivery for rider, driver, marketplace, and product apps." },
     { id: "devops", label: "DevOps & Tools", description: "Containerized delivery, automated pipelines, cloud infrastructure, and production operations." },
-    { id: "ai", label: "AI & Automation", description: "Retrieval workflows, vector search, conversational systems, and AI-assisted product automation." },
+    { id: "ai", label: "AI & Automation", description: "LLM API integration, retrieval and vector search, and chat assistants for WhatsApp, Messenger, and the web." },
 ];
 
 const coreExpertise = [
@@ -52,6 +52,14 @@ const coreExpertise = [
         title: "Production Delivery",
         description: "Docker, Nginx, GitHub Actions, CI/CD, cloud platforms, monitoring, and server operations.",
     },
+    {
+        title: "AI Automation & Chatbots",
+        description: "LLM APIs, retrieval and vector search, and chat assistants for WhatsApp, Messenger, and in-app widgets.",
+    },
+    {
+        title: "Stack Adaptability",
+        description: "Switching frameworks and getting productive inside an unfamiliar codebase quickly.",
+    },
 ];
 
 const featuredSkillNames = [
@@ -63,6 +71,7 @@ const featuredSkillNames = [
     "Redis",
     "Docker",
     "FastAPI",
+    "LLM Integration",
 ];
 
 const categoryLabel = (category: Skill["category"]) =>

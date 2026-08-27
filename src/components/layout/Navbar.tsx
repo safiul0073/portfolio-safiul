@@ -107,7 +107,7 @@ const Navbar: React.FC = () => {
             </span>
             <span className="hidden sm:block">
               <span className="block text-sm font-semibold leading-none">Md Safiullah</span>
-              <span className="type-label mt-1.5 block">Full stack developer</span>
+              <span className="type-label mt-1.5 block whitespace-nowrap">Full stack &amp; AI developer</span>
             </span>
           </Link>
 

@@ -39,10 +39,11 @@ const Hero = () => {
                     </div>
 
                     <p className="type-eyebrow mt-7">Hello, I&apos;m {personalInfo.name}</p>
-                    <h1 className="type-display mt-4 max-w-4xl">I build reliable web products, end to end.</h1>
+                    <h1 className="type-display mt-4 max-w-4xl">I build reliable web products and AI automation, end to end.</h1>
                     <p className="type-lead mt-6 max-w-3xl">
                         Senior full stack developer with 4+ years of experience building maintainable products with
-                        Laravel, Next.js, React, Vue, and MySQL.
+                        Laravel, Next.js, React, Vue, and MySQL, plus AI chatbots and automation on top of them. I pick
+                        up an unfamiliar stack or codebase fast and ship in it.
                     </p>
 
                     <div className="mt-6 flex flex-wrap gap-x-6 gap-y-3 text-sm text-fg-subtle">

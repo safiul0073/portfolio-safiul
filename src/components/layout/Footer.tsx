@@ -13,7 +13,8 @@ const Footer = () => (
                 <p className="type-label">Designed and developed by</p>
                 <p className="type-card-title mt-3">{personalInfo.name}</p>
                 <p className="type-body-sm mt-3 max-w-xl">
-                    Senior full stack developer building maintainable web products, APIs, and business platforms.
+                    Senior full stack developer building maintainable web products, APIs, business platforms, and AI
+                    automation.
                 </p>
                 <p className="type-body-xs mt-5 text-fg-faint">
                     © {new Date().getFullYear()} {personalInfo.name}. Built with Next.js and Tailwind CSS.

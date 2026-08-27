@@ -1,6 +1,9 @@
 /** @format */
 
 import comvest from "../../public/comvest.png";
+import neuralDesk from "../../public/NeuralDesk.png";
+import waCatelog from "../../public/waCatelog.png";
+import waPro from "../../public/WaPro.png";
 import ighotokImage from "../../public/ighotok.png";
 import itsholyday from "../../public/itsholyday.png";
 import lottery from "../../public/lottery.png";
@@ -11,10 +14,10 @@ import { Education, Experience, Project, Skill, SocialLink } from "../types";
 
 export const personalInfo = {
     name: "Md Safiullah",
-    title: "Senior Full Stack Developer",
+    title: "Senior Full Stack & AI Automation Developer",
     email: "mdsafiul0073@gmail.com",
     location: "Uttara, Dhaka, Bangladesh",
-    bio: "Full stack developer with 4+ years of experience building reliable web applications with Laravel, Next.js, React, Vue, MySQL, and Docker. I focus on backend architecture, clean user experiences, and production-ready systems that are easy to maintain and scale.",
+    bio: "Full stack developer with 4+ years of experience building reliable web applications with Laravel, Next.js, React, Vue, MySQL, and Docker, and AI automation and chatbots on top of them. I focus on backend architecture, clean user experiences, and production-ready systems, and I move into an unfamiliar stack or codebase quickly.",
 };
 
 export const projects: Project[] = [
@@ -34,7 +37,7 @@ export const projects: Project[] = [
             "Built automated follow-up communication sequences to enhance customer engagement and retention.",
             "Designed a comprehensive merchant dashboard for managing products, orders, customers, and overall business operations.",
         ],
-        image: "https://images.pexels.com/photos/5082567/pexels-photo-5082567.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        image: waCatelog.src,
         technologies: ["Laravel", "PHP", "WhatsApp Cloud API", "Tailwind CSS", "MySQL", "SaaS Architecture"],
         github: "#",
         live: "https://preview.codecanyon.net/item/wacatelog-whatsapp-catalog-manager-saas/full_screen_preview/64875668",
@@ -57,7 +60,7 @@ export const projects: Project[] = [
             "Delivered multi-tenant SaaS infrastructure: workspaces with four permission roles, subscription plans with feature limits, 14 payment gateways, and multi-currency billing.",
             "Built the surrounding platform — CRM with leads and Google Places lookup, Meta-synced template library, embeddable chat widget, Telegram and SMS channels, frontend CMS, Swagger-documented REST API, RTL-capable translation editor, and audit logs with 2FA.",
         ],
-        image: "https://images.pexels.com/photos/6963944/pexels-photo-6963944.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        image: waPro.src,
         technologies: ["Laravel", "PHP", "WhatsApp Cloud API", "Tailwind CSS", "Alpine.js", "MySQL", "Qdrant", "Stripe"],
         github: "#",
         live: "https://demo.pixelaxis.net/wapro/",
@@ -79,7 +82,7 @@ export const projects: Project[] = [
             "Implemented the SaaS layer: subscription plans with feature restrictions, scoped team accounts, six payment gateways, multi-currency, and refund management.",
             "Delivered the surrounding platform — frontend CMS with blog and themes, Sanctum REST API with Swagger docs, roles and permissions, 2FA, audit logs, and translation management.",
         ],
-        image: "https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        image: neuralDesk.src,
         technologies: ["Laravel", "PHP", "Tailwind CSS", "Alpine.js", "MySQL", "Qdrant", "OpenAI", "Stripe"],
         github: "#",
         live: "https://demo.pixelaxis.net/neuraldesk/",
@@ -177,12 +180,33 @@ export const projects: Project[] = [
     {
         id: 3,
         slug: "regal-furniture-ecommerce",
-        title: "E-commerce Platform (Regal Furniture)",
-        description: "A furniture e-commerce platform with catalog management, cart, checkout, and order workflows.",
+        title: "Regal Furniture - E-commerce Platform",
+        description:
+            "Backend developer on a production furniture e-commerce platform: Laravel REST API powering the catalog, cart, SSLCommerz checkout, and order fulfilment for the Nuxt.js storefront.",
         longDescription:
-            "Built a full e-commerce solution using Laravel for the backend API and Vue.js/Nuxt.js for the frontend. Implemented authentication, product catalog management, shopping cart, SSLCommerz checkout, and order management workflows.",
+            "Worked as the backend developer on Regal Furniture, a live furniture retail platform serving customers across Bangladesh. I owned the Laravel side of the system: a REST API consumed by the Nuxt.js storefront and by the internal admin panel. Responsibilities covered the product and variant catalog, inventory and stock reservation, pricing and discount rules, cart and checkout, SSLCommerz payment integration with IPN verification, and the full order lifecycle from placement through warehouse dispatch and delivery. I also handled authentication and role-based access for staff, transactional email/SMS notifications, media handling for product imagery, database schema design and query optimisation on MySQL, and caching to keep category and product listing endpoints fast under catalog-wide load.",
+        highlights: [
+            "Designed and built the Laravel REST API backing both the Nuxt.js storefront and the internal admin panel.",
+            "Modelled a variant-aware product catalog (size, material, finish) with category trees, attributes, and filterable listing endpoints.",
+            "Implemented cart, stock reservation, and order placement inside database transactions to prevent overselling on concurrent checkouts.",
+            "Integrated SSLCommerz payments with signed IPN callback verification, retry handling, and reconciliation of payment status against orders.",
+            "Built the order lifecycle state machine — pending, confirmed, processing, dispatched, delivered, cancelled, refunded — with an auditable status history.",
+            "Added role-based access control for admin, sales, and warehouse staff over order, inventory, and catalog operations.",
+            "Automated transactional order confirmation and status-update notifications over email and SMS via queued jobs.",
+            "Optimised MySQL schema, indexes, and eager loading to remove N+1 queries; cached category and listing responses for faster page loads.",
+            "Handled product media uploads with server-side image resizing and CDN-friendly delivery to keep storefront payloads light.",
+        ],
         image: "https://images.pexels.com/photos/230544/pexels-photo-230544.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-        technologies: ["Laravel", "Nuxt.js", "MySQL"],
+        technologies: [
+            "Laravel",
+            "PHP",
+            "REST API",
+            "MySQL",
+            "Redis",
+            "Queues",
+            "SSLCommerz",
+            "Nuxt.js",
+        ],
         github: "#",
         live: "https://regalfurniturebd.com/",
         featured: true,
@@ -266,11 +290,27 @@ export const projects: Project[] = [
         id: 8,
         slug: "lead-management-system",
         title: "Lead Management System",
-        description: "A lead tracking platform for capturing inquiries, managing follow-ups, and reviewing sales activity.",
+        description:
+            "A real-time lead tracking platform with third-party lead-generation API integrations and WebSocket presence, so no two staff members work the same lead at once.",
         longDescription:
-            "Engineered a lead management workflow for capturing inquiries, coordinating follow-ups, and reviewing sales activity. The system combines lead forms, email notifications, operational reporting, and dashboards in one business platform.",
+            "Engineered a lead management workflow for capturing inquiries, coordinating follow-ups, and reviewing sales activity. Leads flow in from third-party lead-generation APIs as well as internal forms, and an Amazon API Gateway WebSocket layer broadcasts live claim and presence events so every dashboard shows which staff member is currently working each lead. That real-time locking removed duplicate outreach and stopped multiple agents from contacting the same prospect at the same time. The platform also covers email notifications, operational reporting, and dashboards for sales activity.",
+        highlights: [
+            "Integrated third-party lead-generation APIs to ingest, normalise, and de-duplicate inbound leads from multiple providers.",
+            "Built a real-time presence layer on Amazon API Gateway WebSocket services to show which staff member was actively working each lead.",
+            "Implemented lead claim/lock semantics with automatic release on disconnect or idle timeout, preventing two agents from handling the same lead.",
+            "Broadcast live lead status and assignment changes to all connected dashboards, eliminating duplicate outreach to the same prospect.",
+            "Delivered follow-up scheduling, email notifications, and sales activity reporting on top of the lead pipeline.",
+        ],
         image: "https://images.pexels.com/photos/3184295/pexels-photo-3184295.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-        technologies: ["Next.js", "Node.js", "Tailwind CSS", "Prisma"],
+        technologies: [
+            "Next.js",
+            "Node.js",
+            "AWS API Gateway WebSocket",
+            "WebSockets",
+            "REST API Integration",
+            "Prisma",
+            "Tailwind CSS",
+        ],
         github: "#",
         live: "#",
     },
@@ -278,11 +318,29 @@ export const projects: Project[] = [
         id: 9,
         slug: "courier-management-system",
         title: "Courier Management System",
-        description: "A courier operations platform for shipment scheduling, delivery tracking, and multi-role management.",
+        description:
+            "Backend developer on a multi-app courier platform: one Laravel REST API powering a Flutter delivery agent app, Next.js merchant and shop portals, and a super admin console.",
         longDescription:
-            "Built a multi-role courier operations platform for scheduling, tracking, and managing deliveries. Designed workflows for Agents, Shops, Merchants, and Admins, supported by delivery notifications, operational dashboards, and order management.",
+            "Worked as the backend developer on a multi-role courier operations platform for scheduling, tracking, and managing deliveries. I owned the Laravel REST API that serves four separate clients: a Flutter delivery agent mobile app, a Next.js merchant portal, a shop portal, and a super admin console. On the API side I built parcel booking and assignment, the delivery status lifecycle, proof-of-delivery and cash-on-delivery collection endpoints for agents, COD payout and invoice reconciliation for merchants, branch-level order handover for shops, and admin operations for rider and hub assignment, delivery zones, and pricing rules. Role-scoped authentication and permissions, delivery status notifications, and the reporting endpoints behind each role's dashboard were also part of my scope.",
+        highlights: [
+            "Owned the Laravel REST API serving four clients — Flutter agent app, merchant portal, shop portal, and super admin console.",
+            "Built the agent-facing endpoints consumed by the Flutter app: assigned run lists, parcel scanning, status updates, proof of delivery, and COD collection.",
+            "Exposed merchant APIs for parcel booking, shipment tracking, delivery history, and COD payout reconciliation used by the Next.js portal.",
+            "Modelled shop accounts for branch pickups and agent handover, scoped separately from merchant accounts.",
+            "Implemented admin operations for rider and hub assignment, delivery zones, pricing rules, invoices, payouts, and platform reporting.",
+            "Designed the parcel lifecycle — booked, picked, in hub, in transit, delivered, returned — with role-scoped permissions and an auditable status trail.",
+            "Delivered status notification and dashboard reporting endpoints for every role, on PostgreSQL with a Docker-based deployment.",
+        ],
         image: "https://images.pexels.com/photos/3184295/pexels-photo-3184295.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-        technologies: ["Laravel", "Next.js", "PostgreSQL", "Docker", "Tailwind CSS"],
+        technologies: [
+            "Laravel",
+            "REST API",
+            "Next.js",
+            "Flutter",
+            "PostgreSQL",
+            "Docker",
+            "Tailwind CSS",
+        ],
         github: "#",
         live: "#",
     },
@@ -469,6 +527,13 @@ export const skills: Skill[] = [
     { name: "Qdrant", icon: "qdrant", category: "ai" },
     { name: "AI Chatbot Development", icon: "chatbot", category: "ai" },
     { name: "AI-Powered Automation Workflows", icon: "automation", category: "ai" },
+    { name: "OpenAI API", icon: "openai", category: "ai" },
+    { name: "Claude API", icon: "claude", category: "ai" },
+    { name: "Gemini API", icon: "gemini", category: "ai" },
+    { name: "LLM Integration", icon: "llm", category: "ai" },
+    { name: "Vector Embeddings", icon: "embeddings", category: "ai" },
+    { name: "Semantic Search", icon: "semantic-search", category: "ai" },
+    { name: "Conversational AI (WhatsApp, Messenger, Web)", icon: "conversational-ai", category: "ai" },
 ];
 
 export const education: Education[] = [

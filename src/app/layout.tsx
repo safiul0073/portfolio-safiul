@@ -32,9 +32,9 @@ d.style.colorScheme=t;
 
 export const metadata: Metadata = {
     metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://portfolio-safiul.vercel.app"),
-    title: "Md Safiullah | Senior Full Stack Developer",
+    title: "Md Safiullah | Senior Full Stack & AI Automation Developer",
     description:
-        "Portfolio of Md Safiullah, a backend-focused full stack developer building Laravel, Next.js, React, Vue, API, dashboard, ERP, e-commerce, and booking applications.",
+        "Portfolio of Md Safiullah, a backend-focused full stack and AI automation developer building Laravel, Next.js, React, Vue, API, dashboard, ERP, e-commerce, and booking applications, plus AI chatbots and LLM-powered automation.",
     keywords: [
         "Md Safiullah",
         "Full Stack Developer",
@@ -43,15 +43,20 @@ export const metadata: Metadata = {
         "React Developer",
         "Vue Developer",
         "Backend Developer",
+        "AI Automation Developer",
+        "AI Chatbot Developer",
+        "LLM Integration",
+        "RAG Developer",
+        "WhatsApp Chatbot Developer",
         "Bangladesh Developer",
         "Portfolio",
     ],
     authors: [{ name: "Md Safiullah" }],
     creator: "Md Safiullah",
     openGraph: {
-        title: "Md Safiullah | Senior Full Stack Developer",
+        title: "Md Safiullah | Senior Full Stack & AI Automation Developer",
         description:
-            "Explore full stack projects, backend architecture work, APIs, dashboards, and production applications built by Md Safiullah.",
+            "Explore full stack projects, backend architecture work, APIs, dashboards, AI chatbots, and automation built by Md Safiullah.",
         type: "website",
         images: [
             {
@@ -64,8 +69,8 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: "summary_large_image",
-        title: "Md Safiullah | Senior Full Stack Developer",
-        description: "Backend-focused full stack portfolio featuring Laravel, Next.js, React, Vue, dashboards, APIs, and production systems.",
+        title: "Md Safiullah | Senior Full Stack & AI Automation Developer",
+        description: "Full stack and AI automation portfolio featuring Laravel, Next.js, React, Vue, dashboards, APIs, chatbots, and production systems.",
         images: ["/image.png"],
     },
 };

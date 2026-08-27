@@ -8,8 +8,8 @@ import Tools from "@/components/sections/Tools";
 import Contact from "@/components/sections/Contact";
 
 export const metadata: Metadata = {
-    title: "Md Safiullah | Senior Full Stack Developer",
-    description: "Portfolio of Md Safiullah, a senior full stack developer building Laravel, Next.js, React, Vue, API, ERP, marketplace, and business applications.",
+    title: "Md Safiullah | Senior Full Stack & AI Automation Developer",
+    description: "Portfolio of Md Safiullah, a senior full stack and AI automation developer building Laravel, Next.js, React, Vue, API, ERP, marketplace, and business applications, plus AI chatbots and LLM-powered automation.",
 };
 
 export default function HomePage() {
