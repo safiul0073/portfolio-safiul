@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowDown, ArrowUpRight, Download, Mail, MapPin } from "lucide-react";
 import { experiences, personalInfo, projects } from "@/data/portfolio";
-import profileImage from "@/profile.png";
+import profileImage from "@/profile.jpg";
 import GridBackdrop from "@/components/motion/GridBackdrop";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
@@ -17,11 +17,11 @@ const Hero = () => {
     return (
         <section id="hero" className="relative isolate overflow-hidden border-b border-line/60 bg-surface pt-nav">
             <GridBackdrop />
-            <Container className="relative z-10 grid items-center gap-10 py-12 sm:py-16 lg:min-h-[calc(100svh-var(--nav-h))] lg:grid-cols-[minmax(0,1.5fr)_minmax(220px,0.5fr)] lg:gap-12 lg:py-20">
+            <Container className="relative z-10 grid items-center gap-10 py-12 sm:py-16 lg:min-h-[calc(100svh-var(--nav-h))] lg:grid-cols-[minmax(0,1.5fr)_minmax(260px,0.5fr)] lg:gap-12 lg:py-20">
                 <div className="max-w-4xl">
                     <div className="flex items-center gap-4">
-                        <div className="group relative h-20 w-20 shrink-0 rounded-full bg-surface-sunken p-1 shadow-md ring-1 ring-line/70 lg:hidden">
-                            <div className="relative h-full w-full overflow-hidden rounded-full">
+                        <div className="relative h-24 w-20 shrink-0 rounded-lg bg-surface p-1 shadow-md ring-1 ring-line/70 lg:hidden">
+                            <div className="relative h-full w-full overflow-hidden rounded-md">
                                 <Image
                                     src={profileImage}
                                     alt={`${personalInfo.name} profile photo`}
@@ -91,23 +91,21 @@ const Hero = () => {
                 </div>
 
                 <div className="hidden lg:flex lg:flex-col lg:items-center lg:justify-self-end">
-                    <div className="group relative h-56 w-56 rounded-full xl:h-60 xl:w-60">
-                        <div className="absolute -inset-5 rounded-full border border-line-strong/80" />
-                        <div className="absolute -inset-10 rounded-full border border-line/70" />
-                        <div className="relative h-full w-full overflow-hidden rounded-full bg-surface-sunken p-1.5 shadow-lg ring-1 ring-line/70">
-                            <div className="relative h-full w-full overflow-hidden rounded-full">
+                    <div className="group relative aspect-[4/5] w-64 xl:w-72">
+                        <div className="relative h-full w-full overflow-hidden rounded-xl bg-surface p-1.5 shadow-lg ring-1 ring-line/70">
+                            <div className="relative h-full w-full overflow-hidden rounded-lg">
                                 <Image
                                     src={profileImage}
                                     alt={`${personalInfo.name} profile photo`}
                                     priority
                                     fill
-                                    sizes="240px"
+                                    sizes="(min-width: 1280px) 288px, 256px"
                                     className="object-cover transition-transform duration-reveal ease-out group-hover:scale-[1.025]"
                                 />
                             </div>
                         </div>
                     </div>
-                    <div className="mt-10 text-center">
+                    <div className="mt-6 text-center">
                         <p className="type-card-title">{personalInfo.name}</p>
                         <p className="type-body-sm mt-1.5 text-fg-subtle">{experiences[0].position}</p>
                         <span className="type-label mt-3 block">DHAKA / BD</span>
