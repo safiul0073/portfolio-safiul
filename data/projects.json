@@ -52,5 +52,50 @@
       "Enables syncing product catalogs to the WhatsApp Business Catalog.",
       "Facilitates taking orders directly in chat, sending payment links, and automating follow-up communications."
     ]
+  },
+  {
+    "id": 5,
+    "name": "Prohyre — On-Demand Services & Escrow Bidding Marketplace",
+    "stacks": "Next.js, Laravel, React Native, Expo, Escrow Payments, MySQL, WebSockets",
+    "description": "<p>Airtasker-style local services marketplace where customers post tasks, verified taskers bid in real time, and payments are held in automated escrow across Next.js 16 web and Expo mobile apps.</p>",
+    "website": "https://prohyre.com",
+    "repository": "#",
+    "short_list": [
+      "Two-sided task posting, geo-filtered discovery, and real-time tasker offer & bidding engine.",
+      "Automated escrow payment protection holding funds from task assignment until verified completion.",
+      "Configurable platform commission splits, tasker wallet ledger, and automated withdrawal disbursements.",
+      "Real-time buyer-tasker chat with attachments, milestone verification, and verified review system.",
+      "Cross-platform Next.js 16 web marketplace, Laravel 12 admin portal, and React Native (Expo) iOS/Android app."
+    ]
+  },
+  {
+    "id": 6,
+    "name": "FashionFiest — Hybrid Wholesale & Retail Commerce SaaS",
+    "stacks": "Next.js, Laravel, Flutter, MySQL, WhatsApp Cloud API, Tailwind CSS, Redis",
+    "description": "<p>Multi-tenant hybrid wholesale and retail e-commerce platform with custom pack bundle builder, WhatsApp Cloud API marketing automation, Next.js 16 storefront, and Flutter mobile apps.</p>",
+    "website": "https://fashionfiest.com",
+    "repository": "#",
+    "short_list": [
+      "Dual wholesale & retail commerce engine with custom pack templates and mix-and-match bundle builders.",
+      "Meta WhatsApp Cloud API integration with WhatsApp OTP login, broadcast marketing, and chat widgets.",
+      "Headless Next.js 16 multi-tenant storefront with automated domain host resolution and edge caching.",
+      "Cross-platform Flutter mobile applications for customer ordering and store owner management.",
+      "Integrated 'Become a Promoter' affiliate network and real-time package tracking fulfillment."
+    ]
+  },
+  {
+    "id": 7,
+    "name": "Zelvi — Luxury Direct-to-Consumer (D2C) Fashion Flagship",
+    "stacks": "Next.js, Laravel, React, TypeScript, Tailwind CSS, MySQL, REST API, Order Tracking",
+    "description": "<p>Ultra-fast headless luxury fashion retail storefront with editorial visual merchandising, real-time inventory locking, and end-to-end order tracking.</p>",
+    "website": "https://thezelvi.store",
+    "repository": "#",
+    "short_list": [
+      "Pure direct-to-consumer (D2C) retail shopping experience with high-editorial lookbooks and seasonal collections.",
+      "Frictionless variant selection with live stock availability and atomic inventory reservations at checkout.",
+      "Headless Next.js 16 architecture delivering sub-second TTFB and zero-layout-shift visual presentation.",
+      "Self-service real-time customer order tracking portal with automated shipment status telemetry.",
+      "Optimized mobile-first commerce UX with one-tap express payment gateway checkout."
+    ]
   }
 ]

@@ -10,6 +10,9 @@ import lottery from "../../public/lottery.png";
 import quiz from "../../public/quiz.png";
 import investra from "../../public/investra.png";
 import sagorstore from "../../public/sagorstore.png";
+import fashionfiest from "../../public/fashionfiest.png";
+import zelvi from "../../public/zelvi.png";
+import prohyre from "../../public/prohyre-hero.png";
 import { Education, Experience, Project, Skill, SocialLink } from "../types";
 
 export const personalInfo = {
@@ -21,6 +24,69 @@ export const personalInfo = {
 };
 
 export const projects: Project[] = [
+    {
+        id: 21,
+        slug: "prohyre-ondemand-services-escrow-marketplace",
+        title: "Prohyre — On-Demand Services & Escrow Bidding Marketplace",
+        description:
+            "Airtasker-style local services marketplace where customers post tasks, verified taskers bid in real time, and payments are held in automated escrow across Next.js 16 web and Expo mobile apps.",
+        longDescription:
+            "Built Prohyre, a full-scale Airtasker-style two-sided service marketplace engineered with a Next.js 16 web storefront, Laravel 12 REST API & Blade Admin Console, and a React Native (Expo) mobile app. Customers post local or remote tasks with budget tiers, verified service providers submit competitive bids, and payments are securely held in escrow from assignment until verified completion—automatically splitting tasker payouts and platform commission fees with multi-gateway payment processing (Stripe, PayPal, etc.).",
+        highlights: [
+            "Two-sided task posting, geo-filtered discovery, and real-time tasker offer & bidding engine.",
+            "Automated escrow payment protection holding funds from task assignment until verified completion.",
+            "Configurable platform commission splits, tasker wallet ledger, and automated withdrawal disbursements.",
+            "Real-time buyer-tasker chat with attachments, milestone verification, and verified review system.",
+            "Cross-platform Next.js 16 web marketplace, Laravel 12 admin portal, and React Native (Expo) iOS/Android app.",
+        ],
+        image: prohyre.src,
+        technologies: ["Next.js", "Laravel", "React Native", "Expo", "Escrow Payments", "Tailwind CSS", "MySQL", "WebSockets"],
+        github: "#",
+        live: "https://prohyre.com",
+        featured: true,
+    },
+    {
+        id: 20,
+        slug: "fashionfiest-wholesale-retail-ecommerce-saas",
+        title: "FashionFiest — Hybrid Wholesale & Retail Commerce SaaS",
+        description:
+            "Multi-tenant hybrid wholesale and retail e-commerce platform with custom pack bundle builder, WhatsApp Cloud API marketing automation, Next.js 16 storefront, and Flutter mobile apps.",
+        longDescription:
+            "FashionFiest (fashionfiest.com) is an enterprise-grade hybrid commerce and WhatsApp marketing ecosystem engineered on Next.js 16 and Laravel 13. It bridges the gap between bulk wholesale B2B distribution and high-conversion direct-to-consumer (D2C) retail. The platform provides store owners with custom pack template management (mix-and-match bundles with wholesale tiered pricing), explicit cart grouping, WhatsApp OTP login, official Meta WhatsApp Cloud API marketing broadcasts, live chat triage, promoter affiliate commission tracking, and cross-platform Flutter apps for iOS and Android.",
+        highlights: [
+            "Dual wholesale & retail commerce engine with custom pack templates and mix-and-match bundle builders.",
+            "Meta WhatsApp Cloud API integration with WhatsApp OTP login, broadcast marketing, and chat widgets.",
+            "Headless Next.js 16 multi-tenant storefront with automated domain host resolution and edge caching.",
+            "Cross-platform Flutter mobile applications for customer ordering and store owner management.",
+            "Integrated 'Become a Promoter' affiliate network and real-time package tracking fulfillment.",
+        ],
+        image: fashionfiest.src,
+        technologies: ["Next.js", "Laravel", "Flutter", "MySQL", "WhatsApp Cloud API", "Tailwind CSS", "Redis"],
+        github: "#",
+        live: "https://fashionfiest.com",
+        featured: true,
+    },
+    {
+        id: 19,
+        slug: "zelvi-luxury-fashion-retail-storefront",
+        title: "Zelvi — Luxury Direct-to-Consumer (D2C) Fashion Flagship",
+        description:
+            "Ultra-fast headless luxury fashion retail storefront with editorial visual merchandising, real-time inventory locking, and end-to-end order tracking.",
+        longDescription:
+            "Zelvi (thezelvi.store) is a purpose-built direct-to-consumer (D2C) fashion retail platform engineered for premium luxury apparel and accessories. Designed with an international haute-couture editorial aesthetic, the headless Next.js 16 storefront delivers sub-second page loads, fluid variant selection (size, color, fit), and instant slide-out cart drawers. The backend runs on a high-throughput Laravel 13 engine with automated inventory reserves, multi-currency checkout, and a real-time order tracking portal.",
+        highlights: [
+            "Pure direct-to-consumer (D2C) retail shopping experience with high-editorial lookbooks and seasonal collections.",
+            "Frictionless variant selection with live stock availability and atomic inventory reservations at checkout.",
+            "Headless Next.js 16 architecture delivering sub-second TTFB and zero-layout-shift visual presentation.",
+            "Self-service real-time customer order tracking portal with automated shipment status telemetry.",
+            "Optimized mobile-first commerce UX with one-tap express payment gateway checkout.",
+        ],
+        image: zelvi.src,
+        technologies: ["Next.js", "Laravel", "React", "TypeScript", "Tailwind CSS", "MySQL", "REST API", "Order Tracking"],
+        github: "#",
+        live: "https://thezelvi.store",
+        featured: true,
+    },
     {
         id: 18,
         slug: "wacatelog-whatsapp-catalog-manager-saas",
