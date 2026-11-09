@@ -5,7 +5,7 @@ import { tools } from "@/data/tools";
 
 export const metadata: Metadata = {
     title: "Tools | Md Safiullah",
-    description: `Explore ${tools.length} independent tools by Md Safiullah, including a Bengali plagiarism checker and native macOS utilities for image replacement and clean ZIP archives.`,
+    description: `Explore ${tools.length} independent tools by Md Safiullah, including BijoyMac (native Bangla Bijoy for macOS), a Bengali plagiarism checker, and native utilities for image replacement and clean ZIP archives.`,
 };
 
 export default function ToolsPage() {

@@ -8,6 +8,7 @@ import {
     FolderArchive,
     Github,
     Image as ImageIcon,
+    Keyboard,
     ShieldCheck,
     X,
 } from "lucide-react";
@@ -93,6 +94,36 @@ const ToolVisual = ({ tool }: { tool: Tool }) => {
         );
     }
 
+    if (tool.slug === "bijoy-mac") {
+        return (
+            <div className={visualFrameClass}>
+                <div className={visualCardClass}>
+                    <div className={visualChromeClass}>
+                        <span className="type-label">BijoyMac / Bengali Input</span>
+                        <Keyboard size={14} className="text-fg-subtle" />
+                    </div>
+                    <div className="grid grid-cols-1 items-center gap-3 p-4 sm:grid-cols-[1fr_auto_1fr] sm:gap-4 sm:p-5">
+                        <div className="flex flex-col gap-1.5 rounded-md bg-surface-muted p-2.5">
+                            <span className="text-[10px] font-medium uppercase tracking-wider text-fg-subtle">Key sequence</span>
+                            <div className="flex items-center gap-1 text-[11px] font-mono font-semibold text-fg">
+                                <span className="rounded bg-surface px-1.5 py-0.5 shadow-xs ring-1 ring-line">J</span>
+                                <span className="text-fg-subtle">+</span>
+                                <span className="rounded bg-surface px-1.5 py-0.5 shadow-xs ring-1 ring-line">G</span>
+                                <span className="text-fg-subtle">+</span>
+                                <span className="rounded bg-surface px-1.5 py-0.5 shadow-xs ring-1 ring-line">⇧N</span>
+                            </div>
+                        </div>
+                        <ArrowRight size={18} className="mx-auto rotate-90 text-fg-subtle sm:rotate-0" />
+                        <div className="flex flex-col items-center justify-center rounded-md bg-solid p-3 text-solid-fg shadow-xs">
+                            <span className="text-2xl font-bold leading-none">ক্ষ</span>
+                            <span className="mt-1 text-[10px] opacity-80">Bijoy ➔ বাংলা</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
     return (
         <div className={visualFrameClass}>
             <div className={visualCardClass}>
@@ -146,7 +177,7 @@ const Tools = ({ preview = false, showHeader = true }: { preview?: boolean; show
 
             {preview ? (
                 <>
-                    <div data-reveal-group className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                    <div data-reveal-group className="grid gap-6 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4">
                         {tools.map((tool) => (
                             <Card data-reveal as="article" interactive padding="none" key={tool.id} className="overflow-hidden">
                                 {/* min-height, not a fixed aspect: the visual stacks on narrow

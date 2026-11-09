@@ -58,4 +58,23 @@ export const tools: Tool[] = [
         github: "https://github.com/safiul0073/Zipper-mac",
         featured: true,
     },
+    {
+        id: 4,
+        slug: "bijoy-mac",
+        name: "BijoyMac — Bangla Bijoy for macOS",
+        type: "Native macOS Input Method",
+        platform: "macOS 12+",
+        description:
+            "A native Bengali keyboard input method for macOS bringing the familiar Bijoy typing layout (ANSI SutonnyMJ & Unicode) with zero external runtime dependencies.",
+        highlights: [
+            "Built natively in Swift using InputMethodKit, integrating directly into the macOS text input subsystem and menu bar switcher.",
+            "Supports the traditional Bijoy layout for both ANSI (SutonnyMJ) and modern Unicode Bengali typing.",
+            "Engineered with accurate Bengali conjunct (যুক্তবর্ণ) sequences, vowel matras, and low-latency keystroke handling.",
+            "Packaged with a drag-and-drop DMG installer targeting ~/Library/Input Methods with guided privacy permissions.",
+            "Includes SutonnyMJ font setup and quick input switching via standard macOS shortcuts (Ctrl + Option + Space).",
+        ],
+        technologies: ["Swift", "InputMethodKit", "macOS", "Xcode", "Shell"],
+        github: "https://github.com/safiul0073/bijoy-mac",
+        featured: true,
+    },
 ];
